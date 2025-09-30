@@ -150,6 +150,7 @@ h1 {
 }
 /* Стили для круглой кнопки Назад */
 .back-button {
+.back-button {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -165,6 +166,7 @@ h1 {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     z-index: 100;
+    margin-bottom: 20px; /* Добавляем эту строку */
 }
 
 .back-arrow {
