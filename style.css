@@ -40,7 +40,11 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-top: 70px; /* Добавляем эту строку */
+}
+
+/* Отступ только для страниц с кнопкой назад */
+.container:has(.back-button) .button-container {
+    padding-top: 70px;
 }
 
 .button {
