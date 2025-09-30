@@ -147,3 +147,50 @@ h1 {
 .back-btn:active {
     transform: translateY(-1px);
 }
+/* Стили для круглой кнопки Назад */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 2px solid #2c3e50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back-arrow {
+    font-size: 1.5em;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
+/* Адаптивность для кнопки назад */
+@media (max-width: 480px) {
+    .back-button {
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .back-arrow {
+        font-size: 1.3em;
+    }
+}
