@@ -66,13 +66,15 @@ class MultiplicationGame {
     this.generateExample();
 }
     
-    updateButton() {
-        if (this.answerVisible) {
-            this.actionBtn.innerHTML = '<span class="icon">➡️</span> Следующий пример';
-        } else {
-            this.actionBtn.innerHTML = '<span class="icon">👁️</span> Покажи ответ';
-        }
+   updateButton() {
+    if (this.answerVisible) {
+        this.actionBtn.textContent = 'Следующий пример';
+        this.actionBtn.className = 'button action-btn next-example';
+    } else {
+        this.actionBtn.textContent = 'Покажи ответ';
+        this.actionBtn.className = 'button action-btn show-answer';
     }
+}
 }
 
 // Инициализация игры при загрузке страницы
