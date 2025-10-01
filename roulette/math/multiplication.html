@@ -9,30 +9,33 @@
 </head>
 <body>
     <div class="multiplication-container">
-        <div class="controls">
-            <a href="index.html" class="back-btn-small">&lt;</a>
-            <div class="radio-group" id="radioGroup">
-                <input type="radio" id="all" name="multiplier" value="all" class="radio-input" checked>
-                <label for="all" class="radio-label">все</label>
-                
-                <input type="radio" id="35" name="multiplier" value="35" class="radio-input">
-                <label for="35" class="radio-label">35</label>
-                
-                <input type="radio" id="25" name="multiplier" value="25" class="radio-input">
-                <label for="25" class="radio-label">25</label>
-                
-                <input type="radio" id="17" name="multiplier" value="17" class="radio-input">
-                <label for="17" class="radio-label">17</label>
-                
-                <input type="radio" id="11" name="multiplier" value="11" class="radio-input">
-                <label for="11" class="radio-label">11</label>
-                
-                <input type="radio" id="8" name="multiplier" value="8" class="radio-input">
-                <label for="8" class="radio-label">8</label>
-                
-                <input type="radio" id="5" name="multiplier" value="5" class="radio-input">
-                <label for="5" class="radio-label">5</label>
-            </div>
+        <a href="index.html" class="back-button">
+            <span class="back-arrow">&lt;</span>
+        </a>
+        
+        <h2 class="training-title">Выбери что тренировать</h2>
+        
+        <div class="radio-group" id="radioGroup">
+            <input type="radio" id="all" name="multiplier" value="all" class="radio-input" checked>
+            <label for="all" class="radio-label">все</label>
+            
+            <input type="radio" id="35" name="multiplier" value="35" class="radio-input">
+            <label for="35" class="radio-label">35</label>
+            
+            <input type="radio" id="25" name="multiplier" value="25" class="radio-input">
+            <label for="25" class="radio-label">25</label>
+            
+            <input type="radio" id="17" name="multiplier" value="17" class="radio-input">
+            <label for="17" class="radio-label">17</label>
+            
+            <input type="radio" id="11" name="multiplier" value="11" class="radio-input">
+            <label for="11" class="radio-label">11</label>
+            
+            <input type="radio" id="8" name="multiplier" value="8" class="radio-input">
+            <label for="8" class="radio-label">8</label>
+            
+            <input type="radio" id="5" name="multiplier" value="5" class="radio-input">
+            <label for="5" class="radio-label">5</label>
         </div>
         
         <div class="example" id="example">5 × 7</div>
@@ -44,7 +47,6 @@
         </button>
     </div>
 
-    <script src="../../script.js"></script>
     <script src="multiplication.js"></script>
 </body>
 </html>
