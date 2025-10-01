@@ -56,16 +56,11 @@ class MultiplicationGame {
         this.updateButton();
     }
     
-    showAnswer() {
-        this.answerElement.classList.add('show');
-        this.answerVisible = true;
-        this.updateButton();
-        
-        // Вибрация на мобильных
-        if (navigator.vibrate) {
-            navigator.vibrate(50);
-        }
-    }
+   showAnswer() {
+    this.answerElement.classList.add('show');
+    this.answerVisible = true;
+    this.updateButton();
+}
     
    nextExample() {
     this.generateExample();
