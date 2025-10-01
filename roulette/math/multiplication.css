@@ -24,7 +24,6 @@
     gap: 12px;
     justify-content: center;
     margin-bottom: 40px;
-    /*max-width: 300px;*/
     margin-left: auto;
     margin-right: auto;
 }
@@ -35,7 +34,6 @@
     border-radius: 15px;
     padding: 15px 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
     font-size: 1em;
     font-weight: 600;
     text-align: center;
@@ -53,16 +51,10 @@
     width: 100%;
 }
 
-.radio-label:hover {
-    border-color: #6c757d;
-    transform: translateY(-2px);
-}
-
 .radio-input:checked + .radio-label {
     background: #007bff;
     color: white;
     border-color: #007bff;
-    transform: translateY(-2px);
 }
 
 .radio-input {
@@ -88,7 +80,6 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .answer.show {
@@ -113,9 +104,9 @@
     }
     
     .radio-label {
-        padding: 10px 16px;
+        padding: 12px 5px;
         font-size: 0.9em;
-        min-width: 45px;
+        min-height: 45px;
     }
     
     .example {
