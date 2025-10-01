@@ -10,22 +10,25 @@
     position: relative;
 }
 
-.radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
 .radio-label {
     background: #f8f9fa;
     border: 2px solid #dee2e6;
-    border-radius: 20px;
-    padding: 8px 16px;
+    border-radius: 15px;
+    padding: 4px 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9em;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 .radio-label:hover {
