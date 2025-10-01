@@ -38,7 +38,7 @@ class ComplitsGame {
         this.complitsText.innerHTML = `Комплит ${complit} дюжины<br>по ${bet}`;
         
         // Рассчитываем ставку
-        const stake = this.multipliers[complit] * bet;
+        const stake = Math.round(this.multipliers[complit] * bet * 100) / 100;
         
         // Формируем ответ
         this.answerElement.innerHTML = `Ставка: ${stake}<br>Выплата: комплит ${randomNumber}`;
