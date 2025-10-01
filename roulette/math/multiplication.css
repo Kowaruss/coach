@@ -117,12 +117,14 @@
         font-size: 1.7em;
     }
 }
-.action-btn.show-answer {
+#actionBtn.show-answer {
     background: linear-gradient(145deg, #FF7F50, #FF6347);
     color: white;
+    border: none;
 }
 
-.action-btn.next-example {
+#actionBtn.next-example {
     background: linear-gradient(145deg, #7CFC00, #32CD32);
     color: white;
+    border: none;
 }
