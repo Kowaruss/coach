@@ -67,15 +67,9 @@ class MultiplicationGame {
         }
     }
     
-    nextExample() {
-        this.generateExample();
-        
-        // Анимация кнопки
-        this.actionBtn.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            this.actionBtn.style.transform = 'scale(1)';
-        }, 150);
-    }
+   nextExample() {
+    this.generateExample();
+}
     
     updateButton() {
         if (this.answerVisible) {
