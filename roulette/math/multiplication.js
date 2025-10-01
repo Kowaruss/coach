@@ -1,0 +1,92 @@
+class MultiplicationGame {
+    constructor() {
+        this.a = 0;
+        this.b = 0;
+        this.answerVisible = false;
+        this.multipliers = [35, 25, 17, 11, 8, 5];
+        
+        this.exampleElement = document.getElementById('example');
+        this.answerElement = document.getElementById('answer');
+        this.actionBtn = document.getElementById('actionBtn');
+        this.radioGroup = document.getElementById('radioGroup');
+        
+        this.init();
+    }
+    
+    init() {
+        this.generateExample();
+        this.setupEventListeners();
+    }
+    
+    setupEventListeners() {
+        this.actionBtn.addEventListener('click', () => {
+            if (this.answerVisible) {
+                this.nextExample();
+            } else {
+                this.showAnswer();
+            }
+        });
+        
+        this.radioGroup.addEventListener('change', () => {
+            this.nextExample();
+        });
+    }
+    
+    getSelectedMultiplier() {
+        const selected = document.querySelector('input[name="multiplier"]:checked');
+        return selected.value;
+    }
+    
+    generateExample() {
+        const selected = this.getSelectedMultiplier();
+        
+        if (selected === 'all') {
+            this.a = this.multipliers[Math.floor(Math.random() * this.multipliers.length)];
+        } else {
+            this.a = parseInt(selected);
+        }
+        
+        this.b = Math.floor(Math.random() * 19) + 2; // от 2 до 20
+        
+        this.exampleElement.textContent = `${this.a} × ${this.b}`;
+        this.answerElement.textContent = (this.a * this.b).toString();
+        this.answerElement.classList.remove('show');
+        this.answerVisible = false;
+        
+        this.updateButton();
+    }
+    
+    showAnswer() {
+        this.answerElement.classList.add('show');
+        this.answerVisible = true;
+        this.updateButton();
+        
+        // Вибрация на мобильных
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+    }
+    
+    nextExample() {
+        this.generateExample();
+        
+        // Анимация кнопки
+        this.actionBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.actionBtn.style.transform = 'scale(1)';
+        }, 150);
+    }
+    
+    updateButton() {
+        if (this.answerVisible) {
+            this.actionBtn.innerHTML = '<span class="icon">➡️</span> Следующий пример';
+        } else {
+            this.actionBtn.innerHTML = '<span class="icon">👁️</span> Покажи ответ';
+        }
+    }
+}
+
+// Инициализация игры при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    new MultiplicationGame();
+});
