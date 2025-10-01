@@ -2,10 +2,13 @@ class ExamplesGame {
     constructor() {
         this.multipliers = [35, 25, 17, 11, 8, 5];
         this.answerVisible = false;
+        this.currentFontSize = 1.6; // начальный размер шрифта в em
         
         this.exampleElement = document.getElementById('exampleFormula');
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
+        this.minusBtn = document.querySelector('.minus-btn');
+        this.plusBtn = document.querySelector('.plus-btn');
         
         this.init();
     }
@@ -13,6 +16,7 @@ class ExamplesGame {
     init() {
         this.generateExample();
         this.setupEventListeners();
+        this.updateFontSize();
     }
     
     setupEventListeners() {
@@ -22,6 +26,14 @@ class ExamplesGame {
             } else {
                 this.showAnswer();
             }
+        });
+        
+        this.minusBtn.addEventListener('click', () => {
+            this.decreaseFontSize();
+        });
+        
+        this.plusBtn.addEventListener('click', () => {
+            this.increaseFontSize();
         });
     }
     
@@ -83,6 +95,24 @@ class ExamplesGame {
             this.actionBtn.classList.remove('next-example');
             this.actionBtn.classList.add('show-answer');
         }
+    }
+    
+    increaseFontSize() {
+        if (this.currentFontSize < 2.5) {
+            this.currentFontSize += 0.1;
+            this.updateFontSize();
+        }
+    }
+    
+    decreaseFontSize() {
+        if (this.currentFontSize > 0.8) {
+            this.currentFontSize -= 0.1;
+            this.updateFontSize();
+        }
+    }
+    
+    updateFontSize() {
+        this.exampleElement.style.fontSize = `${this.currentFontSize}em`;
     }
 }
 
