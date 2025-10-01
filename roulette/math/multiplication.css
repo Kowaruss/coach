@@ -49,6 +49,8 @@
 .radio-label.full-width {
     flex: 1 0 100%;
     margin-top: 10px;
+    min-width: 100%;
+    width: 100%;
 }
 
 .radio-label:hover {
