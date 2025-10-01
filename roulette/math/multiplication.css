@@ -21,22 +21,26 @@
 .radio-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     margin-bottom: 40px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .radio-label {
     background: #f8f9fa;
     border: 3px solid #dee2e6;
     border-radius: 20px;
-    padding: 12px 20px;
+    padding: 10px 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 600;
-    min-width: 50px;
+    min-width: 45px;
     text-align: center;
+    flex: 0 0 calc(33.333% - 10px);
 }
 
 .radio-label:hover {
