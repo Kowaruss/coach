@@ -5,10 +5,15 @@ class ComplitsGame {
         this.actionBtn = document.getElementById('actionBtn');
         
         this.bets = [25, 50, 75, 100, 200];
-        this.multipliers = {
+        this.dozensMultipliers = {
             1: 136,
             2: 140, 
             3: 120
+        };
+        this.sixLineMultipliers = {
+            'first': 46,
+            'last': 30,
+            'other': 50
         };
         
         this.actionButton = new ActionButton(
@@ -28,23 +33,48 @@ class ComplitsGame {
         // Случайное число от 1 до 7 (выпавший номер)
         const randomNumber = Math.floor(Math.random() * 7) + 1;
         
-        // Случайный комплит от 1 до 3
-        const complit = Math.floor(Math.random() * 3) + 1;
-        
         // Случайная ставка из массива
         const bet = this.bets[Math.floor(Math.random() * this.bets.length)];
         
-        // Формируем текст
-        this.complitsText.innerHTML = `Комплит ${complit} дюжины<br>по ${bet}`;
+        let complitText = '';
+        let stake = 0;
+        let payoutText = '';
         
-        // Рассчитываем ставку
-        const stake = Math.round(this.multipliers[complit] * bet * 100) / 100;
+        if (randomNumber === 1) {
+            // Комплит дюжины
+            const complit = Math.floor(Math.random() * 3) + 1;
+            complitText = `Комплит ${complit} дюжины<br>по ${bet}`;
+            stake = this.dozensMultipliers[complit] * bet;
+            payoutText = `комплит выпавшего номера по ${bet}`;
+        } else {
+            // Комплит six line
+            const sixLineType = this.getRandomSixLineType();
+            complitText = `Комплит six line<br>по ${bet}`;
+            
+            if (sixLineType === 'first') {
+                stake = this.sixLineMultipliers.first * bet;
+            } else if (sixLineType === 'last') {
+                stake = this.sixLineMultipliers.last * bet;
+            } else {
+                stake = this.sixLineMultipliers.other * bet;
+            }
+            
+            payoutText = `комплит выпавшего номера по ${bet}`;
+        }
+        
+        // Формируем текст
+        this.complitsText.innerHTML = complitText;
         
         // Формируем ответ
-        this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br><span class="label">Выплата:</span> комплит выпавшего номера по ${bet}`;
+        this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br><span class="label">Выплата:</span> ${payoutText}`;
         
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
+    }
+    
+    getRandomSixLineType() {
+        const types = ['first', 'last', 'other', 'other', 'other', 'other'];
+        return types[Math.floor(Math.random() * types.length)];
     }
     
     showAnswer() {
