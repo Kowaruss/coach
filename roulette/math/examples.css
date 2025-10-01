@@ -11,7 +11,7 @@
 }
 
 .example-formula {
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: bold;
     margin: 60px 0 40px 0;
     min-height: 80px;
@@ -23,6 +23,33 @@
     overflow-y: hidden;
     padding: 10px 5px;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .examples-container {
+        padding: 30px 15px;
+        margin: 10px;
+    }
+    
+    .example-formula {
+        font-size: 1.3em;
+        margin: 50px 0 30px 0;
+    }
+    
+    .answer {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 380px) {
+    .example-formula {
+        font-size: 1.1em;
+        white-space: normal;
+        word-break: break-all;
+        text-align: center;
+    }
 }
 
 .answer {
