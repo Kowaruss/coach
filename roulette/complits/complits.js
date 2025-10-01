@@ -1,3 +1,8 @@
+// Функция для форматирования чисел с разделителями тысяч
+function formatNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
 class ComplitsGame {
     constructor() {
         this.complitsText = document.getElementById('complitsText');
@@ -44,7 +49,7 @@ class ComplitsGame {
             // Комплит дюжины
             const complit = Math.floor(Math.random() * 3) + 1;
             complitText = `Комплит ${complit} дюжины<br>по ${bet}`;
-            stake = this.dozensMultipliers[complit] * bet;
+            stake = formatNumber(this.dozensMultipliers[complit] * bet);
             payoutText = `комплит выпавшего номера по ${bet}`;
         } else {
             // Комплит six line
@@ -52,11 +57,11 @@ class ComplitsGame {
             complitText = `Комплит six line<br>по ${bet}`;
             
             if (sixLineType === 'first') {
-                stake = this.sixLineMultipliers.first * bet;
+                stake = formatNumber(this.sixLineMultipliers.first * bet);
             } else if (sixLineType === 'last') {
-                stake = this.sixLineMultipliers.last * bet;
+                stake = formatNumber(this.sixLineMultipliers.last * bet);
             } else {
-                stake = this.sixLineMultipliers.other * bet;
+                stake = formatNumber(this.sixLineMultipliers.other * bet);
             }
             
             payoutText = `комплит выпавшего номера по ${bet}`;
