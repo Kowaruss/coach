@@ -2,7 +2,7 @@
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    padding: 40px 20px;
+    padding: 40px 30px;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     max-width: 500px;
@@ -11,23 +11,15 @@
 }
 
 .example-formula {
-    font-size: 1.4em;
+    font-size: 1.6em;
     font-weight: bold;
     margin: 60px 0 40px 0;
-    min-height: 60px;
-    display: block;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 15px 10px;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    scrollbar-width: none;
-}
-
-.example-formula::-webkit-scrollbar {
-    display: none;
+    line-height: 1.4;
 }
 
 .answer {
@@ -70,14 +62,15 @@
 /* Адаптивность */
 @media (max-width: 480px) {
     .examples-container {
-        padding: 30px 10px;
+        padding: 30px 20px;
         margin: 10px;
     }
     
     .example-formula {
-        font-size: 1.2em;
+        font-size: 1.3em;
         margin: 50px 0 30px 0;
-        padding: 12px 5px;
+        white-space: normal;
+        word-wrap: break-word;
     }
     
     .answer {
@@ -88,6 +81,5 @@
 @media (max-width: 360px) {
     .example-formula {
         font-size: 1.1em;
-        padding: 10px 3px;
     }
 }
