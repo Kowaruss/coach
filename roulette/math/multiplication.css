@@ -21,7 +21,7 @@
 .radio-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
     margin-bottom: 40px;
     max-width: 300px;
@@ -32,15 +32,23 @@
 .radio-label {
     background: #f8f9fa;
     border: 3px solid #dee2e6;
-    border-radius: 20px;
-    padding: 10px 16px;
+    border-radius: 15px;
+    padding: 15px 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9em;
+    font-size: 1em;
     font-weight: 600;
-    min-width: 45px;
     text-align: center;
-    flex: 0 0 calc(33.333% - 10px);
+    flex: 1 0 calc(33.333% - 12px);
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-label.full-width {
+    flex: 1 0 100%;
+    margin-top: 10px;
 }
 
 .radio-label:hover {
