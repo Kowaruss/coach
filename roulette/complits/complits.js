@@ -41,7 +41,7 @@ class ComplitsGame {
         const stake = Math.round(this.multipliers[complit] * bet * 100) / 100;
         
         // Формируем ответ
-        this.answerElement.innerHTML = `Ставка: ${stake}<br>Выплата: комплит выпавшего номера по ${bet}`;
+        this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br><span class="label">Выплата:</span> комплит выпавшего номера по ${bet}`;
         
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
