@@ -58,20 +58,25 @@ class ComplitsGame {
             
             if (sixLineType === 'first') {
                 stake = formatNumber(this.sixLineMultipliers.first * bet);
+                payoutText = `первый six line ${this.sixLineMultipliers.first}×${bet}`;
             } else if (sixLineType === 'last') {
                 stake = formatNumber(this.sixLineMultipliers.last * bet);
+                payoutText = `последний six line ${this.sixLineMultipliers.last}×${bet}`;
             } else {
                 stake = formatNumber(this.sixLineMultipliers.other * bet);
+                payoutText = `остальные ${this.sixLineMultipliers.other}×${bet}`;
             }
-            
-            payoutText = `комплит выпавшего номера по ${bet}`;
         }
         
         // Формируем текст
         this.complitsText.innerHTML = complitText;
         
         // Формируем ответ
-        this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br><span class="label">Выплата:</span> ${payoutText}`;
+        if (randomNumber === 1) {
+            this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br><span class="label">Выплата:</span> ${payoutText}`;
+        } else {
+            this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br>${payoutText}<br><span class="label">Выплата:</span> комплит выпавшего номера по ${bet}`;
+        }
         
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
