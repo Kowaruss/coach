@@ -10,16 +10,6 @@ class ComplitsGame {
         this.actionBtn = document.getElementById('actionBtn');
         
         this.bets = [25, 50, 75, 100, 200];
-        this.dozensMultipliers = {
-            1: 136,
-            2: 140, 
-            3: 120
-        };
-        this.sixLineMultipliers = {
-            'first': 46,
-            'last': 30,
-            'other': 50
-        };
         
         this.actionButton = new ActionButton(
             this.actionBtn,
@@ -35,56 +25,20 @@ class ComplitsGame {
     }
     
     generateExample() {
-        // Случайное число от 1 до 7 (выпавший номер)
         const randomNumber = Math.floor(Math.random() * 7) + 1;
-        
-        // Случайная ставка из массива
         const bet = this.bets[Math.floor(Math.random() * this.bets.length)];
         
-        let complitText = '';
-        let stake = 0;
-        let payoutText = '';
-        
+        let scenario;
         if (randomNumber === 1) {
-            // Комплит дюжины
-            const complit = Math.floor(Math.random() * 3) + 1;
-            complitText = `Комплит ${complit} дюжины<br>по ${bet}`;
-            stake = formatNumber(this.dozensMultipliers[complit] * bet);
-            payoutText = `комплит выпавшего номера по ${bet}`;
+            scenario = generateScenario1(bet);
         } else {
-            // Комплит six line
-            const sixLineType = this.getRandomSixLineType();
-            complitText = `Комплит six line<br>по ${bet}`;
-            
-            if (sixLineType === 'first') {
-                stake = formatNumber(this.sixLineMultipliers.first * bet);
-                payoutText = `первый six line ${this.sixLineMultipliers.first}×${bet}`;
-            } else if (sixLineType === 'last') {
-                stake = formatNumber(this.sixLineMultipliers.last * bet);
-                payoutText = `последний six line ${this.sixLineMultipliers.last}×${bet}`;
-            } else {
-                stake = formatNumber(this.sixLineMultipliers.other * bet);
-                payoutText = `остальные ${this.sixLineMultipliers.other}×${bet}`;
-            }
+            scenario = generateScenario2(bet);
         }
         
-        // Формируем текст
-        this.complitsText.innerHTML = complitText;
-        
-        // Формируем ответ
-        if (randomNumber === 1) {
-            this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br><span class="label">Выплата:</span> ${payoutText}`;
-        } else {
-            this.answerElement.innerHTML = `<span class="label">Ставка:</span> ${stake}<br>${payoutText}<br><span class="label">Выплата:</span> комплит выпавшего номера по ${bet}`;
-        }
-        
+        this.complitsText.innerHTML = scenario.text;
+        this.answerElement.innerHTML = scenario.answer;
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
-    }
-    
-    getRandomSixLineType() {
-        const types = ['first', 'last', 'other', 'other', 'other', 'other'];
-        return types[Math.floor(Math.random() * types.length)];
     }
     
     showAnswer() {
