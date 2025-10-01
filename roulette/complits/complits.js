@@ -4,7 +4,7 @@ class ComplitsGame {
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        this.bets = [0.25, 0.5, 0.75, 100, 200];
+        this.bets = [25, 50, 75, 100, 200];
         this.multipliers = {
             1: 136,
             2: 140, 
