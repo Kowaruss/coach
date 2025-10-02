@@ -25,7 +25,7 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     width: 100%;
-    position: relative; /* Добавляем эту строку */
+    position: relative;
 }
 
 h1 {
@@ -42,11 +42,6 @@ h1 {
     gap: 20px;
 }
 
-/* Отступ только для страниц с кнопкой назад */
-.container:has(.back-button) .button-container {
-    padding-top: 70px;
-}
-
 .button {
     display: flex;
     align-items: center;
@@ -56,7 +51,6 @@ h1 {
     border-radius: 12px;
     font-size: 1.3em;
     font-weight: 600;
-    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     border: none;
     cursor: pointer;
@@ -73,17 +67,45 @@ h1 {
     color: white;
 }
 
-.button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.button:active {
-    transform: translateY(-1px);
-}
-
 .icon {
     font-size: 1.5em;
+}
+
+/* Стили для круглой кнопки Назад */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 2px solid #2c3e50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.back-arrow {
+    font-size: 1.5em;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Стили для кнопок меню */
+.menu-btn {
+    background: linear-gradient(145deg, #4a5568, #2d3748);
+    color: white;
+    border: none;
+    width: 100%;
+}
+
+/* Отступ только для страниц с кнопкой назад */
+.container:has(.back-button) .button-container {
+    padding-top: 70px;
 }
 
 /* Адаптивность для мобильных устройств */
@@ -102,93 +124,7 @@ h1 {
         padding: 16px 20px;
         font-size: 1.1em;
     }
-}
-
-/* Стили для кнопки Назад */
-.back-btn {
-    background: linear-gradient(145deg, #6c757d, #5a6268);
-    color: white;
-    margin-bottom: 40px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 25px;
-    text-decoration: none;
-    border-radius: 12px;
-    font-size: 1.2em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    gap: 12px;
-}
-
-/* Стили для кнопок меню */
-.menu-btn {
-    background: linear-gradient(145deg, #2c3e50, #34495e);
-    color: white;
-    border: none;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 18px 25px;
-    text-decoration: none;
-    border-radius: 12px;
-    font-size: 1.1em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    margin-bottom: 15px;
-    gap: 12px;
-}
-
-.menu-btn:hover,
-.back-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.menu-btn:active,
-.back-btn:active {
-    transform: translateY(-1px);
-}
-/* Стили для круглой кнопки Назад */
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    background: white;
-    border: 2px solid #2c3e50;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    z-index: 100;
-}
-
-.back-arrow {
-    font-size: 1.5em;
-    color: #2c3e50;
-    font-weight: bold;
-}
-
-.back-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.back-button:active {
-    transform: scale(0.95);
-}
-
-/* Адаптивность для кнопки назад */
-@media (max-width: 480px) {
+    
     .back-button {
         top: 15px;
         left: 15px;
