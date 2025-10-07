@@ -1,5 +1,6 @@
 function generateScenario3(bet) {
     const streetMultipliers = {
+        'zero': 42,     // для 0-1-2
         'first': 46,    // для 1-3
         'last': 30,     // для 34-36
         'other': 50     // для 13-15
@@ -7,6 +8,7 @@ function generateScenario3(bet) {
     
     // Варианты street
     const streetTypes = [
+        { name: "Комплит Streets 0 - 1 - 2", type: "zero" },
         { name: "Комплит Streets 1 - 3", type: "first" },
         { name: "Комплит Streets 13 - 15", type: "other" },
         { name: "Комплит Streets 34 - 36", type: "last" }
@@ -17,7 +19,9 @@ function generateScenario3(bet) {
     
     // Определяем ставку в зависимости от выбранного street
     let stake = 0;
-    if (selectedStreet.type === "first") {
+    if (selectedStreet.type === "zero") {
+        stake = streetMultipliers.zero * bet;
+    } else if (selectedStreet.type === "first") {
         stake = streetMultipliers.first * bet;
     } else if (selectedStreet.type === "last") {
         stake = streetMultipliers.last * bet;
