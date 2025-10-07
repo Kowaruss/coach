@@ -26,18 +26,18 @@ class CashPaymentsGame {
         // X - случайное значение из массива
         const x = this.xValues[Math.floor(Math.random() * this.xValues.length)];
         
-        // Y - случайное число от 199 до 340, умноженное на X и округленное
-        const yRaw = Math.floor(Math.random() * 142) + 199; // 199-340
+        // Y - случайное число от 199 до Z-50, умноженное на X и округленное
+        const yRaw = Math.floor(Math.random() * (z - 50 - 199 + 1)) + 199; // 199 до Z-50
         const y = this.roundY(yRaw * x, x);
         
         // Формируем текст
-        this.cashPaymentsText.textContent = `Выплата ${z} цвет по ${x} через ${y}`;
+        this.cashPaymentsText.innerHTML = `Выплата ${z} цвет по ${x}<br>через ${y}`;
         
         // Рассчитываем ответ
         const answerValue = z - (y / x);
         
-        // Формируем ответ
-        this.answerElement.innerHTML = `<span class="label">Ответ:</span><br>${z} – (${y} / ${x}) = ${this.formatNumber(answerValue.toFixed(2))}`;
+        // Формируем ответ (целое число)
+        this.answerElement.innerHTML = `<span class="label">Ответ:</span><br>${Math.round(answerValue)}`;
         
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
