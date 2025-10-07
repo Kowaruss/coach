@@ -4,24 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Новая страница</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- <link rel="stylesheet" href="page-styles.css"> -->
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
+        <!-- Убрать кнопку назад если не нужна -->
+        <a href="index.html" class="back-button">
             <span class="back-arrow">&lt;</span>
         </a>
         
-        <!-- Контент страницы -->
-        <div class="content">
-            <h1>Заголовок страницы</h1>
-            <div class="button-container">
-                <!-- Кнопки меню -->
-            </div>
+        <!-- Для страниц с меню кнопок -->
+        <div class="button-container">
+            <a href="page1.html" class="button menu-btn">
+                <span class="icon">🔢</span>
+                Кнопка 1
+            </a>
+            <a href="page2.html" class="button menu-btn">
+                <span class="icon">🎯</span>
+                Кнопка 2
+            </a>
         </div>
+
+        <!-- Для страниц с контентом и универсальной кнопкой -->
+        <!--
+        <div class="content-text" id="contentText">
+            Текст вопроса...
+        </div>
+        <div class="answer" id="answer">
+            Ответ...
+        </div>
+        
+        <button class="action-btn show-answer" id="actionBtn">
+            Покажи ответ
+        </button>
+        -->
     </div>
 
+    <!-- Подключение скриптов -->
+    <!-- <script src="/coach/action-button.js"></script> -->
     <!-- <script src="page-script.js"></script> -->
 </body>
 </html>
