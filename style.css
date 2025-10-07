@@ -13,20 +13,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px; /* Возвращаем 20px */
 }
 
 .container {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
-    width: 100%;
-    position: relative;
-}
+        padding: 30px 20px;
+        margin: 10px; /* Возвращаем 10px */
+        min-height: auto; /* Убираем фиксированную высоту */
+        max-height: calc(100vh - 40px); /* Ограничиваем максимальную высоту */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden; /* Запрещаем прокрутку */
+    }
 
 h1 {
     color: #2c3e50;
