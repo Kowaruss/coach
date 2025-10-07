@@ -1,15 +1,3 @@
-.sectors-container {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 100%;
-    position: relative;
-}
-
 .sectors-text {
     font-size: 1.4em;
     font-weight: bold;
@@ -44,4 +32,9 @@
 
 .answer span.label {
     color: #28a745;
+}
+
+.action-btn {
+    margin-top: auto;
+    margin-bottom: 20px;
 }
