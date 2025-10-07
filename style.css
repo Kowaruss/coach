@@ -26,6 +26,10 @@ body {
     max-width: 400px;
     width: 100%;
     position: relative;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
@@ -110,47 +114,29 @@ h1 {
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 480px) {
-    body {
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        overflow: hidden; /* Запрещаем прокрутку body */
-    }
-
     .container {
-        padding: 20px 15px;
-        margin: 0;
-        height: calc(100vh - 20px); /* Фиксированная высота вместо min-height */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        overflow: hidden; /* Запрещаем прокрутку контейнера */
+        padding: 30px 20px;
+        margin: 10px;
     }
     
     h1 {
         font-size: 1.8em;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
     
     .button {
-        padding: 14px 18px;
-        font-size: 1em;
-    }
-    
-    .button-container {
-        gap: 15px;
+        padding: 16px 20px;
+        font-size: 1.1em;
     }
     
     .back-button {
-        top: 10px;
-        left: 10px;
-        width: 40px;
-        height: 40px;
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
     }
     
     .back-arrow {
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
 }
