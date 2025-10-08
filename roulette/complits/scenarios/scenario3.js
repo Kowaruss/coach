@@ -1,6 +1,6 @@
 function generateScenario3(bet) {
     const streetMultipliers = {
-        'zero': 42,     // для 0-1-2
+        'zero': 44,     // для 0-1-2
         'first': 46,    // для 1-3
         'last': 30,     // для 34-36
         'other': 50     // для 13-15
