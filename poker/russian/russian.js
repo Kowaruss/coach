@@ -8,7 +8,7 @@ class RussianPokerGame {
         this.pokerCombinations = [
             { name: "Пара", multiplier: 2 },
             { name: "Две пары", multiplier: 3 },
-            { name: "Тройка", multiplier: 4 },
+            { name: "Тройная", multiplier: 4 },
             { name: "Стрит", multiplier: 5 },
             { name: "Флеш", multiplier: 7 },
             { name: "Фулл хаус", multiplier: 11 },
@@ -40,7 +40,7 @@ class RussianPokerGame {
         // Формируем текст
         this.pokerText.innerHTML = `Комбинация "${combination.name}"<br>Анте ${y}`;
         
-        // Рассчитываем ответ R = Y * 2 * коэффициент комбинации
+        // Рассчитываем ответ R = Y * коэффициент комбинации
         const r = y * 2 * combination.multiplier;
         
         // Формируем ответ
