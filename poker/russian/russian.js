@@ -41,7 +41,7 @@ class RussianPokerGame {
         this.pokerText.innerHTML = `Комбинация "${combination.name}"<br>Анте ${y}`;
         
         // Рассчитываем ответ R = Y * коэффициент комбинации
-        const r = y * 2 * combination.multiplier;
+        const r = y * combination.multiplier;
         
         // Формируем ответ
         this.answerElement.innerHTML = `<span class="label">Ответ:</span><br>${this.formatNumber(r)}`;
