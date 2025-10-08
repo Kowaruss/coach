@@ -67,7 +67,7 @@ class SochiPokerGame {
     generateAnte() {
         // Генерируем число от 15 до 300, кратное 5
         const min = 15;
-        const max = 300;
+        const max = 200;
         const step = 5;
         const range = (max - min) / step;
         return min + (Math.floor(Math.random() * (range + 1)) * step);
