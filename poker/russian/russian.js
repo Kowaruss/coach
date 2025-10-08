@@ -4,18 +4,18 @@ class RussianPokerGame {
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        // Покерные комбинации для русского покера с коэффициентами выплат (без старшей карты)
-        this.pokerCombinations = [
-            { name: "Пара", multiplier: 2 },
-            { name: "Две пары", multiplier: 3 },
-            { name: "Тройная", multiplier: 4 },
-            { name: "Стрит", multiplier: 5 },
-            { name: "Флеш", multiplier: 7 },
-            { name: "Фулл хаус", multiplier: 11 },
-            { name: "Каре", multiplier: 50 },
-            { name: "Стрит флеш", multiplier: 100 },
-            { name: "Флеш рояль", multiplier: 250 }
-        ];
+        // Покерные комбинации для русского покера с обновлёнными коэффициентами выплат
+this.pokerCombinations = [
+    { name: "Пара", multiplier: 2 },
+    { name: "Две пары", multiplier: 4 },
+    { name: "Тройка", multiplier: 6 },
+    { name: "Стрит", multiplier: 8 },
+    { name: "Флеш", multiplier: 10 },
+    { name: "Фулл хаус", multiplier: 14 },
+    { name: "Каре", multiplier: 40 },
+    { name: "Стрит флеш", multiplier: 100 },
+    { name: "Флеш рояль", multiplier: 200 }
+];
         
         this.actionButton = new ActionButton(
             this.actionBtn,
