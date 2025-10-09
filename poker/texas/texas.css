@@ -1,18 +1,40 @@
-/* Стили для техасского холдема */
 .poker-text {
     font-size: 1.4em;
-    margin-bottom: 30px;
+    font-weight: bold;
+    margin: 60px 0 40px 0;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    line-height: 1.6;
 }
 
 .answer {
-    font-size: 1.6em;
-    margin-bottom: 30px;
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin: 20px 0;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    font-weight: bold;
+    line-height: 1.6;
+    text-align: center;
 }
 
-.label {
-    font-size: 0.8em;
-    color: #666;
+.answer.show {
+    opacity: 1;
 }
 
-/* Можно добавить специфичные стили для техасского холдема */
+.answer span.label {
+    color: #28a745;
+}
+
+.action-btn {
+    margin-top: auto;
+    margin-bottom: 20px;
+}
