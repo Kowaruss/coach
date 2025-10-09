@@ -1,4 +1,4 @@
-// Покерные комбинации для техасского холдема
+// Покерные комбинации для техасского покера
 const texasCombinations = [
     { name: "Пара", multiplier: 3 },
     { name: "Две пары", multiplier: 3 },
@@ -11,7 +11,7 @@ const texasCombinations = [
     { name: "Роял флеш", multiplier: 102 }
 ];
 
-// Функция расчёта ответа для техасского холдема
+// Функция расчёта ответа для техасского покера
 function calculateTexasAnswer(combination, ante) {
     const payout = ante * combination.multiplier;
     
