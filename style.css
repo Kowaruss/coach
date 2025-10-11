@@ -106,7 +106,12 @@ h1 {
     border: none;
     width: 100%;
 }
-
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
 /* Отступ только для страниц с кнопкой назад */
 .container:has(.back-button) .button-container {
     padding-top: 70px;
