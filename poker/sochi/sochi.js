@@ -36,7 +36,10 @@ function calculateSochiAnswer(combination, ante) {
     };
 }
 
+// Создаем временный массив для взвешенного выбора
+const tempCombinations = sochiCombinations.map(comb => ({...comb, multiplier: 1}));
+
 // Инициализация страницы
 document.addEventListener('DOMContentLoaded', () => {
-    PokerCommon.initPokerPage(sochiCombinations, calculateSochiAnswer);
+    PokerCommon.initPokerPage(tempCombinations, calculateSochiAnswer);
 });
