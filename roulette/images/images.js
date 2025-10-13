@@ -4,10 +4,10 @@ class ImagesGame {
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        // Список картинок
+        // Список картинок с правильным расширением .jpg
         this.images = [
-            '25.jpeg', '30.jpeg', '35.jpeg', '40.jpeg', '45.jpeg',
-            '50.jpeg', '51_1.jpeg', '51_2.jpeg', '55.jpeg', '60.jpeg', '75.jpeg'
+            '25.jpg', '30.jpg', '35.jpg', '40.jpg', '45.jpg',
+            '50.jpg', '51_1.jpg', '51_2.jpg', '55.jpg', '60.jpg', '75.jpg'
         ];
         this.currentImage = null;
         
@@ -25,7 +25,7 @@ class ImagesGame {
     }
     
     getImageNumber(filename) {
-        // Из "25.jpeg" получаем 25, из "51_2.jpeg" получаем 51
+        // Из "25.jpg" получаем 25, из "51_2.jpg" получаем 51
         return filename.split('_')[0].split('.')[0];
     }
     
