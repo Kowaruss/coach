@@ -38,30 +38,43 @@ class SochiPokerGame {
     }
     
     generateExample() {
-        // Выбираем случайную покерную комбинацию с весом
-        const combination = PokerCommon.getWeightedCombination(this.pokerCombinations);
+        // Выбираем случайную покерную комбинацию
+        const combination = this.pokerCombinations[Math.floor(Math.random() * this.pokerCombinations.length)];
         
         // Выбираем случайный тип закрытия
         const closeType = this.closeTypes[Math.floor(Math.random() * this.closeTypes.length)];
         
-        // Генерируем анте
-        const ante = PokerCommon.generateAnte();
-        
-        // Рассчитываем блаинд и анте+бет
-        const blind = ante * combination.blindMultiplier;
-        const anteBet = ante * closeType.multiplier;
+        // Генерируем анте Y (от 15 до 300, кратно 5)
+        const y = this.generateAnte();
         
         // Формируем текст
-        this.pokerText.innerHTML = `Сочи покер<br>Комбинация "${combination.name}"<br>Анте ${ante}<br>${closeType.name}`;
+        this.pokerText.innerHTML = `Комбинация "${combination.name}"<br>Анте ${y}<br>${closeType.name}`;
+        
+        // Рассчитываем блаинд и анте+бет
+        const blind = y * combination.blindMultiplier;
+        const anteBet = y * closeType.multiplier;
         
         // Формируем ответ
         this.answerElement.innerHTML = `
-            <span class="label">Блаинд:</span><br>${PokerCommon.formatNumber(blind)}<br>
-            <span class="label">Анте + Бет:</span><br>${PokerCommon.formatNumber(anteBet)}
+            <span class="label">Блаинд:</span><br>${this.formatNumber(blind)}<br>
+            <span class="label">Анте + Бет:</span><br>${this.formatNumber(anteBet)}
         `;
         
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
+    }
+    
+    generateAnte() {
+        // Генерируем число от 15 до 300, кратное 5
+        const min = 15;
+        const max = 200;
+        const step = 5;
+        const range = (max - min) / step;
+        return min + (Math.floor(Math.random() * (range + 1)) * step);
+    }
+    
+    formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
     
     showAnswer() {
