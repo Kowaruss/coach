@@ -65,7 +65,7 @@ class SochiPokerGame {
         const y = this.generateAnte();
         
         // Формируем текст
-        this.pokerText.innerHTML = `Комбинация "${combination.name}"<br>Анте ${y}<br>${closeType.name}`;
+        this.pokerText.innerHTML = `Сочи покер<br>Комбинация "${combination.name}"<br>Анте ${y}<br>${closeType.name}`;
         
         // Рассчитываем блаинд и анте+бет
         const blind = y * combination.blindMultiplier;
