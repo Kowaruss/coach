@@ -16,7 +16,7 @@ function calculateOasisAnswer(combination, ante) {
     const payout = ante * combination.multiplier;
     
     return {
-        text: `Комбинация "${combination.name}"<br>Анте ${ante}`,
+        text: `Оазис покер<br>Комбинация "${combination.name}"<br>Анте ${ante}`,
         answer: `<span class="label">Ответ:</span><br>${PokerCommon.formatNumber(payout)}`
     };
 }
