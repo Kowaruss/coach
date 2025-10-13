@@ -4,8 +4,11 @@ class ImagesGame {
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        // Список картинок (будет автоматически определяться)
-        this.images = [];
+        // Список картинок
+        this.images = [
+            '25.jpeg', '30.jpeg', '35.jpeg', '40.jpeg', '45.jpeg',
+            '50.jpeg', '51_1.jpeg', '51_2.jpeg', '55.jpeg', '60.jpeg', '75.jpeg'
+        ];
         this.currentImage = null;
         
         this.actionButton = new ActionButton(
@@ -17,18 +20,8 @@ class ImagesGame {
         this.init();
     }
     
-    async init() {
-        await this.loadImagesList();
+    init() {
         this.nextImage();
-    }
-    
-    async loadImagesList() {
-        // Здесь будет логика автоматического определения картинок
-        // Пока используем статический список из 11 картинок
-        this.images = [
-            '25.jpeg', '30.jpeg', '35.jpeg', '40.jpeg', '45.jpeg',
-            '50.jpeg', '51_1.jpeg', '51_2.jpeg', '55.jpeg', '60.jpeg', '75.jpeg'
-        ];
     }
     
     getImageNumber(filename) {
@@ -43,8 +36,7 @@ class ImagesGame {
         this.currentImage = imageFile;
         
         // Показываем картинку
-        const imageUrl = `https://kowaruss.github.io/coach/roulette/images/${imageFile}`;
-        this.imageContent.innerHTML = `<img src="${imageUrl}" alt="Картинка ${imageFile}">`;
+        this.imageContent.innerHTML = `<img src="${imageFile}" alt="Картинка ${imageFile}">`;
         
         // Скрываем ответ
         this.answerElement.innerHTML = this.getImageNumber(imageFile);
