@@ -12,7 +12,7 @@
 .poker-text {
     font-size: 1.4em;
     font-weight: bold;
-    margin: 0 0 40px 0;
+    margin: 80px 0 40px 0;
     min-height: 120px;
     display: flex;
     flex-direction: column;
