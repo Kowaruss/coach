@@ -25,30 +25,18 @@ class ImagesGame {
     }
     
     getImageNumber(filename) {
+        // Из "25.jpg" получаем 25, из "51_2.jpg" получаем 51
         return filename.split('_')[0].split('.')[0];
     }
     
     nextImage() {
+        // Выбираем случайную картинку
         const randomIndex = Math.floor(Math.random() * this.images.length);
         const imageFile = this.images[randomIndex];
         this.currentImage = imageFile;
         
-        // Отладка
-        console.log('Пытаюсь загрузить:', imageFile);
-        
         // Показываем картинку
-        const img = new Image();
-        img.src = imageFile;
-        img.alt = "Картинка " + imageFile;
-        img.onload = () => {
-            console.log('Картинка загружена:', imageFile);
-            this.imageContent.innerHTML = '';
-            this.imageContent.appendChild(img);
-        };
-        img.onerror = () => {
-            console.error('Ошибка загрузки:', imageFile);
-            this.imageContent.innerHTML = '❌ Ошибка загрузки: ' + imageFile;
-        };
+        this.imageContent.innerHTML = `<img src="${imageFile}" alt="Картинка ${imageFile}">`;
         
         // Скрываем ответ
         this.answerElement.innerHTML = this.getImageNumber(imageFile);
