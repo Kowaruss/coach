@@ -37,14 +37,31 @@ class SochiPokerGame {
         this.generateExample();
     }
     
+    getWeightedCombination() {
+        // Создаем массив с весами: 4, 4, 4, 4, 3, 3, 2, 1, 1
+        const weights = [4, 4, 4, 4, 3, 3, 2, 1, 1];
+        
+        // Создаем взвешенный массив
+        let weightedArray = [];
+        this.pokerCombinations.forEach((combination, index) => {
+            const weight = weights[index] || 1;
+            for (let i = 0; i < weight; i++) {
+                weightedArray.push(combination);
+            }
+        });
+        
+        // Выбираем случайную комбинацию из взвешенного массива
+        return weightedArray[Math.floor(Math.random() * weightedArray.length)];
+    }
+    
     generateExample() {
-        // Выбираем случайную покерную комбинацию
-        const combination = this.pokerCombinations[Math.floor(Math.random() * this.pokerCombinations.length)];
+        // Выбираем случайную покерную комбинацию С ВЕСОМ
+        const combination = this.getWeightedCombination();
         
         // Выбираем случайный тип закрытия
         const closeType = this.closeTypes[Math.floor(Math.random() * this.closeTypes.length)];
         
-        // Генерируем анте Y (от 15 до 300, кратно 5)
+        // Генерируем анте Y (от 15 до 200, кратно 5)
         const y = this.generateAnte();
         
         // Формируем текст
@@ -65,7 +82,7 @@ class SochiPokerGame {
     }
     
     generateAnte() {
-        // Генерируем число от 15 до 300, кратное 5
+        // Генерируем число от 15 до 200, кратное 5
         const min = 15;
         const max = 200;
         const step = 5;
