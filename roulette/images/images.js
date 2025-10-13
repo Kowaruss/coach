@@ -4,10 +4,10 @@ class ImagesGame {
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        // Список картинок
+        // Реальный список картинок из папки
         this.images = [
-            '25.jpg', '30.jpg', '35.jpg', '40.jpg', '45.jpg',
-            '50.jpg', '51_1.jpg', '51_2.jpg', '55.jpg', '60.jpg', '75.jpg'
+            '102.jpg', '103.jpg', '25.jpg', '33.jpg', '43.jpg',
+            '51.jpg', '51_2.jpg', '52.jpg', '69.jpg', '86.jpg', '77.jpg'
         ];
         this.currentImage = null;
         
