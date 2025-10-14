@@ -1,5 +1,28 @@
 class WheelGame {
-    // ... остальной код без изменений ...
+    constructor() {
+        this.content = document.getElementById('content');
+        this.answerElement = document.getElementById('answer');
+        this.actionBtn = document.getElementById('actionBtn');
+        
+        // Массив чисел рулетки
+        this.wheelNumbers = [
+            3, 26, 0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 
+            8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 
+            35, 3, 26, 0, 32
+        ];
+        
+        this.actionButton = new ActionButton(
+            this.actionBtn,
+            () => this.showAnswer(),
+            () => this.nextExample()
+        );
+        
+        this.init();
+    }
+    
+    init() {
+        this.nextExample();
+    }
     
     nextExample() {
         // Выбираем случайный индекс от 2 до 38
@@ -32,5 +55,11 @@ class WheelGame {
         this.actionButton.reset();
     }
     
-    // ... остальной код без изменений ...
+    showAnswer() {
+        this.answerElement.classList.add('show');
+    }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    new WheelGame();
+});
