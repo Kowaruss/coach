@@ -60,6 +60,7 @@ class IntersectionGame {
         // Формируем контент
         this.content.innerHTML = `
             <div class="complit-text">
+                Рулетка 1 - 100<br>
                 Комплит "${variant.x}" по "${z}",<br>
                 комплит "${variant.y}" по "${h}"
             </div>
