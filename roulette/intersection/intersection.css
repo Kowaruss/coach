@@ -1,0 +1,52 @@
+.roulette-title {
+    font-size: 1.6em;
+    font-weight: bold;
+    text-align: center;
+    margin: 40px 0 20px 0;
+    color: #2c3e50;
+}
+
+.content {
+    text-align: center;
+    margin: 20px 0 30px 0;
+}
+
+.complit-text {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.intersection-image {
+    width: 250px;
+    height: 400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.intersection-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.answer {
+    font-size: 1.4em;
+    color: #2c3e50;
+    margin: 20px 0;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.answer.show {
+    opacity: 1;
+}
