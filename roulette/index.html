@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пересечение комплиты</title>
-    <link rel="stylesheet" href="https://kowaruss.github.io/coach/style.css">
-    <link rel="stylesheet" href="https://kowaruss.github.io/coach/action-button.css">
-    <link rel="stylesheet" href="intersection.css">
+    <title>Рулетка</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="container">
@@ -14,22 +12,37 @@
             <span class="back-arrow">&lt;</span>
         </a>
         
-        <div class="roulette-title">Рулетка 1 - 100</div>
-        
-        <div class="content" id="content">
-            <!-- Контент будет генерироваться динамически -->
+        <div class="button-container">
+            <a href="math/index.html" class="button menu-btn">
+                <span class="icon">➗</span>
+                Математика
+            </a>
+            <a href="sectors/index.html" class="button menu-btn">
+                <span class="icon">🎯</span>
+                Сектора
+            </a>
+            <a href="complits/index.html" class="button menu-btn">
+                <span class="icon">✅</span>
+                Комплиты
+            </a>
+            <a href="intersection/index.html" class="button menu-btn">
+    <span class="icon">🔀</span>
+    Пересечение комплитов
+            </a>
+            <button class="button menu-btn">
+                <span class="icon">💰</span>
+                Ставки
+            </button>
+            <a href="cash-payments/index.html" class="button menu-btn">
+                <span class="icon">💵</span>
+                Выплаты через Cash
+            </a>
+            <a href="images/index.html" class="button menu-btn">
+                <span class="icon">🖼️</span>
+                Картинки
+            </a>
         </div>
-        
-        <div class="answer" id="answer">
-            <!-- Ответ будет генерироваться динамически -->
-        </div>
-        
-        <button class="action-btn show-answer" id="actionBtn">
-            Покажи ответ
-        </button>
     </div>
-
-    <script src="/coach/action-button.js"></script>
-    <script src="intersection.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
