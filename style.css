@@ -1,3 +1,4 @@
+/* Общие стили для всего сайта */
 * {
     margin: 0;
     padding: 0;
@@ -5,75 +6,142 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .container {
     text-align: center;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
-    color: white;
+    color: #2c3e50;
     margin-bottom: 40px;
-    font-size: 2.5em;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-size: 2.2em;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.menu-buttons {
+.button-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    gap: 10px;
 }
 
 .button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 40px;
-    background: white;
-    border-radius: 15px;
+    padding: 18px 25px;
     text-decoration: none;
-    color: #333;
+    border-radius: 12px;
+    font-size: 1.3em;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    gap: 12px;
+}
+
+.roulette-btn {
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.cards-btn {
+    background: linear-gradient(145deg, #27ae60, #219a52);
+    color: white;
+}
+
+.icon {
     font-size: 1.5em;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    min-width: 250px;
 }
 
-.button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-}
-
-.button .icon {
-    font-size: 1.8em;
-    margin-right: 15px;
-}
-
+/* Стили для круглой кнопки Назад */
 .back-button {
     position: absolute;
     top: 20px;
     left: 20px;
-    color: white;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 2px solid #2c3e50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
-    font-size: 2em;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
 }
 
 .back-arrow {
-    display: inline-block;
-    transition: transform 0.3s ease;
+    font-size: 1.5em;
+    color: #2c3e50;
+    font-weight: bold;
 }
 
-.back-button:hover .back-arrow {
-    transform: translateX(-5px);
+/* Стили для кнопок меню */
+.menu-btn {
+    background: linear-gradient(145deg, #4a5568, #2d3748);
+    color: white;
+    border: none;
+    width: 100%;
+}
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+/* Отступ только для страниц с кнопкой назад */
+.container:has(.back-button) .button-container {
+    padding-top: 70px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+    
+    .button {
+        padding: 16px 20px;
+        font-size: 1.1em;
+    }
+    
+    .back-button {
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .back-arrow {
+        font-size: 1.3em;
+    }
 }
