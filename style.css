@@ -25,70 +25,10 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Стили ТОЛЬКО для главной страницы */
 .menu-buttons {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
-    width: 100%;
-}
-
-.menu-btn {
-    width: 90%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    text-decoration: none;
-    color: white;
-    font-size: 1.8em;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border: 3px solid rgba(255,255,255,0.3);
-}
-
-.menu-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.8;
-    z-index: -1;
-}
-
-.roulette-btn::before {
-    background-image: url('roulette-wheel-bg.jpg');
-}
-
-.chart-btn::before {
-    background-image: url('cards-fan-bg.jpg');
-}
-
-.menu-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-    border-color: rgba(255,255,255,0.6);
-}
-
-.btn-text {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    z-index: 1;
-}
-
-/* Стили для остальных страниц */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     align-items: center;
 }
 
@@ -106,7 +46,6 @@ h1 {
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     min-width: 250px;
-    margin: 5px 0;
 }
 
 .button:hover {
@@ -137,46 +76,4 @@ h1 {
 
 .back-button:hover .back-arrow {
     transform: translateX(-5px);
-}
-
-/* Дополнительные стили для других элементов */
-.poker-text, .blackjack-text, .wheel-text, .complit-text {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin: 60px 0 40px 0;
-    min-height: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    line-height: 1.6;
-}
-
-.answer {
-    font-size: 1.3em;
-    color: #2c3e50;
-    margin: 20px 0;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    font-weight: bold;
-    line-height: 1.6;
-    text-align: center;
-}
-
-.answer.show {
-    opacity: 1;
-}
-
-.answer span.label {
-    color: #28a745;
-}
-
-.action-btn {
-    margin-top: auto;
-    margin-bottom: 20px;
 }
