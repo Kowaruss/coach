@@ -19,26 +19,27 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     border: 3px solid #fff;
     position: relative;
+    overflow: hidden;
 }
 
-.roulette-container::before {
-    content: "bg_fon.jpg";
+.chip {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8em;
+    width: 8%; /* Размер фишки относительно поля */
+    height: auto;
+    cursor: move;
+    /* Начальная позиция - по центру */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.chip:hover {
+    filter: drop-shadow(0 0 8px gold);
 }
 
 .answer {
