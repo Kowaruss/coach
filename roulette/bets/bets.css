@@ -27,7 +27,7 @@
 
 .chip {
     position: absolute;
-    width: 20%; /* Увеличил с 2% до 10% */
+    width: 15%; /* Увеличил с 2% до 10% */
     height: auto;
     cursor: move;
     /* Начальная позиция - по центру */
