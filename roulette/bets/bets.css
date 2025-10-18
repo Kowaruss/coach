@@ -27,11 +27,12 @@
 
 .chip {
     position: absolute;
-    width: 15%; /* Размер 15% */
+    width: 15%;
     height: auto;
     cursor: move;
     transition: all 0.3s ease;
     z-index: 10;
+    /* Убрано transform: translate(-50%, -50%) */
 }
 
 .chip:hover {
