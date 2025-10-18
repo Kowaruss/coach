@@ -27,15 +27,22 @@
 
 .chip {
     position: absolute;
-    width: 15%; /* Увеличил с 2% до 10% */
+    width: 10%;
     height: auto;
     cursor: move;
-    /* Начальная позиция - по центру */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     transition: all 0.3s ease;
     z-index: 10;
+}
+
+/* Разные цвета для фишек */
+#chip1 {
+    /* Первая фишка - синяя (оригинальная) */
+    filter: hue-rotate(0deg);
+}
+
+#chip2 {
+    /* Вторая фишка - красная */
+    filter: hue-rotate(120deg);
 }
 
 .chip:hover {
