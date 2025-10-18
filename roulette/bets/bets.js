@@ -5,7 +5,15 @@ class BetsGame {
         this.actionBtn = document.getElementById('actionBtn');
         this.chip1 = document.getElementById('chip1');
         this.chip2 = document.getElementById('chip2');
+        this.chip3 = document.getElementById('chip3');
         this.currentNumber = 1;
+        
+        // Сохраняем позиции фишек
+        this.chipPositions = {
+            str2: { top: '50%', left: '50%' },   // Для chip1
+            sp0_2: { top: '50%', left: '35%' },  // Для chip2
+            sp0_3: { top: '50%', left: '65%' }   // Для chip3 (15% вправо от центра)
+        };
         
         this.actionButton = new ActionButton(
             this.actionBtn,
@@ -18,13 +26,20 @@ class BetsGame {
     }
     
     positionChips() {
-        // Центр для первой фишки
-        this.chip1.style.top = '50%';
-        this.chip1.style.left = '50%';
-        
-        // Правее для второй фишки (было 30%, стало 35%)
-        this.chip2.style.top = '50%';
-        this.chip2.style.left = '35%';
+        // Позиционируем все фишки
+        this.positionChip('chip1', 'str2');
+        this.positionChip('chip2', 'sp0_2');
+        this.positionChip('chip3', 'sp0_3');
+    }
+    
+    // Универсальный метод для позиционирования фишки
+    positionChip(chipId, positionName) {
+        const chip = document.getElementById(chipId);
+        if (chip && this.chipPositions[positionName]) {
+            const pos = this.chipPositions[positionName];
+            chip.style.top = pos.top;
+            chip.style.left = pos.left;
+        }
     }
     
     showAnswer() {
