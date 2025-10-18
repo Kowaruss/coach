@@ -3,12 +3,14 @@ class BetsGame {
         this.contentText = document.getElementById('contentText');
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
-        this.chip = document.getElementById('chip');
+        this.chip1 = document.getElementById('chip1');
+        this.chip2 = document.getElementById('chip2');
         this.currentNumber = 1;
         
-        // Позиции фишки
+        // Позиции фишек
         this.chipPositions = {
-            str2: { top: '50%', left: '50%' } // Текущая позиция по центру
+            str2: { top: '50%', left: '50%' }, // Для chip1
+            str3: { top: '40%', left: '40%' }  // Для chip2
         };
         
         this.actionButton = new ActionButton(
@@ -17,33 +19,19 @@ class BetsGame {
             () => this.nextExample()
         );
         
-        this.saveCurrentPositionAsStr2();
+        // Позиционируем фишки
+        this.positionChip('chip1', 'str2');
+        this.positionChip('chip2', 'str3');
     }
     
-    // Сохраняем текущую позицию как str2
-    saveCurrentPositionAsStr2() {
-        const rect = this.chip.getBoundingClientRect();
-        const containerRect = document.getElementById('rouletteContainer').getBoundingClientRect();
-        
-        // Рассчитываем позицию в процентах относительно контейнера
-        const topPercent = ((rect.top - containerRect.top) / containerRect.height) * 100;
-        const leftPercent = ((rect.left - containerRect.left) / containerRect.width) * 100;
-        
-        this.chipPositions.str2 = {
-            top: `${topPercent}%`,
-            left: `${leftPercent}%`
-        };
-        
-        console.log('Позиция str2 сохранена:', this.chipPositions.str2);
-    }
-    
-    // Позиционируем фишку в сохраненную позицию
-    positionChip(positionName) {
-        if (this.chipPositions[positionName]) {
+    // Позиционируем конкретную фишку
+    positionChip(chipId, positionName) {
+        const chip = document.getElementById(chipId);
+        if (chip && this.chipPositions[positionName]) {
             const pos = this.chipPositions[positionName];
-            this.chip.style.top = pos.top;
-            this.chip.style.left = pos.left;
-            this.chip.style.transform = 'translate(0, 0)'; // Убираем центрирование
+            chip.style.top = pos.top;
+            chip.style.left = pos.left;
+            chip.style.transform = 'translate(0, 0)';
         }
     }
     
@@ -57,8 +45,9 @@ class BetsGame {
         this.answerElement.textContent = this.currentNumber;
         this.answerElement.classList.remove('show');
         
-        // При следующем примере можно использовать сохраненную позицию
-        // this.positionChip('str2');
+        // При следующем примере можно использовать сохраненные позиции
+        // this.positionChip('chip1', 'str2');
+        // this.positionChip('chip2', 'str3');
     }
 }
 
