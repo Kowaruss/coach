@@ -19,19 +19,19 @@ class BetsGame {
             () => this.nextExample()
         );
         
-        // Позиционируем фишки
-        this.positionChip('chip1', 'str2');
-        this.positionChip('chip2', 'str3');
+        // УБИРАЕМ вызов positionChip - позиции уже заданы в HTML!
+        // this.positionChip('chip1', 'str2');
+        // this.positionChip('chip2', 'str3');
     }
     
-    // Позиционируем конкретную фишку
+    // Оставляем метод для будущего использования
     positionChip(chipId, positionName) {
         const chip = document.getElementById(chipId);
         if (chip && this.chipPositions[positionName]) {
             const pos = this.chipPositions[positionName];
             chip.style.top = pos.top;
             chip.style.left = pos.left;
-            chip.style.transform = 'translate(0, 0)';
+            // УБИРАЕМ transform!
         }
     }
     
