@@ -32,7 +32,8 @@
     cursor: move;
     transition: all 0.3s ease;
     z-index: 10;
-    /* Без transform! */
+    /* Центрируем фишку относительно точки позиционирования */
+    transform: translate(-50%, -50%);
 }
 
 .chip:hover {
