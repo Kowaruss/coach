@@ -9,8 +9,8 @@ class BetsGame {
         
         // Позиции фишек
         this.chipPositions = {
-            str2: { top: '50%', left: '50%' }, // Для chip1
-            str3: { top: '40%', left: '40%' }  // Для chip2
+            str2: { top: '50%', left: '50%' },   // Центр - для chip1
+            str3: { top: '50%', left: '30%' }    // Левее - для chip2
         };
         
         this.actionButton = new ActionButton(
@@ -44,10 +44,6 @@ class BetsGame {
         this.contentText.textContent = `Тут будет фото ${this.currentNumber}`;
         this.answerElement.textContent = this.currentNumber;
         this.answerElement.classList.remove('show');
-        
-        // При следующем примере можно использовать сохраненные позиции
-        // this.positionChip('chip1', 'str2');
-        // this.positionChip('chip2', 'str3');
     }
 }
 
