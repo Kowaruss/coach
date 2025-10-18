@@ -22,9 +22,9 @@ class BetsGame {
         this.chip1.style.top = '50%';
         this.chip1.style.left = '50%';
         
-        // Левее для второй фишки
+        // Правее для второй фишки (было 30%, стало 35%)
         this.chip2.style.top = '50%';
-        this.chip2.style.left = '30%';
+        this.chip2.style.left = '35%';
     }
     
     showAnswer() {
