@@ -44,9 +44,9 @@ class BetsGame {
             sp2_5_down: { top: '65%', left: '65%' },   // chip6
             
             // Нижний ряд (сдвиг на 30% вниз)
-            str2_down2: { top: '80%', left: '50%' },   // chip13
-            sp0_2_down2: { top: '80%', left: '35%' },  // chip14
-            sp2_5_down2: { top: '80%', left: '65%' }   // chip15
+            str2_down2: { top: '82%', left: '50%' },   // chip13
+            sp0_2_down2: { top: '82%', left: '35%' },  // chip14
+            sp2_5_down2: { top: '82%', left: '65%' }   // chip15
         };
         
         this.actionButton = new ActionButton(
