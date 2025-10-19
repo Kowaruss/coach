@@ -3,7 +3,7 @@ class BetsGame {
         this.contentText = document.getElementById('contentText');
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
-        // Получаем все 15 фишек
+        // Получаем все 19 фишек
         this.chip1 = document.getElementById('chip1');
         this.chip2 = document.getElementById('chip2');
         this.chip3 = document.getElementById('chip3');
@@ -19,10 +19,19 @@ class BetsGame {
         this.chip13 = document.getElementById('chip13');
         this.chip14 = document.getElementById('chip14');
         this.chip15 = document.getElementById('chip15');
+        this.chip16 = document.getElementById('chip16');
+        this.chip17 = document.getElementById('chip17');
+        this.chip18 = document.getElementById('chip18');
+        this.chip19 = document.getElementById('chip19');
         this.currentNumber = 1;
         
         // Сохраняем позиции фишек
         this.chipPositions = {
+            // Верхний ряд (сдвиг на 45% вверх)
+            str2_up3: { top: '5%', left: '50%' },      // chip16
+            sp0_2_up3: { top: '5%', left: '35%' },     // chip17
+            sp2_5_up3: { top: '5%', left: '65%' },     // chip18
+            
             // Верхний ряд (сдвиг на 30% вверх)
             str2_up2: { top: '20%', left: '50%' },     // chip10
             sp0_2_up2: { top: '20%', left: '35%' },    // chip11
@@ -38,12 +47,15 @@ class BetsGame {
             sp0_2: { top: '50%', left: '35%' },        // chip2
             sp2_5: { top: '50%', left: '65%' },        // chip3
             
+            // Фишка со сдвигом 40% влево от центра
+            str2_left: { top: '50%', left: '10%' },    // chip19
+            
             // Нижний ряд (сдвиг на 15% вниз)
             str2_down: { top: '65%', left: '50%' },    // chip4
             sp0_2_down: { top: '65%', left: '35%' },   // chip5
             sp2_5_down: { top: '65%', left: '65%' },   // chip6
             
-            // Нижний ряд (сдвиг на 30% вниз)
+            // Нижний ряд (сдвиг на 32% вниз)
             str2_down2: { top: '82%', left: '50%' },   // chip13
             sp0_2_down2: { top: '82%', left: '35%' },  // chip14
             sp2_5_down2: { top: '82%', left: '65%' }   // chip15
@@ -60,7 +72,11 @@ class BetsGame {
     }
     
     positionChips() {
-        // Позиционируем все 15 фишек
+        // Позиционируем все 19 фишек
+        this.positionChip('chip16', 'str2_up3');
+        this.positionChip('chip17', 'sp0_2_up3');
+        this.positionChip('chip18', 'sp2_5_up3');
+        
         this.positionChip('chip10', 'str2_up2');
         this.positionChip('chip11', 'sp0_2_up2');
         this.positionChip('chip12', 'sp2_5_up2');
@@ -72,6 +88,8 @@ class BetsGame {
         this.positionChip('chip1', 'str2');
         this.positionChip('chip2', 'sp0_2');
         this.positionChip('chip3', 'sp2_5');
+        
+        this.positionChip('chip19', 'str2_left');
         
         this.positionChip('chip4', 'str2_down');
         this.positionChip('chip5', 'sp0_2_down');
