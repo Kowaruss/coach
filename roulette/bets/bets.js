@@ -31,9 +31,9 @@ class BetsGame {
         // Сохраняем позиции фишек с информацией о смещении
         this.chipPositions = {
             // Верхний ряд (сдвиг на 45% вверх) - размер: 15% - 3% = 12%
-            str2_up3: { top: '5%', left: '50%', sizeOffset: -3 },      // chip16
-            sp0_2_up3: { top: '5%', left: '35%', sizeOffset: -3 },     // chip17
-            sp2_5_up3: { top: '5%', left: '65%', sizeOffset: -3 },     // chip18
+            str2_up3: { top: '8%', left: '50%', sizeOffset: -3 },      // chip16
+            sp0_2_up3: { top: '8%', left: '35%', sizeOffset: -3 },     // chip17
+            sp2_5_up3: { top: '8%', left: '65%', sizeOffset: -3 },     // chip18
             
             // Верхний ряд (сдвиг на 30% вверх) - размер: 15% - 2% = 13%
             str2_up2: { top: '20%', left: '50%', sizeOffset: -2 },     // chip10
