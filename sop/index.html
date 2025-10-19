@@ -6,6 +6,7 @@
     <title>СОП - Казино Тренер</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="/coach/action-button.css">
+    <link rel="stylesheet" href="sop.css">
 </head>
 <body>
     <div class="container">
@@ -56,7 +57,7 @@
             const question = questions[currentQuestionIndex];
             document.getElementById('questionText').textContent = question.question || 'Вопрос';
             document.getElementById('answer').innerHTML = question.answer || 'Ответ';
-            document.getElementById('answer').style.color = ''; // Сбрасываем цвет
+            document.getElementById('answer').style.color = '#2c3e50'; // Сбрасываем цвет
         }
         
         // Инициализация
