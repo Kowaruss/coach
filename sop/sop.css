@@ -9,7 +9,7 @@
 .option {
     font-size: 1.1em;
     margin: 8px 0;
-    padding: 10px 15px; /* Добавил отступ слева-справа */
+    padding: 10px 15px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -18,9 +18,9 @@
     min-height: 50px;
     display: flex;
     align-items: center;
-    text-align: left; /* Выравнивание по левому краю */
-    margin-left: 10px; /* Небольшой отступ слева */
-    margin-right: 10px; /* И справа для баланса */
+    text-align: left;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .option:hover {
