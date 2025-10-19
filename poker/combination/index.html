@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Покерные комбинации</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/coach/action-button.css">
+    <link rel="stylesheet" href="combinations.css">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <span class="back-arrow">&lt;</span>
+        </a>
+        
+        <!-- Ползунок времени -->
+        <div class="time-slider-container">
+            <label>Время показа карт: <span id="timeValue">7</span> сек.</label>
+            <input type="range" id="timeSlider" min="4" max="10" value="7" step="1">
+        </div>
+
+        <!-- Область с картами -->
+        <div class="cards-container">
+            <!-- Верхние 2 карты -->
+            <div class="cards-row top-cards" id="topCards"></div>
+            
+            <!-- Средние 5 карт -->
+            <div class="cards-row middle-cards">
+                <div class="card-group" id="middleGroup1"></div>
+                <div class="card-group" id="middleGroup2"></div>
+            </div>
+        </div>
+
+        <!-- Область ответа -->
+        <div class="answer" id="answer"></div>
+        
+        <!-- Кнопка действия -->
+        <button class="action-btn show-answer" id="actionBtn">
+            Покажи ответ
+        </button>
+    </div>
+
+    <script src="combinations.js"></script>
+    <script src="/coach/action-button.js"></script>
+</body>
+</html>
