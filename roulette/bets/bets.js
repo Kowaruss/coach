@@ -25,40 +25,43 @@ class BetsGame {
         this.chip19 = document.getElementById('chip19');
         this.currentNumber = 1;
         
-        // Сохраняем позиции фишек
+        // Базовый размер для среднего ряда
+        this.baseSize = 15;
+        
+        // Сохраняем позиции фишек с информацией о смещении
         this.chipPositions = {
-            // Верхний ряд (сдвиг на 45% вверх)
-            str2_up3: { top: '5%', left: '50%' },      // chip16
-            sp0_2_up3: { top: '5%', left: '35%' },     // chip17
-            sp2_5_up3: { top: '5%', left: '65%' },     // chip18
+            // Верхний ряд (сдвиг на 45% вверх) - размер: 15% - 3% = 12%
+            str2_up3: { top: '5%', left: '50%', sizeOffset: -3 },      // chip16
+            sp0_2_up3: { top: '5%', left: '35%', sizeOffset: -3 },     // chip17
+            sp2_5_up3: { top: '5%', left: '65%', sizeOffset: -3 },     // chip18
             
-            // Верхний ряд (сдвиг на 30% вверх)
-            str2_up2: { top: '20%', left: '50%' },     // chip10
-            sp0_2_up2: { top: '20%', left: '35%' },    // chip11
-            sp2_5_up2: { top: '20%', left: '65%' },    // chip12
+            // Верхний ряд (сдвиг на 30% вверх) - размер: 15% - 2% = 13%
+            str2_up2: { top: '20%', left: '50%', sizeOffset: -2 },     // chip10
+            sp0_2_up2: { top: '20%', left: '35%', sizeOffset: -2 },    // chip11
+            sp2_5_up2: { top: '20%', left: '65%', sizeOffset: -2 },    // chip12
             
-            // Верхний ряд (сдвиг на 15% вверх)
-            str2_up: { top: '35%', left: '50%' },      // chip7
-            sp0_2_up: { top: '35%', left: '35%' },     // chip8
-            sp2_5_up: { top: '35%', left: '65%' },     // chip9
+            // Верхний ряд (сдвиг на 15% вверх) - размер: 15% - 1% = 14%
+            str2_up: { top: '35%', left: '50%', sizeOffset: -1 },      // chip7
+            sp0_2_up: { top: '35%', left: '35%', sizeOffset: -1 },     // chip8
+            sp2_5_up: { top: '35%', left: '65%', sizeOffset: -1 },     // chip9
             
-            // Средний ряд
-            str2: { top: '50%', left: '50%' },         // chip1
-            sp0_2: { top: '50%', left: '35%' },        // chip2
-            sp2_5: { top: '50%', left: '65%' },        // chip3
+            // Средний ряд - размер: 15%
+            str2: { top: '50%', left: '50%', sizeOffset: 0 },         // chip1
+            sp0_2: { top: '50%', left: '35%', sizeOffset: 0 },        // chip2
+            sp2_5: { top: '50%', left: '65%', sizeOffset: 0 },        // chip3
             
-            // Фишка со сдвигом 40% влево от центра
-            str2_left: { top: '50%', left: '10%' },    // chip19
+            // Фишка со сдвигом 40% влево от центра - размер: 15%
+            str2_left: { top: '50%', left: '10%', sizeOffset: 0 },    // chip19
             
-            // Нижний ряд (сдвиг на 15% вниз)
-            str2_down: { top: '65%', left: '50%' },    // chip4
-            sp0_2_down: { top: '65%', left: '35%' },   // chip5
-            sp2_5_down: { top: '65%', left: '65%' },   // chip6
+            // Нижний ряд (сдвиг на 15% вниз) - размер: 15% + 1% = 16%
+            str2_down: { top: '65%', left: '50%', sizeOffset: 1 },    // chip4
+            sp0_2_down: { top: '65%', left: '35%', sizeOffset: 1 },   // chip5
+            sp2_5_down: { top: '65%', left: '65%', sizeOffset: 1 },   // chip6
             
-            // Нижний ряд (сдвиг на 32% вниз)
-            str2_down2: { top: '82%', left: '50%' },   // chip13
-            sp0_2_down2: { top: '82%', left: '35%' },  // chip14
-            sp2_5_down2: { top: '82%', left: '65%' }   // chip15
+            // Нижний ряд (сдвиг на 32% вниз) - размер: 15% + 2% = 17%
+            str2_down2: { top: '82%', left: '50%', sizeOffset: 2 },   // chip13
+            sp0_2_down2: { top: '82%', left: '35%', sizeOffset: 2 },  // chip14
+            sp2_5_down2: { top: '82%', left: '65%', sizeOffset: 2 }   // chip15
         };
         
         this.actionButton = new ActionButton(
@@ -107,6 +110,10 @@ class BetsGame {
             const pos = this.chipPositions[positionName];
             chip.style.top = pos.top;
             chip.style.left = pos.left;
+            
+            // Устанавливаем размер в зависимости от смещения
+            const size = this.baseSize + pos.sizeOffset;
+            chip.style.width = `${size}%`;
         }
     }
     
