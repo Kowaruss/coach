@@ -1,3 +1,26 @@
+.options-container {
+    margin: 20px 0;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.option {
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    line-height: 1.4;
+}
+
+.option:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
 .question-text {
     font-size: 1.4em;
     font-weight: bold;
@@ -28,10 +51,6 @@
 
 .answer.show {
     opacity: 1;
-}
-
-.answer.correct {
-    color: #28a745;
 }
 
 .action-btn {
