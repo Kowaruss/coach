@@ -3,32 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOP - Свод правил</title>
+    <title>СОП - Казино Тренер</title>
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="sop.css">
+    <link rel="stylesheet" href="/coach/action-button.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>📘 Свод правил и положений</h1>
+        <a href="../index.html" class="back-button">
+            <span class="back-arrow">&lt;</span>
+        </a>
+        
+        <div class="question-text" id="questionText">
+            Загрузка вопросов...
         </div>
         
-        <div class="question-container">
-            <div class="progress" id="progress">Вопрос 1 из 64</div>
-            <div class="question-text" id="questionText"></div>
-            <div class="options-container" id="optionsContainer"></div>
+        <div class="answer" id="answer">
+            <!-- Ответ будет загружаться из базы -->
         </div>
         
-        <div class="button-container">
-            <button class="button action-button" id="actionButton">🟢 Показать ответ</button>
-            <button class="button next-button" id="nextButton" style="display: none;">🔄 Следующий вопрос</button>
-        </div>
-        
-        <div class="back-button-container">
-            <button class="button back-button" onclick="window.location.href='../index.html'">← Назад</button>
-        </div>
+        <button class="action-btn show-answer" id="actionBtn">
+            Покажи ответ
+        </button>
     </div>
 
-    <script src="sop.js"></script>
+    <script src="/coach/action-button.js"></script>
+    <script type="module">
+        import { db, collection, getDocs } from '../firebase.js';
+        
+        let questions = [];
+        let currentQuestionIndex = 0;
+        
+        async function loadQuestions() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "sops"));
+                questions = [];
+                querySnapshot.forEach((doc) => {
+                    questions.push(doc.data());
+                });
+                
+                if (questions.length > 0) {
+                    showRandomQuestion();
+                } else {
+                    document.getElementById('questionText').textContent = 'В базе нет вопросов';
+                }
+            } catch (error) {
+                console.error("Ошибка загрузки:", error);
+            }
+        }
+        
+        function showRandomQuestion() {
+            currentQuestionIndex = Math.floor(Math.random() * questions.length);
+            const question = questions[currentQuestionIndex];
+            document.getElementById('questionText').textContent = question.question || 'Вопрос';
+            document.getElementById('answer').innerHTML = question.answer || 'Ответ';
+            document.getElementById('answer').style.color = ''; // Сбрасываем цвет
+        }
+        
+        // Инициализация
+        loadQuestions();
+    </script>
 </body>
 </html>
