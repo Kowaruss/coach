@@ -18,8 +18,12 @@
             Загрузка вопросов...
         </div>
         
+        <div class="options-container" id="optionsContainer">
+            <!-- Варианты ответов будут здесь -->
+        </div>
+        
         <div class="answer" id="answer">
-            <!-- Ответ будет загружаться из базы -->
+            <!-- Правильный ответ будет здесь -->
         </div>
         
         <button class="action-btn show-answer" id="actionBtn">
@@ -42,7 +46,7 @@
                 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    if (data.question && data.answer) {
+                    if (data.question && data.options) {
                         questions.push(data);
                     }
                 });
@@ -53,7 +57,7 @@
                     showRandomQuestion();
                     setupActionButton();
                 } else {
-                    document.getElementById('questionText').textContent = 'В базе данных пока нет вопросов. Добавьте вопросы через админ-панель.';
+                    document.getElementById('questionText').textContent = 'В базе данных пока нет вопросов.';
                     document.getElementById('actionBtn').style.display = 'none';
                 }
             } catch (error) {
@@ -68,24 +72,49 @@
             currentQuestionIndex = Math.floor(Math.random() * questions.length);
             const question = questions[currentQuestionIndex];
             
+            // Показываем вопрос
             document.getElementById('questionText').textContent = question.question;
-            document.getElementById('answer').innerHTML = question.answer;
-            document.getElementById('answer').style.color = '#2c3e50';
-            document.getElementById('answer').classList.remove('show');
+            
+            // Показываем варианты ответов
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = `${index + 1}. ${option}`;
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Скрываем правильный ответ
+            const answerElement = document.getElementById('answer');
+            answerElement.innerHTML = `Правильный ответ: ${question.options[question.correctAnswer]}`;
+            answerElement.style.color = '#2c3e50';
+            answerElement.classList.remove('show');
             answerShown = false;
         }
         
         function setupActionButton() {
             const actionBtn = document.getElementById('actionBtn');
             const answerElement = document.getElementById('answer');
+            const options = document.querySelectorAll('.option');
             
             actionBtn.addEventListener('click', function() {
                 if (!answerShown) {
-                    // Показываем ответ зелёным цветом
+                    // Показываем правильный ответ зелёным цветом
                     answerElement.style.color = '#28a745';
                     answerElement.classList.add('show');
                     actionBtn.textContent = 'Следующий вопрос';
                     answerShown = true;
+                    
+                    // Подсвечиваем правильный вариант
+                    const correctIndex = questions[currentQuestionIndex].correctAnswer;
+                    options.forEach((option, index) => {
+                        if (index === correctIndex) {
+                            option.style.color = '#28a745';
+                            option.style.fontWeight = 'bold';
+                        }
+                    });
                 } else {
                     // Показываем следующий вопрос
                     showRandomQuestion();
