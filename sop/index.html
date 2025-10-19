@@ -27,41 +27,75 @@
         </button>
     </div>
 
-    <script src="/coach/action-button.js"></script>
     <script type="module">
         import { db, collection, getDocs } from '../firebase.js';
         
         let questions = [];
         let currentQuestionIndex = 0;
+        let answerShown = false;
         
         async function loadQuestions() {
             try {
+                console.log("Загружаю вопросы из БД...");
                 const querySnapshot = await getDocs(collection(db, "sops"));
                 questions = [];
+                
                 querySnapshot.forEach((doc) => {
-                    questions.push(doc.data());
+                    const data = doc.data();
+                    if (data.question && data.answer) {
+                        questions.push(data);
+                    }
                 });
+                
+                console.log("Загружено вопросов:", questions.length);
                 
                 if (questions.length > 0) {
                     showRandomQuestion();
+                    setupActionButton();
                 } else {
-                    document.getElementById('questionText').textContent = 'В базе нет вопросов';
+                    document.getElementById('questionText').textContent = 'В базе данных пока нет вопросов. Добавьте вопросы через админ-панель.';
+                    document.getElementById('actionBtn').style.display = 'none';
                 }
             } catch (error) {
                 console.error("Ошибка загрузки:", error);
+                document.getElementById('questionText').textContent = 'Ошибка загрузки вопросов из базы данных';
             }
         }
         
         function showRandomQuestion() {
+            if (questions.length === 0) return;
+            
             currentQuestionIndex = Math.floor(Math.random() * questions.length);
             const question = questions[currentQuestionIndex];
-            document.getElementById('questionText').textContent = question.question || 'Вопрос';
-            document.getElementById('answer').innerHTML = question.answer || 'Ответ';
-            document.getElementById('answer').style.color = '#2c3e50'; // Сбрасываем цвет
+            
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('answer').innerHTML = question.answer;
+            document.getElementById('answer').style.color = '#2c3e50';
+            document.getElementById('answer').classList.remove('show');
+            answerShown = false;
         }
         
-        // Инициализация
-        loadQuestions();
+        function setupActionButton() {
+            const actionBtn = document.getElementById('actionBtn');
+            const answerElement = document.getElementById('answer');
+            
+            actionBtn.addEventListener('click', function() {
+                if (!answerShown) {
+                    // Показываем ответ зелёным цветом
+                    answerElement.style.color = '#28a745';
+                    answerElement.classList.add('show');
+                    actionBtn.textContent = 'Следующий вопрос';
+                    answerShown = true;
+                } else {
+                    // Показываем следующий вопрос
+                    showRandomQuestion();
+                    actionBtn.textContent = 'Покажи ответ';
+                }
+            });
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadQuestions);
     </script>
 </body>
 </html>
