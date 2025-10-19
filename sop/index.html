@@ -1,130 +1,94 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СОП - Казино Тренер</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="/coach/action-button.css">
-    <link rel="stylesheet" href="sop.css">
-</head>
-<body>
-    <div class="container">
-        <a href="../index.html" class="back-button">
-            <span class="back-arrow">&lt;</span>
-        </a>
+<script type="module">
+    import { db, collection, getDocs } from '../firebase.js';
+    
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let answerShown = false;
+    
+    async function loadQuestions() {
+        try {
+            console.log("Загружаю вопросы из БД...");
+            const querySnapshot = await getDocs(collection(db, "sops"));
+            questions = [];
+            
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.question && data.options) {
+                    questions.push(data);
+                }
+            });
+            
+            console.log("Загружено вопросов:", questions.length);
+            
+            if (questions.length > 0) {
+                showRandomQuestion();
+                setupActionButton();
+            } else {
+                document.getElementById('questionText').textContent = 'В базе данных пока нет вопросов.';
+                document.getElementById('actionBtn').style.display = 'none';
+            }
+        } catch (error) {
+            console.error("Ошибка загрузки:", error);
+            document.getElementById('questionText').textContent = 'Ошибка загрузки вопросов из базы данных';
+        }
+    }
+    
+    function showRandomQuestion() {
+        if (questions.length === 0) return;
         
-        <div class="question-text" id="questionText">
-            Загрузка вопросов...
-        </div>
+        currentQuestionIndex = Math.floor(Math.random() * questions.length);
+        const question = questions[currentQuestionIndex];
         
-        <div class="options-container" id="optionsContainer">
-            <!-- Варианты ответов будут здесь -->
-        </div>
+        // Показываем вопрос
+        document.getElementById('questionText').textContent = question.question;
         
-        <div class="answer" id="answer">
-            <!-- Правильный ответ будет здесь -->
-        </div>
+        // Показываем варианты ответов
+        const optionsContainer = document.getElementById('optionsContainer');
+        optionsContainer.innerHTML = '';
         
-        <button class="action-btn show-answer" id="actionBtn">
-            Покажи ответ
-        </button>
-    </div>
-
-    <script type="module">
-        import { db, collection, getDocs } from '../firebase.js';
+        question.options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'option';
+            optionElement.textContent = `${index + 1}. ${option}`;
+            optionElement.style.color = '#2c3e50'; // обычный цвет
+            optionElement.style.fontWeight = 'normal';
+            optionsContainer.appendChild(optionElement);
+        });
         
-        let questions = [];
-        let currentQuestionIndex = 0;
-        let answerShown = false;
+        // Скрываем блок ответа
+        const answerElement = document.getElementById('answer');
+        answerElement.innerHTML = '';
+        answerElement.classList.remove('show');
+        answerShown = false;
+    }
+    
+    function setupActionButton() {
+        const actionBtn = document.getElementById('actionBtn');
+        const options = document.querySelectorAll('.option');
         
-        async function loadQuestions() {
-            try {
-                console.log("Загружаю вопросы из БД...");
-                const querySnapshot = await getDocs(collection(db, "sops"));
-                questions = [];
-                
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    if (data.question && data.options) {
-                        questions.push(data);
+        actionBtn.addEventListener('click', function() {
+            if (!answerShown) {
+                // Подсвечиваем правильный вариант зелёным, неправильные - серым
+                const correctIndex = questions[currentQuestionIndex].correctAnswer;
+                options.forEach((option, index) => {
+                    if (index === correctIndex) {
+                        option.style.color = '#28a745';
+                        option.style.fontWeight = 'bold';
+                    } else {
+                        option.style.color = '#95a5a6';
                     }
                 });
                 
-                console.log("Загружено вопросов:", questions.length);
-                
-                if (questions.length > 0) {
-                    showRandomQuestion();
-                    setupActionButton();
-                } else {
-                    document.getElementById('questionText').textContent = 'В базе данных пока нет вопросов.';
-                    document.getElementById('actionBtn').style.display = 'none';
-                }
-            } catch (error) {
-                console.error("Ошибка загрузки:", error);
-                document.getElementById('questionText').textContent = 'Ошибка загрузки вопросов из базы данных';
+                actionBtn.textContent = 'Следующий вопрос';
+                answerShown = true;
+            } else {
+                // Показываем следующий вопрос
+                showRandomQuestion();
+                actionBtn.textContent = 'Покажи ответ';
             }
-        }
-        
-        function showRandomQuestion() {
-            if (questions.length === 0) return;
-            
-            currentQuestionIndex = Math.floor(Math.random() * questions.length);
-            const question = questions[currentQuestionIndex];
-            
-            // Показываем вопрос
-            document.getElementById('questionText').textContent = question.question;
-            
-            // Показываем варианты ответов
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                optionElement.textContent = `${index + 1}. ${option}`;
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Скрываем правильный ответ
-            const answerElement = document.getElementById('answer');
-            answerElement.innerHTML = `Правильный ответ: ${question.options[question.correctAnswer]}`;
-            answerElement.style.color = '#2c3e50';
-            answerElement.classList.remove('show');
-            answerShown = false;
-        }
-        
-        function setupActionButton() {
-            const actionBtn = document.getElementById('actionBtn');
-            const answerElement = document.getElementById('answer');
-            const options = document.querySelectorAll('.option');
-            
-            actionBtn.addEventListener('click', function() {
-                if (!answerShown) {
-                    // Показываем правильный ответ зелёным цветом
-                    answerElement.style.color = '#28a745';
-                    answerElement.classList.add('show');
-                    actionBtn.textContent = 'Следующий вопрос';
-                    answerShown = true;
-                    
-                    // Подсвечиваем правильный вариант
-                    const correctIndex = questions[currentQuestionIndex].correctAnswer;
-                    options.forEach((option, index) => {
-                        if (index === correctIndex) {
-                            option.style.color = '#28a745';
-                            option.style.fontWeight = 'bold';
-                        }
-                    });
-                } else {
-                    // Показываем следующий вопрос
-                    showRandomQuestion();
-                    actionBtn.textContent = 'Покажи ответ';
-                }
-            });
-        }
-        
-        // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', loadQuestions);
-    </script>
-</body>
-</html>
+        });
+    }
+    
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', loadQuestions);
+</script>
