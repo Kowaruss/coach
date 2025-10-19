@@ -44,29 +44,29 @@
         
         // Показываем варианты ответов
         const optionsContainer = document.getElementById('optionsContainer');
-        optionsContainer.innerHTML = '';
+        if (optionsContainer) {
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = `${index + 1}. ${option}`;
+                optionElement.style.color = '#2c3e50';
+                optionElement.style.fontWeight = 'normal';
+                optionsContainer.appendChild(optionElement);
+            });
+        }
         
-        question.options.forEach((option, index) => {
-            const optionElement = document.createElement('div');
-            optionElement.className = 'option';
-            optionElement.textContent = `${index + 1}. ${option}`;
-            optionElement.style.color = '#2c3e50'; // обычный цвет
-            optionElement.style.fontWeight = 'normal';
-            optionsContainer.appendChild(optionElement);
-        });
-        
-        // Скрываем блок ответа
-        const answerElement = document.getElementById('answer');
-        answerElement.innerHTML = '';
-        answerElement.classList.remove('show');
         answerShown = false;
     }
     
     function setupActionButton() {
         const actionBtn = document.getElementById('actionBtn');
-        const options = document.querySelectorAll('.option');
+        if (!actionBtn) return;
         
         actionBtn.addEventListener('click', function() {
+            const options = document.querySelectorAll('.option');
+            
             if (!answerShown) {
                 // Подсвечиваем правильный вариант зелёным, неправильные - серым
                 const correctIndex = questions[currentQuestionIndex].correctAnswer;
