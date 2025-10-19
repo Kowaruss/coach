@@ -51,7 +51,7 @@ class BetsGame {
             sp2_5: { top: '50%', left: '65%', sizeOffset: 0 },        // chip3
             
             // Фишка со сдвигом 40% влево от центра - размер: 15%
-            str2_left: { top: '50%', left: '10%', sizeOffset: 0 },    // chip19
+            str2_left: { top: '50%', left: '20%', sizeOffset: 0 },    // chip19
             
             // Нижний ряд (сдвиг на 15% вниз) - размер: 15% + 1% = 16%
             str2_down: { top: '65%', left: '50%', sizeOffset: 1 },    // chip4
