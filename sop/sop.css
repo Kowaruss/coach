@@ -85,3 +85,64 @@
     flex-direction: column;
     justify-content: space-between;
 }
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    .options-container {
+        min-height: 150px;
+        margin: 10px 0;
+    }
+    
+    .option {
+        font-size: 1em;
+        margin: 6px 0;
+        padding: 10px 12px;
+        min-height: 45px;
+    }
+    
+    .question-text {
+        font-size: 1.2em;
+        margin: 30px 0 15px 0;
+        min-height: 80px;
+    }
+    
+    .answer {
+        font-size: 1.1em;
+        min-height: 50px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .options-container {
+        min-height: 120px;
+        padding: 0 15px;
+    }
+    
+    .option {
+        font-size: 0.9em;
+        padding: 8px 10px;
+        min-height: 40px;
+    }
+    
+    .question-text {
+        font-size: 1.1em;
+        margin: 20px 0 10px 0;
+        min-height: 70px;
+        padding: 0 15px;
+    }
+}
+
+/* Фиксируем кнопку внизу экрана */
+.action-btn {
+    position: sticky;
+    bottom: 20px;
+    z-index: 100;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px; /* Отступ для sticky кнопки */
+}
