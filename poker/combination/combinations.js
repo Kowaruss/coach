@@ -142,15 +142,190 @@ class PokerCombinations {
             this.generateNewExample();
         }
     }
-    
+
     detectCombination(cards) {
-        const combinations = [
-            "Нет игры", "Пара двоек", "Пара троек", "Пара четвёрок", "Пара пятёрок",
-            "Пара шестёрок", "Пара семёрок", "Пара восьмёрок", "Пара девяток",
-            "Пара десяток", "Пара валетов", "Пара дам", "Пара королей", "Пара тузов",
-            "Две пары", "Сет", "Стрит", "Флеш", "Фулл-хаус", "Каре", "Стрит-флеш", "Флеш-рояль"
-        ];
-        return combinations[Math.floor(Math.random() * combinations.length)];
+        // Конвертируем карты в числовые значения для анализа
+        const numericCards = cards.map(card => {
+            const rank = card.rank;
+            let value;
+            if (rank === 'A') value = 14;
+            else if (rank === 'K') value = 13;
+            else if (rank === 'Q') value = 12;
+            else if (rank === 'J') value = 11;
+            else value = parseInt(rank);
+            
+            return { value, suit: card.suit, rank: card.rank };
+        });
+        
+        // Проверяем комбинации от самой старшей к младшей
+        const royalFlush = this.isRoyalFlush(numericCards);
+        if (royalFlush) return "Флеш-рояль";
+        
+        const straightFlush = this.isStraightFlush(numericCards);
+        if (straightFlush) return "Стрит-флеш";
+        
+        const fourOfAKind = this.isFourOfAKind(numericCards);
+        if (fourOfAKind) return "Каре";
+        
+        const fullHouse = this.isFullHouse(numericCards);
+        if (fullHouse) return "Фулл-хаус";
+        
+        const flush = this.isFlush(numericCards);
+        if (flush) return "Флеш";
+        
+        const straight = this.isStraight(numericCards);
+        if (straight) return "Стрит";
+        
+        const threeOfAKind = this.isThreeOfAKind(numericCards);
+        if (threeOfAKind) return "Сет";
+        
+        const twoPairs = this.isTwoPairs(numericCards);
+        if (twoPairs) return "Две пары";
+        
+        const onePair = this.isOnePair(numericCards);
+        if (onePair) return onePair;
+        
+        return "Нет игры";
+    }
+
+    // Флеш-рояль: 10,J,Q,K,A одной масти
+    isRoyalFlush(cards) {
+        const straightFlush = this.isStraightFlush(cards);
+        if (!straightFlush) return false;
+        
+        // Проверяем, что стрит-флеш содержит A, K, Q, J, 10
+        const values = straightFlush.map(card => card.value).sort((a, b) => a - b);
+        return values[0] === 10 && values[4] === 14;
+    }
+
+    // Стрит-флеш: 5 последовательных карт одной масти
+    isStraightFlush(cards) {
+        // Группируем карты по мастям
+        const suits = {};
+        cards.forEach(card => {
+            if (!suits[card.suit]) suits[card.suit] = [];
+            suits[card.suit].push(card);
+        });
+        
+        // Ищем стрит в каждой масти
+        for (let suit in suits) {
+            if (suits[suit].length >= 5) {
+                const straight = this.findStraight(suits[suit]);
+                if (straight) return straight;
+            }
+        }
+        return false;
+    }
+
+    // Каре: 4 карты одного достоинства
+    isFourOfAKind(cards) {
+        const values = cards.map(card => card.value);
+        const counts = {};
+        values.forEach(value => {
+            counts[value] = (counts[value] || 0) + 1;
+        });
+        return Object.values(counts).some(count => count === 4);
+    }
+
+    // Фулл-хаус: сет + пара
+    isFullHouse(cards) {
+        const values = cards.map(card => card.value);
+        const counts = {};
+        values.forEach(value => {
+            counts[value] = (counts[value] || 0) + 1;
+        });
+        
+        const countsArr = Object.values(counts);
+        const hasThree = countsArr.some(count => count >= 3);
+        const hasTwo = countsArr.filter(count => count >= 2).length >= 2;
+        
+        return hasThree && hasTwo;
+    }
+
+    // Флеш: 5 карт одной масти
+    isFlush(cards) {
+        const suits = {};
+        cards.forEach(card => {
+            suits[card.suit] = (suits[card.suit] || 0) + 1;
+        });
+        return Object.values(suits).some(count => count >= 5);
+    }
+
+    // Стрит: 5 последовательных карт
+    isStraight(cards) {
+        return this.findStraight(cards) !== false;
+    }
+
+    // Сет: 3 карты одного достоинства
+    isThreeOfAKind(cards) {
+        const values = cards.map(card => card.value);
+        const counts = {};
+        values.forEach(value => {
+            counts[value] = (counts[value] || 0) + 1;
+        });
+        return Object.values(counts).some(count => count === 3);
+    }
+
+    // Две пары
+    isTwoPairs(cards) {
+        const values = cards.map(card => card.value);
+        const counts = {};
+        values.forEach(value => {
+            counts[value] = (counts[value] || 0) + 1;
+        });
+        const pairs = Object.values(counts).filter(count => count === 2);
+        return pairs.length >= 2;
+    }
+
+    // Одна пара с указанием достоинства
+    isOnePair(cards) {
+        const values = cards.map(card => card.value);
+        const counts = {};
+        values.forEach(value => {
+            counts[value] = (counts[value] || 0) + 1;
+        });
+        
+        for (let value in counts) {
+            if (counts[value] === 2) {
+                const rankNames = {
+                    2: 'двоек', 3: 'троек', 4: 'четвёрок', 5: 'пятёрок',
+                    6: 'шестёрок', 7: 'семёрок', 8: 'восьмёрок', 9: 'девяток',
+                    10: 'десяток', 11: 'валетов', 12: 'дам', 13: 'королей', 14: 'тузов'
+                };
+                return `Пара ${rankNames[value]}`;
+            }
+        }
+        return false;
+    }
+
+    // Вспомогательная функция для поиска стрита
+    findStraight(cards) {
+        // Убираем дубликаты и сортируем
+        const uniqueValues = [...new Set(cards.map(card => card.value))].sort((a, b) => a - b);
+        
+        // Проверяем обычный стрит
+        for (let i = 0; i <= uniqueValues.length - 5; i++) {
+            if (uniqueValues[i + 4] - uniqueValues[i] === 4) {
+                // Нашли стрит из 5 карт
+                const straightCards = cards.filter(card => 
+                    card.value >= uniqueValues[i] && card.value <= uniqueValues[i + 4]
+                );
+                return straightCards.slice(0, 5);
+            }
+        }
+        
+        // Проверяем стрит с тузом как 1 (A,2,3,4,5)
+        if (uniqueValues.includes(14)) { // есть туз
+            const lowStraight = [2, 3, 4, 5].every(val => uniqueValues.includes(val));
+            if (lowStraight) {
+                const straightCards = cards.filter(card => 
+                    card.value === 14 || (card.value >= 2 && card.value <= 5)
+                );
+                return straightCards.slice(0, 5);
+            }
+        }
+        
+        return false;
     }
 }
 
