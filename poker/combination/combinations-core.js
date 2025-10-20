@@ -13,6 +13,7 @@ class PokerCombinations {
         this.deck = [];
         
         this.setupEventListeners();
+        this.generateNewExample();
     }
     
     setupEventListeners() {
