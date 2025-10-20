@@ -75,6 +75,7 @@
 .card-rank {
     font-size: 1.2em;
     font-weight: bold;
+    color: #2c3e50; /* Темный цвет для текста */
 }
 
 .card-suit {
@@ -83,19 +84,16 @@
 }
 
 /* Цвета мастей */
-.card.red .card-rank,
 .card.red .card-suit {
     color: #dc3545; /* Красные ♥ ♦ */
 }
 
-.card.black .card-rank,
 .card.black .card-suit {
     color: #2c3e50; /* Чёрные ♣ ♠ */
 }
 
 .card.back {
     background: linear-gradient(45deg, #1a5276, #2980b9);
-    color: white !important;
 }
 
 .card.back .card-content {
