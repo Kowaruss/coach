@@ -100,19 +100,22 @@
                     const correctIndex = questions[currentQuestionIndex].correctAnswer;
                     options.forEach((option, index) => {
                         if (index === correctIndex) {
-                            option.style.color = '#006400';
+                            option.classList.add('correct'); // Зелёный фон
                         } else {
-                            option.style.color = '#95a5a6';
+                            option.classList.add('incorrect'); // Серый фон
                         }
                     });
                     
                     actionBtn.textContent = 'Следующий вопрос';
-                    actionBtn.style.background = '#006400'; // Синий для "Следующий вопрос"
                     answerShown = true;
                 } else {
+                    // Сбрасываем стили для нового вопроса
+                    options.forEach(option => {
+                        option.classList.remove('correct', 'incorrect');
+                    });
+                    
                     showRandomQuestion();
                     actionBtn.textContent = 'Покажи ответ';
-                    actionBtn.style.background = '';
                 }
             });
         }
