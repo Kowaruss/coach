@@ -82,6 +82,14 @@ class PokerCombinations {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
         cardElement.textContent = `${card.rank}${card.suit}`;
+        
+        // Добавляем класс цвета масти
+        if (card.suit === '♥' || card.suit === '♦') {
+            cardElement.classList.add('red');
+        } else {
+            cardElement.classList.add('black');
+        }
+        
         return cardElement;
     }
     
@@ -107,6 +115,13 @@ class PokerCombinations {
             card.classList.remove('back');
             const cardData = this.currentCards[index];
             card.textContent = `${cardData.rank}${cardData.suit}`;
+            
+            // Восстанавливаем цвет масти
+            if (cardData.suit === '♥' || cardData.suit === '♦') {
+                card.classList.add('red');
+            } else {
+                card.classList.add('black');
+            }
         });
     }
     
@@ -129,8 +144,32 @@ class PokerCombinations {
         const combinations = [
             "Нет игры",
             "Пара двоек",
+            "Пара троек",
+            "Пара четвёрок",
+            "Пара пятёрок",
+            "Пара шестёрок",
+            "Пара семёрок",
+            "Пара восьмёрок",
+            "Пара девяток",
+            "Пара десяток",
+            "Пара валетов",
+            "Пара дам",
+            "Пара королей",
+            "Пара тузов",
             "Две пары",
-            "Сет троек", 
+            "Сет двоек",
+            "Сет троек",
+            "Сет четвёрок",
+            "Сет пятёрок",
+            "Сет шестёрок",
+            "Сет семёрок",
+            "Сет восьмёрок",
+            "Сет девяток",
+            "Сет десяток",
+            "Сет валетов",
+            "Сет дам",
+            "Сет королей",
+            "Сет тузов",
             "Стрит",
             "Флеш",
             "Фулл-хаус",
