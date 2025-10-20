@@ -64,13 +64,42 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.card-rank {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-suit {
+    font-size: 1.4em;
+    margin-top: 5px;
+}
+
 /* Цвета мастей */
-.card.red { color: #dc3545; } /* Красные ♥ ♦ */
-.card.black { color: #2c3e50; } /* Чёрные ♣ ♠ */
+.card.red .card-rank,
+.card.red .card-suit {
+    color: #dc3545; /* Красные ♥ ♦ */
+}
+
+.card.black .card-rank,
+.card.black .card-suit {
+    color: #2c3e50; /* Чёрные ♣ ♠ */
+}
 
 .card.back {
     background: linear-gradient(45deg, #1a5276, #2980b9);
     color: white !important;
+}
+
+.card.back .card-content {
+    display: none;
 }
 
 .answer {
