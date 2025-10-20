@@ -8,7 +8,7 @@ class PokerCombinations {
         this.answer = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        this.suits = ['♥', '♦', '♣', '♠'];
+        this.suits = ['hearts', 'diamonds', 'clubs', 'spades'];
         this.ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         this.deck = [];
         
@@ -76,15 +76,30 @@ class PokerCombinations {
         this.currentCards = cards;
         this.answer.classList.remove('show');
         this.answer.textContent = '';
+        this.actionBtn.textContent = 'Покажи ответ';
     }
     
     createCardElement(card) {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
-        cardElement.textContent = `${card.rank}${card.suit}`;
+        
+        // Используем символы мастей
+        const suitSymbols = {
+            'hearts': '♥',
+            'diamonds': '♦', 
+            'clubs': '♣',
+            'spades': '♠'
+        };
+        
+        cardElement.innerHTML = `
+            <div class="card-content">
+                <div class="card-rank">${card.rank}</div>
+                <div class="card-suit">${suitSymbols[card.suit]}</div>
+            </div>
+        `;
         
         // Добавляем класс цвета масти
-        if (card.suit === '♥' || card.suit === '♦') {
+        if (card.suit === 'hearts' || card.suit === 'diamonds') {
             cardElement.classList.add('red');
         } else {
             cardElement.classList.add('black');
@@ -96,7 +111,7 @@ class PokerCombinations {
     startTimer() {
         const time = parseInt(this.timeSlider.value) * 1000;
         
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
             this.flipCards();
         }, time);
     }
@@ -105,23 +120,13 @@ class PokerCombinations {
         const allCards = document.querySelectorAll('.card');
         allCards.forEach(card => {
             card.classList.add('back');
-            card.textContent = '🂠';
         });
     }
     
     showCards() {
         const allCards = document.querySelectorAll('.card');
-        allCards.forEach((card, index) => {
+        allCards.forEach(card => {
             card.classList.remove('back');
-            const cardData = this.currentCards[index];
-            card.textContent = `${cardData.rank}${cardData.suit}`;
-            
-            // Восстанавливаем цвет масти
-            if (cardData.suit === '♥' || cardData.suit === '♦') {
-                card.classList.add('red');
-            } else {
-                card.classList.add('black');
-            }
         });
     }
     
@@ -133,56 +138,23 @@ class PokerCombinations {
             this.answer.classList.add('show');
             this.actionBtn.textContent = 'Следующий пример';
         } else {
+            clearTimeout(this.timer);
             this.generateNewExample();
-            this.actionBtn.textContent = 'Покажи ответ';
         }
     }
     
     detectCombination(cards) {
-        // Заглушка - здесь будет логика определения покерных комбинаций
-        // Пока возвращаем случайную комбинацию для демонстрации
         const combinations = [
-            "Нет игры",
-            "Пара двоек",
-            "Пара троек",
-            "Пара четвёрок",
-            "Пара пятёрок",
-            "Пара шестёрок",
-            "Пара семёрок",
-            "Пара восьмёрок",
-            "Пара девяток",
-            "Пара десяток",
-            "Пара валетов",
-            "Пара дам",
-            "Пара королей",
-            "Пара тузов",
-            "Две пары",
-            "Сет двоек",
-            "Сет троек",
-            "Сет четвёрок",
-            "Сет пятёрок",
-            "Сет шестёрок",
-            "Сет семёрок",
-            "Сет восьмёрок",
-            "Сет девяток",
-            "Сет десяток",
-            "Сет валетов",
-            "Сет дам",
-            "Сет королей",
-            "Сет тузов",
-            "Стрит",
-            "Флеш",
-            "Фулл-хаус",
-            "Каре",
-            "Стрит-флеш",
-            "Флеш-рояль"
+            "Нет игры", "Пара двоек", "Пара троек", "Пара четвёрок", "Пара пятёрок",
+            "Пара шестёрок", "Пара семёрок", "Пара восьмёрок", "Пара девяток",
+            "Пара десяток", "Пара валетов", "Пара дам", "Пара королей", "Пара тузов",
+            "Две пары", "Сет", "Стрит", "Флеш", "Фулл-хаус", "Каре", "Стрит-флеш", "Флеш-рояль"
         ];
-        
         return combinations[Math.floor(Math.random() * combinations.length)];
     }
 }
 
-// Инициализация при загрузке страницы
+// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     new PokerCombinations();
 });
