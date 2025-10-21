@@ -1,3 +1,49 @@
+.filters-container {
+    margin: 15px 0;
+    padding: 0 20px;
+}
+
+.filters-label {
+    color: white;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkbox-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 6px;
+    transform: scale(1.2);
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+    accent-color: #28a745;
+}
+
 .options-container {
     margin: 20px 0;
     min-height: 200px;
@@ -22,7 +68,6 @@
     text-align: left;
 }
 
-/* Правильный ответ с зелёным фоном */
 .option.correct {
     background: linear-gradient(135deg, #28a745, #20c997) !important;
     color: white !important;
@@ -30,7 +75,6 @@
     font-weight: bold;
 }
 
-/* Неправильные ответы серым цветом */
 .option.incorrect {
     background: rgba(149, 165, 166, 0.2) !important;
     color: #95a5a6 !important;
@@ -77,6 +121,9 @@
 .action-btn {
     margin-top: 20px;
     margin-bottom: 20px;
+    position: sticky;
+    bottom: 20px;
+    z-index: 100;
 }
 
 .container {
@@ -84,9 +131,28 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: 30px;
 }
+
 /* Мобильная адаптация */
 @media (max-width: 768px) {
+    .filters-container {
+        margin: 10px 0;
+    }
+    
+    .checkbox-group {
+        gap: 8px;
+    }
+    
+    .checkbox-item {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+    
+    .filters-label {
+        font-size: 1em;
+    }
+    
     .options-container {
         min-height: 150px;
         margin: 10px 0;
@@ -113,6 +179,15 @@
 }
 
 @media (max-width: 480px) {
+    .checkbox-group {
+        gap: 6px;
+    }
+    
+    .checkbox-item {
+        padding: 5px 8px;
+        font-size: 0.75em;
+    }
+    
     .options-container {
         min-height: 120px;
         padding: 0 15px;
@@ -130,19 +205,4 @@
         min-height: 70px;
         padding: 0 15px;
     }
-}
-
-/* Фиксируем кнопку внизу экрана */
-.action-btn {
-    position: sticky;
-    bottom: 20px;
-    z-index: 100;
-}
-
-.container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 30px; /* Отступ для sticky кнопки */
 }
