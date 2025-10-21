@@ -14,6 +14,37 @@
             <span class="back-arrow">&lt;</span>
         </a>
         
+        <!-- Фильтры вопросов -->
+        <div class="filters-container">
+            <div class="filters-label">Какие вопросы тренировать:</div>
+            <div class="checkbox-group">
+                <label class="checkbox-item">
+                    <input type="checkbox" value="0-50" checked> 0-50
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="51-100"> 51-100
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="101-150"> 101-150
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="151-200"> 151-200
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="201-250"> 201-250
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="251-300"> 251-300
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="301-350"> 301-350
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox" value="shuffle" checked> вперемешку
+                </label>
+            </div>
+        </div>
+        
         <div class="question-text" id="questionText">
             Загрузка вопросов...
         </div>
@@ -35,32 +66,83 @@
         let questions = [];
         let currentQuestionIndex = 0;
         let answerShown = false;
+        let allQuestions = [];
         
         async function loadQuestions() {
             try {
                 console.log("Загружаю вопросы из БД...");
                 const querySnapshot = await getDocs(collection(db, "sops"));
-                questions = [];
+                allQuestions = [];
                 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     if (data.question && data.options) {
-                        questions.push(data);
+                        allQuestions.push(data);
                     }
                 });
                 
-                console.log("Загружено вопросов:", questions.length);
+                console.log("Загружено вопросов:", allQuestions.length);
+                setupCheckboxes();
+                applyFilters();
                 
-                if (questions.length > 0) {
-                    showRandomQuestion();
-                    setupActionButton();
-                } else {
-                    document.getElementById('questionText').textContent = 'В базе данных пока нет вопросов.';
-                    document.getElementById('actionBtn').style.display = 'none';
-                }
             } catch (error) {
                 console.error("Ошибка загрузки:", error);
                 document.getElementById('questionText').textContent = 'Ошибка загрузки вопросов из базы данных';
+            }
+        }
+        
+        function setupCheckboxes() {
+            const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', applyFilters);
+            });
+        }
+        
+        function applyFilters() {
+            const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
+            const selectedRanges = [];
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked && checkbox.value !== 'shuffle') {
+                    selectedRanges.push(checkbox.value);
+                }
+            });
+            
+            if (selectedRanges.length === 0) {
+                questions = [...allQuestions];
+            } else {
+                questions = [];
+                selectedRanges.forEach(range => {
+                    const [start, end] = range.split('-').map(Number);
+                    const rangeQuestions = allQuestions.slice(start, end + 1);
+                    questions.push(...rangeQuestions);
+                });
+            }
+            
+            questions = [...new Set(questions)];
+            
+            const shuffleCheckbox = document.querySelector('input[value="shuffle"]');
+            if (shuffleCheckbox.checked) {
+                shuffleArray(questions);
+            }
+            
+            console.log("Отфильтровано вопросов:", questions.length);
+            
+            if (questions.length > 0) {
+                showRandomQuestion();
+                setupActionButton();
+                document.getElementById('actionBtn').style.display = 'block';
+            } else {
+                document.getElementById('questionText').textContent = 'Нет вопросов в выбранных диапазонах';
+                document.getElementById('actionBtn').style.display = 'none';
+                document.getElementById('optionsContainer').innerHTML = '';
+            }
+        }
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
         }
         
@@ -100,16 +182,15 @@
                     const correctIndex = questions[currentQuestionIndex].correctAnswer;
                     options.forEach((option, index) => {
                         if (index === correctIndex) {
-                            option.classList.add('correct'); // Зелёный фон
+                            option.classList.add('correct');
                         } else {
-                            option.classList.add('incorrect'); // Серый фон
+                            option.classList.add('incorrect');
                         }
                     });
                     
                     actionBtn.textContent = 'Следующий вопрос';
                     answerShown = true;
                 } else {
-                    // Сбрасываем стили для нового вопроса
                     options.forEach(option => {
                         option.classList.remove('correct', 'incorrect');
                     });
