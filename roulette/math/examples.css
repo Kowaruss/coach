@@ -100,3 +100,17 @@
         padding: 10px 3px;
     }
 }
+/* Фиксируем кнопку внизу экрана */
+.action-btn {
+    position: sticky;
+    bottom: 20px;
+    z-index: 100;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px; /* Отступ для sticky кнопки */
+}
