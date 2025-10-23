@@ -50,8 +50,17 @@
     color: #28a745;
 }
 
-/* Фиксируем кнопку внизу с отступом */
+/* Фиксируем кнопку внизу экрана */
 .action-btn {
-    margin-top: auto; /* Прижимаем к низу */
-    margin-bottom: 20px; /* Нижний отступ */
+    position: sticky;
+    bottom: 20px;
+    z-index: 100;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px; /* Отступ для sticky кнопки */
 }
