@@ -1,3 +1,13 @@
+/* complits.css */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    padding-bottom: 30px;
+}
+
 .complits-container {
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
@@ -11,7 +21,8 @@
     min-height: 70vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Распределяем пространство */
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
 .complits-text {
@@ -50,17 +61,63 @@
     color: #28a745;
 }
 
-/* Фиксируем кнопку внизу экрана */
 .action-btn {
     position: sticky;
-    bottom: 20px;
+    bottom: 0;
     z-index: 100;
+    margin-top: auto;
 }
 
-.container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 30px; /* Отступ для sticky кнопки */
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        padding-bottom: 25px;
+    }
+    
+    .complits-container {
+        padding: 30px 20px;
+        min-height: 60vh;
+    }
+    
+    .complits-text {
+        font-size: 1.2em;
+        margin: 40px 0 30px 0;
+        min-height: 100px;
+    }
+    
+    .answer {
+        font-size: 1.1em;
+        min-height: 60px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+        padding-bottom: 20px;
+    }
+    
+    .complits-container {
+        padding: 20px 15px;
+        min-height: 50vh;
+    }
+    
+    .complits-text {
+        font-size: 1.1em;
+        margin: 30px 0 20px 0;
+        min-height: 80px;
+    }
+    
+    .answer {
+        font-size: 1em;
+        min-height: 50px;
+        margin: 10px 0;
+    }
+    
+    .action-btn {
+        font-size: 0.9em;
+        padding: 12px 20px;
+    }
 }
