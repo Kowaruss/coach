@@ -31,6 +31,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    padding-bottom: 80px; /* Отступ для кнопки */
 }
 
 .complits-text {
@@ -94,6 +95,7 @@ body {
     .complits-container {
         padding: 30px 20px;
         min-height: 65vh;
+        padding-bottom: 70px;
     }
     
     .complits-text {
@@ -123,6 +125,7 @@ body {
     .complits-container {
         padding: 20px 15px;
         min-height: 60vh;
+        padding-bottom: 60px;
     }
     
     .complits-text {
