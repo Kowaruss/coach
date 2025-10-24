@@ -1,3 +1,25 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .complits-container {
     text-align: center;
     background: rgba(255, 255, 255, 0.95);
@@ -8,30 +30,31 @@
     max-width: 500px;
     width: 100%;
     position: relative;
-    min-height: 70vh;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Распределяем пространство */
+    justify-content: space-between;
 }
 
 .complits-text {
     font-size: 1.4em;
     font-weight: bold;
-    margin: 60px 0 40px 0;
-    min-height: 120px;
+    margin: 40px 0 30px 0;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     line-height: 1.6;
+    flex-grow: 1;
 }
 
 .answer {
     font-size: 1.3em;
     color: #2c3e50;
     margin: 20px 0;
-    min-height: 80px;
+    min-height: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,6 +63,7 @@
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
+    flex-grow: 1;
 }
 
 .answer.show {
@@ -50,17 +74,70 @@
     color: #28a745;
 }
 
-/* Фиксируем кнопку внизу экрана */
 .action-btn {
     position: sticky;
-    bottom: 20px;
+    bottom: 0;
     z-index: 100;
+    margin-top: auto;
+    width: 100%;
 }
 
-.container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 30px; /* Отступ для sticky кнопки */
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .complits-container {
+        padding: 30px 20px;
+        min-height: 350px;
+    }
+    
+    .complits-text {
+        font-size: 1.2em;
+        margin: 30px 0 20px 0;
+        min-height: 80px;
+    }
+    
+    .answer {
+        font-size: 1.1em;
+        min-height: 50px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .complits-container {
+        padding: 20px 15px;
+        min-height: 300px;
+    }
+    
+    .complits-text {
+        font-size: 1.1em;
+        margin: 20px 0 15px 0;
+        min-height: 70px;
+    }
+    
+    .answer {
+        font-size: 1em;
+        min-height: 40px;
+        margin: 10px 0;
+    }
+    
+    .action-btn {
+        font-size: 0.9em;
+        padding: 12px 20px;
+    }
 }
