@@ -1,11 +1,11 @@
 body {
     margin: 0;
     height: 100vh;
-    overflow: hidden; /* Убираем скролл */
+    overflow: hidden;
 }
 
 .container {
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -35,14 +35,15 @@ body {
 .complits-text {
     font-size: 1.4em;
     font-weight: bold;
-    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     line-height: 1.6;
-    flex-grow: 1;
+    height: 40%; /* Фиксированная высота для вопроса */
+    min-height: 120px;
+    max-height: 160px;
 }
 
 .answer {
@@ -56,7 +57,9 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    flex-grow: 1;
+    height: 40%; /* Фиксированная высота для ответа */
+    min-height: 120px;
+    max-height: 160px;
 }
 
 .answer.show {
@@ -69,7 +72,7 @@ body {
 
 .action-btn {
     position: fixed;
-    bottom: 30px;
+    bottom: 2.5vh; /* Отступ от низа 2.5% от высоты экрана */
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -82,10 +85,11 @@ body {
     .container {
         padding: 15px;
         padding-bottom: 90px;
+        height: 95vh;
     }
     
     .action-btn {
-        bottom: 20px;
+        bottom: 2.5vh;
         width: calc(100% - 30px);
         max-width: 470px;
     }
@@ -96,11 +100,16 @@ body {
     
     .complits-text {
         font-size: 1.2em;
-        margin-bottom: 20px;
+        height: 40%;
+        min-height: 100px;
+        max-height: 140px;
     }
     
     .answer {
         font-size: 1.1em;
+        height: 40%;
+        min-height: 100px;
+        max-height: 140px;
     }
 }
 
@@ -108,10 +117,11 @@ body {
     .container {
         padding: 10px;
         padding-bottom: 80px;
+        height: 95vh;
     }
     
     .action-btn {
-        bottom: 15px;
+        bottom: 2.5vh;
         width: calc(100% - 20px);
         max-width: 480px;
     }
@@ -122,11 +132,16 @@ body {
     
     .complits-text {
         font-size: 1.1em;
-        margin-bottom: 15px;
+        height: 40%;
+        min-height: 80px;
+        max-height: 120px;
     }
     
     .answer {
         font-size: 1em;
+        height: 40%;
+        min-height: 80px;
+        max-height: 120px;
     }
     
     .action-btn {
