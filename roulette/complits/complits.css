@@ -3,9 +3,6 @@ body {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container {
@@ -13,8 +10,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    padding-bottom: 30px;
     max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .complits-container {
@@ -26,12 +26,10 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     width: 100%;
     position: relative;
-    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-sizing: border-box;
-    padding-bottom: 80px; /* Отступ для кнопки */
+    flex-grow: 1;
 }
 
 .complits-text {
@@ -71,13 +69,10 @@ body {
 }
 
 .action-btn {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: sticky;
+    bottom: 0;
     z-index: 100;
-    width: calc(100% - 40px);
-    max-width: 460px;
+    margin-top: auto;
 }
 
 /* Мобильная адаптация */
@@ -86,16 +81,12 @@ body {
         padding: 15px;
     }
     
-    .action-btn {
-        bottom: 20px;
-        width: calc(100% - 30px);
-        max-width: 470px;
+    .container {
+        padding-bottom: 25px;
     }
     
     .complits-container {
         padding: 30px 20px;
-        min-height: 65vh;
-        padding-bottom: 70px;
     }
     
     .complits-text {
@@ -116,16 +107,12 @@ body {
         padding: 10px;
     }
     
-    .action-btn {
-        bottom: 15px;
-        width: calc(100% - 20px);
-        max-width: 480px;
+    .container {
+        padding-bottom: 20px;
     }
     
     .complits-container {
         padding: 20px 15px;
-        min-height: 60vh;
-        padding-bottom: 60px;
     }
     
     .complits-text {
