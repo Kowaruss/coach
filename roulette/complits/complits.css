@@ -1,23 +1,21 @@
 body {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     padding: 20px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+    max-width: 500px;
 }
 
 .complits-container {
@@ -27,34 +25,33 @@ body {
     padding: 40px 30px;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
     width: 100%;
     position: relative;
-    min-height: 400px;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .complits-text {
     font-size: 1.4em;
     font-weight: bold;
-    margin: 40px 0 30px 0;
-    min-height: 100px;
+    margin: 60px 0 40px 0;
+    min-height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     line-height: 1.6;
-    flex-grow: 1;
 }
 
 .answer {
     font-size: 1.3em;
     color: #2c3e50;
     margin: 20px 0;
-    min-height: 60px;
+    min-height: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +60,6 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    flex-grow: 1;
 }
 
 .answer.show {
@@ -75,11 +71,13 @@ body {
 }
 
 .action-btn {
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 100;
-    margin-top: auto;
-    width: 100%;
+    width: calc(100% - 40px);
+    max-width: 460px;
 }
 
 /* Мобильная адаптация */
@@ -88,24 +86,26 @@ body {
         padding: 15px;
     }
     
-    .container {
-        padding: 15px;
+    .action-btn {
+        bottom: 20px;
+        width: calc(100% - 30px);
+        max-width: 470px;
     }
     
     .complits-container {
         padding: 30px 20px;
-        min-height: 350px;
+        min-height: 65vh;
     }
     
     .complits-text {
         font-size: 1.2em;
-        margin: 30px 0 20px 0;
-        min-height: 80px;
+        margin: 40px 0 30px 0;
+        min-height: 100px;
     }
     
     .answer {
         font-size: 1.1em;
-        min-height: 50px;
+        min-height: 60px;
         margin: 15px 0;
     }
 }
@@ -115,24 +115,26 @@ body {
         padding: 10px;
     }
     
-    .container {
-        padding: 10px;
+    .action-btn {
+        bottom: 15px;
+        width: calc(100% - 20px);
+        max-width: 480px;
     }
     
     .complits-container {
         padding: 20px 15px;
-        min-height: 300px;
+        min-height: 60vh;
     }
     
     .complits-text {
         font-size: 1.1em;
-        margin: 20px 0 15px 0;
-        min-height: 70px;
+        margin: 30px 0 20px 0;
+        min-height: 80px;
     }
     
     .answer {
         font-size: 1em;
-        min-height: 40px;
+        min-height: 50px;
         margin: 10px 0;
     }
     
