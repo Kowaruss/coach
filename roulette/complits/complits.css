@@ -2,6 +2,10 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
 }
 
 .container {
@@ -9,9 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    padding-bottom: 100px;
     max-width: 500px;
-    margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
 }
@@ -27,9 +29,8 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     box-sizing: border-box;
+    position: relative;
 }
 
 .complits-text {
@@ -38,12 +39,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Начинаем сверху */
     text-align: center;
     line-height: 1.6;
-    height: 40%; /* Фиксированная высота для вопроса */
-    min-height: 120px;
-    max-height: 160px;
+    height: 80px; /* Фиксированная высота для 2 строк */
+    margin-top: 20px; /* Отступ от кнопки назад */
 }
 
 .answer {
@@ -57,9 +57,7 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    height: 40%; /* Фиксированная высота для ответа */
-    min-height: 120px;
-    max-height: 160px;
+    flex-grow: 1; /* Занимает оставшееся пространство */
 }
 
 .answer.show {
@@ -71,27 +69,15 @@ body {
 }
 
 .action-btn {
-    position: fixed;
-    bottom: 2.5vh; /* Отступ от низа 2.5% от высоты экрана */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    width: calc(100% - 40px);
-    max-width: 460px;
+    margin-top: auto; /* Прижимаем к низу контейнера */
+    width: 100%;
 }
 
 /* Мобильная адаптация */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
-        padding-bottom: 90px;
         height: 95vh;
-    }
-    
-    .action-btn {
-        bottom: 2.5vh;
-        width: calc(100% - 30px);
-        max-width: 470px;
     }
     
     .complits-container {
@@ -100,30 +86,19 @@ body {
     
     .complits-text {
         font-size: 1.2em;
-        height: 40%;
-        min-height: 100px;
-        max-height: 140px;
+        height: 70px;
+        margin-top: 15px;
     }
     
     .answer {
         font-size: 1.1em;
-        height: 40%;
-        min-height: 100px;
-        max-height: 140px;
     }
 }
 
 @media (max-width: 480px) {
     .container {
         padding: 10px;
-        padding-bottom: 80px;
         height: 95vh;
-    }
-    
-    .action-btn {
-        bottom: 2.5vh;
-        width: calc(100% - 20px);
-        max-width: 480px;
     }
     
     .complits-container {
@@ -132,16 +107,12 @@ body {
     
     .complits-text {
         font-size: 1.1em;
-        height: 40%;
-        min-height: 80px;
-        max-height: 120px;
+        height: 60px;
+        margin-top: 10px;
     }
     
     .answer {
         font-size: 1em;
-        height: 40%;
-        min-height: 80px;
-        max-height: 120px;
     }
     
     .action-btn {
