@@ -6,10 +6,12 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
+    padding: 0;
 }
 
 .container {
     height: 95vh;
+    max-height: 800px; /* Ограничиваем максимальную высоту */
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -31,6 +33,7 @@ body {
     flex-direction: column;
     box-sizing: border-box;
     position: relative;
+    min-height: 400px; /* Минимальная высота */
 }
 
 .complits-text {
@@ -39,11 +42,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Начинаем сверху */
+    justify-content: center;
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.4; /* Уменьшаем межстрочный интервал */
     height: 80px; /* Фиксированная высота для 2 строк */
-    margin-top: 20px; /* Отступ от кнопки назад */
+    margin: 40px 0 20px 0; /* Отступ сверху и снизу */
+    min-height: 80px;
+    max-height: 80px;
 }
 
 .answer {
@@ -57,7 +62,8 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    flex-grow: 1; /* Занимает оставшееся пространство */
+    flex-grow: 1;
+    margin: 20px 0;
 }
 
 .answer.show {
@@ -69,8 +75,10 @@ body {
 }
 
 .action-btn {
-    margin-top: auto; /* Прижимаем к низу контейнера */
+    margin-top: auto;
     width: 100%;
+    position: sticky;
+    bottom: 0;
 }
 
 /* Мобильная адаптация */
@@ -78,20 +86,26 @@ body {
     .container {
         padding: 15px;
         height: 95vh;
+        max-height: 700px;
     }
     
     .complits-container {
         padding: 30px 20px;
+        min-height: 350px;
     }
     
     .complits-text {
         font-size: 1.2em;
         height: 70px;
-        margin-top: 15px;
+        min-height: 70px;
+        max-height: 70px;
+        margin: 30px 0 15px 0;
+        line-height: 1.3;
     }
     
     .answer {
         font-size: 1.1em;
+        margin: 15px 0;
     }
 }
 
@@ -99,20 +113,26 @@ body {
     .container {
         padding: 10px;
         height: 95vh;
+        max-height: 600px;
     }
     
     .complits-container {
         padding: 20px 15px;
+        min-height: 300px;
     }
     
     .complits-text {
         font-size: 1.1em;
         height: 60px;
-        margin-top: 10px;
+        min-height: 60px;
+        max-height: 60px;
+        margin: 20px 0 10px 0;
+        line-height: 1.2;
     }
     
     .answer {
         font-size: 1em;
+        margin: 10px 0;
     }
     
     .action-btn {
