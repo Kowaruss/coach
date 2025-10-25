@@ -10,13 +10,15 @@ body {
 }
 
 .container {
-    height: 75vh; /* Уменьшаем высоту */
+    height: 75vh;
     display: flex;
     flex-direction: column;
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
+    background: transparent;
+    padding: 0;
 }
 
 .complits-container {
