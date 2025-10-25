@@ -14,7 +14,8 @@ body {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    width: min(500px, 80%); /* Фиксированная ширина до 500px или 80% */
+    max-width: 500px;
+    width: 95%;
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -26,7 +27,7 @@ body {
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    width: 100%; /* 100% от контейнера */
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -85,7 +86,7 @@ body {
     .container {
         padding: 10px;
         height: 90vh;
-        width: min(500px, 80%);
+        width: 95%;
     }
     
     .complits-container {
@@ -108,7 +109,7 @@ body {
     .container {
         padding: 8px;
         height: 90vh;
-        width: min(500px, 80%);
+        width: 95%;
     }
     
     .complits-container {
