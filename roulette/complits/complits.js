@@ -26,6 +26,7 @@ class ComplitsGame {
     init() {
         this.generateExample();
         this.initFontControls();
+        this.increaseButtonFontSize();
     }
     
     initFontControls() {
@@ -55,7 +56,18 @@ class ComplitsGame {
     }
     
     updateFontSize() {
+        // Обновляем шрифт вопроса
         this.complitsText.style.fontSize = `${this.currentFontSize}em`;
+        
+        // Обновляем шрифт ответа (немного больше чем вопрос)
+        const answerFontSize = this.currentFontSize * 1.1;
+        this.answerElement.style.fontSize = `${answerFontSize}em`;
+    }
+    
+    increaseButtonFontSize() {
+        // Увеличиваем шрифт кнопки
+        this.actionBtn.style.fontSize = '1.2em';
+        this.actionBtn.style.padding = '15px 20px';
     }
     
     generateExample() {
@@ -83,7 +95,7 @@ class ComplitsGame {
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
         
-        // Обновляем размер шрифта для нового вопроса
+        // Обновляем размер шрифта для нового вопроса и ответа
         this.updateFontSize();
     }
     
