@@ -5,13 +5,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
     padding: 20px;
     box-sizing: border-box;
 }
 
 .container {
-    height: 85vh;
+    height: 75vh; /* Уменьшаем высоту */
     display: flex;
     flex-direction: column;
     max-width: 500px;
@@ -86,7 +85,7 @@ body {
     }
     
     .container {
-        height: 85vh;
+        height: 75vh;
     }
     
     .complits-container {
@@ -111,7 +110,7 @@ body {
     }
     
     .container {
-        height: 85vh;
+        height: 75vh;
     }
     
     .complits-container {
