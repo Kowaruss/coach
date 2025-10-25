@@ -28,7 +28,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     width: 100%;
-    height: 100%; /* Занимает 100% высоты родителя */
+    height: 100%;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
