@@ -31,6 +31,6 @@ function generateScenario3(bet) {
     
     return {
         text: `${selectedStreet.name}<br>по ${bet}`,
-        answer: `<span class="label">Ставка:</span> ${formatNumber(stake)}<br><span class="label">Выплата:</span> Комплит выпавшего номера по ${bet}`
+        answer: `<span class="label">Ставка:</span> ${formatNumber(stake)}<br><br><span class="label">Выплата:</span> Комплит выпавшего номера по ${bet}`
     };
 }
