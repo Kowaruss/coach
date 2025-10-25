@@ -4,6 +4,6 @@ function generateScenario1(bet) {
     
     return {
         text: `Комплит ${complit} дюжины<br>по ${bet}`,
-        answer: `<span class="label">Ставка:</span> ${formatNumber(dozensMultipliers[complit] * bet)}<br><span class="label">Выплата:</span> комплит выпавшего номера по ${bet}`
+        answer: `<span class="label">Ставка:</span> ${formatNumber(dozensMultipliers[complit] * bet)}<br><br><span class="label">Выплата:</span> комплит выпавшего номера по ${bet}`
     };
 }
