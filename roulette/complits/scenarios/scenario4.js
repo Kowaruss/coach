@@ -50,6 +50,6 @@ function generateScenario4(bet) {
     
     return {
         text: text,
-        answer: `<span class="label">Ставка:</span> ${formatNumber(stake)}<br><span class="label">Выплата:</span> ${formatNumber(payout)}`
+        answer: `<span class="label">Ставка:</span> ${formatNumber(stake)}<br><br><span class="label">Выплата:</span> ${formatNumber(payout)}`
     };
 }
