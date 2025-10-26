@@ -3,28 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сектора</title>
-    
-    <!-- Основные стили -->
+    <title>Секторы</title>
     <link rel="stylesheet" href="../../style.css">
-    
-    <!-- Универсальная кнопка -->
     <link rel="stylesheet" href="/coach/action-button.css">
-    
-    <!-- Стили страницы -->
     <link rel="stylesheet" href="sectors.css">
 </head>
 <body>
     <div class="container">
-        <!-- Кнопка назад -->
         <a href="../index.html" class="back-button">
             <span class="back-arrow">&lt;</span>
         </a>
         
-        <!-- Контент с универсальной кнопкой -->
         <div class="sectors-text" id="sectorsText">
-            Рулетка 1 – 100<br>
-            "Орфалайнс" по 50
+            Загрузка...
         </div>
         <div class="answer" id="answer">
             <!-- Ответ будет генерироваться динамически -->
@@ -35,14 +26,15 @@
         </button>
     </div>
 
-    <!-- Подключение скриптов -->
+    <!-- Существующие скрипты -->
     <script src="/coach/action-button.js"></script>
-    <script src="sectors.js"></script>
+    
+    <!-- Новые модули сценариев -->
     <script src="scenarios/scenario-manager.js"></script>
-<script src="scenarios/sector-to-stake-scenario.js"></script>
-<script src="scenarios/voisin-calculation-scenario.js"></script>
-<script src="scenarios/tier-calculation-scenario.js"></script>
-<script src="scenarios/coming-soon-scenario.js"></script>
-<script src="sectors-game.js"></script>
+    <script src="scenarios/sector-to-stake-scenario.js"></script>
+    <script src="scenarios/voisin-calculation-scenario.js"></script>
+    <script src="scenarios/tier-calculation-scenario.js"></script>
+    <script src="scenarios/coming-soon-scenario.js"></script>
+    <script src="sectors-game.js"></script>
 </body>
 </html>
