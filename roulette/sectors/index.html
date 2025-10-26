@@ -14,6 +14,21 @@
             <span class="back-arrow">&lt;</span>
         </a>
         
+        <div class="mode-controls">
+            <label class="mode-checkbox">
+                <input type="radio" name="mode" value="playsBy" checked>
+                <span>играет по</span>
+            </label>
+            <label class="mode-checkbox">
+                <input type="radio" name="mode" value="playsOn">
+                <span>играет на</span>
+            </label>
+            <label class="mode-checkbox">
+                <input type="radio" name="mode" value="mixed">
+                <span>вперемешку</span>
+            </label>
+        </div>
+        
         <div class="sectors-text" id="sectorsText">
             Загрузка...
         </div>
@@ -26,15 +41,12 @@
         </button>
     </div>
 
-    <!-- Существующие скрипты -->
     <script src="/coach/action-button.js"></script>
-    
-    <!-- Новые модули сценариев -->
-    <script src="scenarios/scenario-manager.js"></script>
     <script src="scenarios/sector-to-stake-scenario.js"></script>
     <script src="scenarios/voisin-calculation-scenario.js"></script>
     <script src="scenarios/tier-calculation-scenario.js"></script>
     <script src="scenarios/coming-soon-scenario.js"></script>
-    <script src="sectors-game.js?v=2"></script>
+    <script src="scenarios/scenario-manager.js"></script>
+    <script src="sectors-game.js"></script>
 </body>
 </html>
