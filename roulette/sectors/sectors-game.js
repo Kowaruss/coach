@@ -1,3 +1,18 @@
+console.log('=== SECTORS DEBUG ===');
+console.log('sectors-game.js loaded');
+
+// Проверка загрузки зависимостей
+console.log('ScenarioManager:', typeof ScenarioManager);
+console.log('SectorToStakeScenario:', typeof SectorToStakeScenario);
+console.log('VoisinCalculationScenario:', typeof VoisinCalculationScenario);
+
+// Проверка DOM
+console.log('sectorsText:', document.getElementById('sectorsText'));
+console.log('actionBtn:', document.getElementById('actionBtn'));
+
+class SectorsGame {
+    // остальной код...
+
 class SectorsGame {
     constructor() {
         this.sectorsText = document.getElementById('sectorsText');
