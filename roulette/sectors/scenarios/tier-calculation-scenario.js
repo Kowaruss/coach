@@ -42,7 +42,8 @@ class TierCalculationScenario {
     calculateTier(bet, divisor, multiplier) {
         const steps = Math.floor(bet / divisor);
         const playAmount = steps * multiplier;
-        const change = bet - (playAmount * (divisor === 150 ? 6 : 6));
+        const totalStake = playAmount * 6; // Всегда умножаем на 6
+        const change = bet - totalStake;
         return { playAmount, change };
     }
     
