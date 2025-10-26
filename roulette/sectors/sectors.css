@@ -18,26 +18,33 @@ body {
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    padding: 30px;
 }
 
 .sectors-text {
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    margin: 20px 0;
+    background: transparent;
+    padding: 20px 0;
     font-size: 1.4em;
     font-weight: bold;
     line-height: 1.6;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: none;
+    box-shadow: none;
 }
 
 .answer {
     font-size: 1.3em;
     color: #2c3e50;
-    margin: 20px 0;
     min-height: 80px;
     display: flex;
     flex-direction: column;
@@ -47,6 +54,8 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
+    flex-shrink: 0;
+    height: 80px;
 }
 
 .answer.show {
@@ -56,9 +65,12 @@ body {
 .action-btn {
     margin-top: auto;
     width: 100%;
+    position: sticky;
+    bottom: 0;
+    flex-shrink: 0;
 }
 
-/* Чекбоксы режима - В СТРОКУ */
+/* Чекбоксы режима */
 .mode-controls {
     position: absolute;
     top: 20px;
@@ -67,10 +79,10 @@ body {
     flex-direction: row;
     gap: 12px;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.9);
+    background: transparent;
     padding: 10px 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 }
 
 .mode-checkbox {
@@ -81,6 +93,10 @@ body {
     color: #2c3e50;
     cursor: pointer;
     font-weight: 500;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .mode-checkbox input {
@@ -99,23 +115,28 @@ body {
     
     .container {
         padding-bottom: 25px;
+        padding: 25px;
     }
     
     .sectors-text {
-        padding: 30px 20px;
         font-size: 1.2em;
     }
     
     .answer {
         font-size: 1.1em;
+        height: 70px;
     }
     
     .mode-controls {
         top: 15px;
         right: 15px;
         padding: 8px 12px;
-        font-size: 0.8em;
         gap: 8px;
+    }
+    
+    .mode-checkbox {
+        padding: 5px 8px;
+        font-size: 0.8em;
     }
 }
 
@@ -126,15 +147,16 @@ body {
     
     .container {
         padding-bottom: 20px;
+        padding: 20px;
     }
     
     .sectors-text {
-        padding: 20px 15px;
         font-size: 1.1em;
     }
     
     .answer {
         font-size: 1em;
+        height: 60px;
     }
     
     .action-btn {
@@ -146,7 +168,11 @@ body {
         top: 12px;
         right: 12px;
         padding: 6px 10px;
-        font-size: 0.75em;
         gap: 6px;
+    }
+    
+    .mode-checkbox {
+        padding: 4px 6px;
+        font-size: 0.75em;
     }
 }
