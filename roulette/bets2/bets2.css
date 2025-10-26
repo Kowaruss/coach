@@ -16,7 +16,7 @@ body {
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.95); /* Белый фон контейнера */
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
@@ -25,7 +25,7 @@ body {
 
 .bets-content {
     text-align: center;
-    background: transparent; /* Прозрачный фон */
+    background: transparent;
     padding: 20px 0;
     font-size: 1.4em;
     font-weight: bold;
@@ -34,8 +34,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Начинаем сверху */
     margin: 0;
+    margin-top: 40px; /* Отступ сверху */
 }
 
 .answer {
@@ -50,8 +51,9 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    flex-shrink: 0; /* Запрещаем сжатие */
-    height: 80px; /* Фиксированная высота */
+    flex-shrink: 0;
+    height: 80px;
+    margin-top: 20px; /* Отступ от контента */
 }
 
 .answer.show {
@@ -61,7 +63,7 @@ body {
 .action-btn {
     margin-top: auto;
     width: 100%;
-    flex-shrink: 0; /* Запрещаем сжатие */
+    flex-shrink: 0;
 }
 
 /* Мобильная адаптация */
@@ -77,11 +79,13 @@ body {
     
     .bets-content {
         font-size: 1.2em;
+        margin-top: 30px;
     }
     
     .answer {
         font-size: 1.1em;
         height: 70px;
+        margin-top: 15px;
     }
 }
 
@@ -97,11 +101,13 @@ body {
     
     .bets-content {
         font-size: 1.1em;
+        margin-top: 20px;
     }
     
     .answer {
         font-size: 1em;
         height: 60px;
+        margin-top: 10px;
     }
     
     .action-btn {
