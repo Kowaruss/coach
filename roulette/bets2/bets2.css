@@ -9,11 +9,9 @@ body {
 }
 
 .container {
-    min-height: 100vh;
+    height: 85vh; /* Фиксированная высота */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 30px;
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
@@ -28,21 +26,20 @@ body {
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     width: 100%;
-    margin: 20px 0;
     font-size: 1.4em;
     font-weight: bold;
     line-height: 1.6;
-    flex-grow: 1;
+    flex-grow: 1; /* Занимает всё доступное пространство */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Центрирует по вертикали */
+    margin: 0; /* Убираем отступы */
 }
 
 .answer {
     font-size: 1.3em;
     color: #2c3e50;
-    margin: 20px 0;
     min-height: 80px;
     display: flex;
     flex-direction: column;
@@ -52,6 +49,7 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
+    flex-grow: 1; /* Также занимает пространство */
 }
 
 .answer.show {
@@ -59,10 +57,8 @@ body {
 }
 
 .action-btn {
-    margin-top: auto;
+    margin-top: auto; /* Прижимает к низу */
     width: 100%;
-    position: sticky;
-    bottom: 0;
 }
 
 /* Мобильная адаптация */
@@ -72,7 +68,7 @@ body {
     }
     
     .container {
-        padding-bottom: 25px;
+        height: 85vh;
     }
     
     .bets-content {
@@ -91,7 +87,7 @@ body {
     }
     
     .container {
-        padding-bottom: 20px;
+        height: 85vh;
     }
     
     .bets-content {
