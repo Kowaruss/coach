@@ -1,13 +1,36 @@
-.sectors-text {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin: 60px 0 40px 0;
-    min-height: 120px;
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.sectors-text {
     text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    margin: 20px 0;
+    font-size: 1.4em;
+    font-weight: bold;
     line-height: 1.6;
 }
 
@@ -30,11 +53,98 @@
     opacity: 1;
 }
 
-.answer span.label {
-    color: #28a745;
-}
-
 .action-btn {
     margin-top: auto;
-    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Чекбоксы режима */
+.mode-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mode-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+    color: #2c3e50;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.mode-checkbox input {
+    margin: 0;
+}
+
+.mode-checkbox span {
+    white-space: nowrap;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        padding-bottom: 25px;
+    }
+    
+    .sectors-text {
+        padding: 30px 20px;
+        font-size: 1.2em;
+    }
+    
+    .answer {
+        font-size: 1.1em;
+    }
+    
+    .mode-controls {
+        top: 15px;
+        right: 15px;
+        padding: 10px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding-bottom: 20px;
+    }
+    
+    .sectors-text {
+        padding: 20px 15px;
+        font-size: 1.1em;
+    }
+    
+    .answer {
+        font-size: 1em;
+    }
+    
+    .action-btn {
+        font-size: 0.9em;
+        padding: 12px 20px;
+    }
+    
+    .mode-controls {
+        top: 12px;
+        right: 12px;
+        padding: 8px;
+        font-size: 0.75em;
+    }
 }
