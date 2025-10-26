@@ -16,17 +16,17 @@ body {
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    background: transparent; /* Делаем прозрачным */
+    background: rgba(255, 255, 255, 0.95); /* Белый фон контейнера */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    padding: 30px;
 }
 
 .bets-content {
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    background: transparent; /* Прозрачный фон */
+    padding: 20px 0;
     font-size: 1.4em;
     font-weight: bold;
     line-height: 1.6;
@@ -36,7 +36,6 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0;
-    border: none; /* Убираем границу если есть */
 }
 
 .answer {
@@ -51,7 +50,8 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    flex-grow: 1;
+    flex-shrink: 0; /* Запрещаем сжатие */
+    height: 80px; /* Фиксированная высота */
 }
 
 .answer.show {
@@ -61,6 +61,7 @@ body {
 .action-btn {
     margin-top: auto;
     width: 100%;
+    flex-shrink: 0; /* Запрещаем сжатие */
 }
 
 /* Мобильная адаптация */
@@ -71,15 +72,16 @@ body {
     
     .container {
         height: 85vh;
+        padding: 25px;
     }
     
     .bets-content {
-        padding: 30px 20px;
         font-size: 1.2em;
     }
     
     .answer {
         font-size: 1.1em;
+        height: 70px;
     }
 }
 
@@ -90,15 +92,16 @@ body {
     
     .container {
         height: 85vh;
+        padding: 20px;
     }
     
     .bets-content {
-        padding: 20px 15px;
         font-size: 1.1em;
     }
     
     .answer {
         font-size: 1em;
+        height: 60px;
     }
     
     .action-btn {
