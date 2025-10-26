@@ -10,9 +10,11 @@ console.log('VoisinCalculationScenario:', typeof VoisinCalculationScenario);
 console.log('sectorsText:', document.getElementById('sectorsText'));
 console.log('actionBtn:', document.getElementById('actionBtn'));
 
-class SectorsGame {
-    // остальной код...
+// УБРАТЬ ЭТУ ЧАСТЬ:
+// class SectorsGame {
+//     // остальной код...
 
+// ОСТАВИТЬ ТОЛЬКО ЭТО:
 class SectorsGame {
     constructor() {
         this.sectorsText = document.getElementById('sectorsText');
