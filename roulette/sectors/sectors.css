@@ -29,7 +29,7 @@ body {
     text-align: center;
     background: transparent;
     padding: 20px 0;
-    font-size: 1.6em; /* Крупнее шрифт */
+    font-size: 1.6em;
     font-weight: bold;
     line-height: 1.6;
     flex-grow: 1;
@@ -40,38 +40,36 @@ body {
     margin: 0;
     border: none;
     box-shadow: none;
-    margin-top: 60px; /* Больший отступ сверху */
+    margin-top: 60px;
 }
 
 .answer {
-    font-size: 1.5em; /* Крупнее шрифт */
+    font-size: 1.5em;
     color: #2c3e50;
     min-height: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Поднимаем ответ выше */
+    justify-content: flex-start;
     opacity: 0;
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
     flex-grow: 1;
     height: auto;
-    margin-top: 40px; /* Поднимаем ответ на 3см */
+    margin-top: 40px;
 }
 
 .answer.show {
     opacity: 1;
 }
 
-/* Зеленый цвет для слов в ответе */
 .answer .label {
-    color: #28a745 !important; /* Зеленый цвет */
+    color: #28a745 !important;
 }
 
-/* Красный цвет для значений рулетки */
 .roulette-value {
-    color: #dc3545 !important; /* Красный цвет */
+    color: #dc3545 !important;
 }
 
 .action-btn {
@@ -82,14 +80,14 @@ body {
     flex-shrink: 0;
 }
 
-/* Чекбоксы режима - справа от надписи */
+/* Чекбоксы режима - текст слева, флажок справа */
 .mode-controls {
     position: absolute;
     top: 20px;
     right: 20px;
     display: flex;
     flex-direction: row;
-    align-items: center; /* Выравниваем по центру */
+    align-items: center;
     gap: 15px;
     z-index: 100;
     background: transparent;
@@ -107,6 +105,7 @@ body {
 
 .mode-checkbox {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     gap: 6px;
     font-size: 0.9em;
@@ -121,10 +120,12 @@ body {
 
 .mode-checkbox input {
     margin: 0;
+    order: 2;
 }
 
 .mode-checkbox span {
     white-space: nowrap;
+    order: 1;
 }
 
 /* Мобильная адаптация */
@@ -188,7 +189,7 @@ body {
         top: 12px;
         right: 12px;
         gap: 10px;
-        flex-direction: column; /* На мобильных в колонку */
+        flex-direction: column;
         align-items: flex-end;
     }
     
