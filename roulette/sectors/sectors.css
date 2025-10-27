@@ -36,10 +36,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Вопрос прижат к верху */
     margin: 0;
     border: none;
     box-shadow: none;
+    margin-top: 40px; /* Отступ ~1см от верха */
 }
 
 .answer {
@@ -54,8 +55,8 @@ body {
     font-weight: bold;
     line-height: 1.6;
     text-align: center;
-    flex-shrink: 0;
-    height: 80px;
+    flex-grow: 1; /* Ответ занимает центр */
+    height: auto;
 }
 
 .answer.show {
@@ -70,7 +71,7 @@ body {
     flex-shrink: 0;
 }
 
-/* Чекбоксы режима */
+/* Чекбоксы режима - без фона */
 .mode-controls {
     position: absolute;
     top: 20px;
@@ -80,8 +81,8 @@ body {
     gap: 12px;
     z-index: 100;
     background: transparent;
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 0;
+    border-radius: 0;
     box-shadow: none;
 }
 
@@ -93,10 +94,10 @@ body {
     color: #2c3e50;
     cursor: pointer;
     font-weight: 500;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 6px 10px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background: transparent; /* Прозрачный фон */
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none; /* Без тени */
 }
 
 .mode-checkbox input {
@@ -120,22 +121,20 @@ body {
     
     .sectors-text {
         font-size: 1.2em;
+        margin-top: 30px; /* Меньший отступ на мобильных */
     }
     
     .answer {
         font-size: 1.1em;
-        height: 70px;
     }
     
     .mode-controls {
         top: 15px;
         right: 15px;
-        padding: 8px 12px;
         gap: 8px;
     }
     
     .mode-checkbox {
-        padding: 5px 8px;
         font-size: 0.8em;
     }
 }
@@ -152,11 +151,11 @@ body {
     
     .sectors-text {
         font-size: 1.1em;
+        margin-top: 25px;
     }
     
     .answer {
         font-size: 1em;
-        height: 60px;
     }
     
     .action-btn {
@@ -167,12 +166,10 @@ body {
     .mode-controls {
         top: 12px;
         right: 12px;
-        padding: 6px 10px;
         gap: 6px;
     }
     
     .mode-checkbox {
-        padding: 4px 6px;
         font-size: 0.75em;
     }
 }
