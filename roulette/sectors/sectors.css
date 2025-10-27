@@ -43,6 +43,7 @@ body {
     opacity: 0;
     font-weight: bold;
     text-align: center;
+    white-space: pre-line; /* Добавить эту строку */
 }
 
 .answer.show {
