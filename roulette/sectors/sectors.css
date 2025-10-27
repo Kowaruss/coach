@@ -18,46 +18,31 @@ body {
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+}
+
+.content {
+    text-align: center;
+    margin: 40px 0 30px 0;
 }
 
 .sectors-text {
-    text-align: center;
-    background: transparent;
-    padding: 20px 0;
-    font-size: 1.6em;
+    font-size: 1.4em;
     font-weight: bold;
+    margin-bottom: 20px;
     line-height: 1.6;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0;
-    border: none;
-    box-shadow: none;
-    margin-top: 60px;
 }
 
 .answer {
-    font-size: 1.5em;
+    font-size: 1.6em;
     color: #2c3e50;
-    min-height: 80px;
+    margin: 20px 0;
+    min-height: 60px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     opacity: 0;
     font-weight: bold;
-    line-height: 1.6;
     text-align: center;
-    flex-grow: 1;
-    height: auto;
-    margin-top: 40px;
 }
 
 .answer.show {
@@ -75,9 +60,6 @@ body {
 .action-btn {
     margin-top: auto;
     width: 100%;
-    position: sticky;
-    bottom: 0;
-    flex-shrink: 0;
 }
 
 /* Чекбоксы режима - текст слева, флажок справа */
@@ -90,10 +72,6 @@ body {
     align-items: center;
     gap: 15px;
     z-index: 100;
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
 }
 
 .mode-checkbox {
@@ -105,10 +83,6 @@ body {
     color: #2c3e50;
     cursor: pointer;
     font-weight: 500;
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
 }
 
 .mode-checkbox input {
@@ -129,17 +103,14 @@ body {
     
     .container {
         padding-bottom: 25px;
-        padding: 25px;
     }
     
     .sectors-text {
-        font-size: 1.4em;
-        margin-top: 50px;
+        font-size: 1.2em;
     }
     
     .answer {
-        font-size: 1.3em;
-        margin-top: 30px;
+        font-size: 1.4em;
     }
     
     .mode-controls {
@@ -160,17 +131,14 @@ body {
     
     .container {
         padding-bottom: 20px;
-        padding: 20px;
     }
     
     .sectors-text {
-        font-size: 1.3em;
-        margin-top: 40px;
+        font-size: 1.1em;
     }
     
     .answer {
         font-size: 1.2em;
-        margin-top: 25px;
     }
     
     .action-btn {
