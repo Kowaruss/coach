@@ -24,12 +24,12 @@ class VoisinCalculationScenario {
         const bet = this.generateBet(betRange);
         const { playAmount, change, hasSpreading } = this.calculateVoisin(bet, baseAmount, rouletteType);
         
-        let answer = `<span class="label">Играет по:<br></span> ${this.formatNumber(playAmount)}`;
+        let answer = `<span class="label">Играет по:</br></span> ${this.formatNumber(playAmount)}`;
         if (hasSpreading) answer += " с размазыванием";
-        answer += `<br><span class="label">Сдача:<br></span> ${this.formatNumber(change)}`;
+        answer += `</br><span class="label">Сдача:</br></span> ${this.formatNumber(change)}`;
         
         return {
-            question: `${rouletteName}.<br> Ставка на Вуазен ${this.formatNumber(bet)} у.е.<br>Почем играет и сколько сдача?`,
+            question: `${rouletteName}.</br> Ставка на Вуазен ${this.formatNumber(bet)} у.е.</br>Почем играет и сколько сдача?`,
             answer: answer
         };
     }
