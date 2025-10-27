@@ -29,7 +29,7 @@ class VoisinCalculationScenario {
         answer += `<br><span class="label">Сдача:</span><br> ${this.formatNumber(change)}`;
         
         return {
-            question: `${rouletteName}<br>. Ставка на Вуазен ${this.formatNumber(bet)} у.е.<br>Почем играет и сколько сдача`,
+            question: `${rouletteName}<br>. Ставка на Вуазен ${this.formatNumber(bet)} у.е.<br>Почем играет и сколько сдача?`,
             answer: answer
         };
     }
