@@ -1,7 +1,7 @@
 .time-slider-container {
     text-align: center;
     margin: 15px 0;
-    color: #2c3e50; /* Изменил на темный цвет */
+    color: #2c3e50;
 }
 
 .time-slider-container label {
@@ -32,20 +32,20 @@
 }
 
 .top-cards {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-.middle-cards {
+.bottom-cards {
     display: flex;
-    gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;
 }
 
 .card-group {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -83,7 +83,6 @@
     margin-top: 5px;
 }
 
-/* Цвета мастей */
 .card.red .card-suit {
     color: #dc3545;
 }
@@ -125,9 +124,9 @@
 /* Мобильные устройства */
 @media (max-width: 768px) {
     .card {
-        width: 50px;
-        height: 75px;
-        font-size: 0.9em;
+        width: 45px;
+        height: 67px;
+        font-size: 0.8em;
     }
     
     .cards-row {
@@ -135,16 +134,16 @@
         margin: 10px 0;
     }
     
-    .card-group {
-        gap: 6px;
-    }
-    
-    .middle-cards {
+    .bottom-cards {
         gap: 15px;
     }
     
+    .card-group {
+        gap: 5px;
+    }
+    
     .top-cards {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
     
     .answer {
@@ -153,12 +152,19 @@
     }
 }
 
-/* Очень маленькие экраны */
 @media (max-width: 480px) {
     .card {
-        width: 45px;
-        height: 67px;
-        font-size: 0.8em;
+        width: 40px;
+        height: 60px;
+        font-size: 0.7em;
+    }
+    
+    .bottom-cards {
+        gap: 10px;
+    }
+    
+    .card-group {
+        gap: 4px;
     }
     
     .time-slider-container label {
@@ -167,6 +173,18 @@
     
     #timeSlider {
         width: 95%;
+    }
+}
+
+@media (max-width: 360px) {
+    .card {
+        width: 35px;
+        height: 52px;
+        font-size: 0.6em;
+    }
+    
+    .bottom-cards {
+        gap: 8px;
     }
 }
 
