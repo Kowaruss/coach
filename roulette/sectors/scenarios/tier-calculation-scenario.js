@@ -28,7 +28,7 @@ class TierCalculationScenario {
         const { playAmount, change } = this.calculateTier(bet, divisor, multiplier);
         
         return {
-            question: `${rouletteName}<br>. Ставка на Тьер ${this.formatNumber(bet)} у.е.<br> По сколько играет исколько сдача?`,
+            question: `${rouletteName}.<br><br> Ставка на Тьер ${this.formatNumber(bet)} у.е.<br> По сколько играет исколько сдача?`,
             answer: `<span class="label">Играет по:</span><br> ${this.formatNumber(playAmount)}<br><span class="label"><br>Сдача:</span><br> ${this.formatNumber(change)}`
         };
     }
