@@ -1,17 +1,17 @@
 class ScenarioManager {
     constructor() {
-        this.stakeScenarios = [ // "играет по" - 4 сценария
+        this.stakeScenarios = [
             new VoisinStakeScenario(),
             new TierStakeScenario(),
             new OrphalinsStakeScenario(),
             new SpielStakeScenario()
         ];
         
-        this.calculationScenarios = [ // "играет на" - 4 сценария
+        this.calculationScenarios = [
             new VoisinCalculationScenario(),
             new TierCalculationScenario(),
-            new ComingSoonScenario(3), // Пока заглушки
-            new ComingSoonScenario(4)
+            new OrphalinsCalculationScenario(), // Добавляем Орфалайнс
+            new ComingSoonScenario(4) // Остается Шпиль как заглушка
         ];
     }
     
