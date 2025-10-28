@@ -3,8 +3,8 @@ class PokerCombinations {
         this.timeSlider = document.getElementById('timeSlider');
         this.timeValue = document.getElementById('timeValue');
         this.topCards = document.getElementById('topCards');
-        this.middleGroup1 = document.getElementById('middleGroup1');
-        this.middleGroup2 = document.getElementById('middleGroup2');
+        this.bottomGroup1 = document.getElementById('bottomGroup1');
+        this.bottomGroup2 = document.getElementById('bottomGroup2');
         this.answer = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
@@ -44,8 +44,8 @@ class PokerCombinations {
     
     displayCards(cards) {
         this.topCards.innerHTML = '';
-        this.middleGroup1.innerHTML = '';
-        this.middleGroup2.innerHTML = '';
+        this.bottomGroup1.innerHTML = '';
+        this.bottomGroup2.innerHTML = '';
         
         // Верхние 2 карты
         for (let i = 0; i < 2; i++) {
@@ -53,14 +53,14 @@ class PokerCombinations {
             this.topCards.appendChild(card);
         }
         
-        // Средние 5 карт (3 + 2)
+        // Нижние 5 карт (3 + 2)
         for (let i = 2; i < 5; i++) {
             const card = this.createCardElement(cards[i]);
-            this.middleGroup1.appendChild(card);
+            this.bottomGroup1.appendChild(card);
         }
         for (let i = 5; i < 7; i++) {
             const card = this.createCardElement(cards[i]);
-            this.middleGroup2.appendChild(card);
+            this.bottomGroup2.appendChild(card);
         }
         
         this.currentCards = cards;
