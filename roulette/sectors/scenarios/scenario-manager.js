@@ -1,43 +1,34 @@
 class ScenarioManager {
-    getRandomScenario() {
-        const mode = this.getSelectedMode();
+    constructor() {
+        this.stakeScenarios = [
+            new VoisinStakeScenario(),
+            new TierStakeScenario(),
+            new OrphalinsStakeScenario(),
+            new SpielStakeScenario()
+        ];
         
+        this.calculationScenarios = [
+            new VoisinCalculationScenario(),
+            new TierCalculationScenario()
+        ];
+        
+        this.comingSoonScenarios = [
+            new ComingSoonScenario(3),
+            new ComingSoonScenario(4)
+        ];
+    }
+    
+    getRandomScenario(mode = 'mixed') {
         if (mode === 'playsBy') {
-            console.log('Selected: Variant 1 (100%) - играет по');
-            return new SectorToStakeScenario();
-        } 
-        else if (mode === 'playsOn') {
-            console.log('Selected: Variant 2 (100%) - играет на');
-            return this.getRandomVariant2Scenario();
-        }
-        else { // mixed
-            const isVariant1 = Math.random() > 0.5;
-            if (isVariant1) {
-                console.log('Selected: Variant 1 (50%) - вперемешку');
-                return new SectorToStakeScenario();
-            } else {
-                console.log('Selected: Variant 2 (50%) - вперемешку');
-                return this.getRandomVariant2Scenario();
-            }
-        }
-    }
-    
-    getSelectedMode() {
-        const selected = document.querySelector('input[name="mode"]:checked');
-        return selected ? selected.value : 'mixed';
-    }
-    
-    getRandomVariant2Scenario() {
-        const scenarioIndex = Math.floor(Math.random() * 4);
-        switch(scenarioIndex) {
-            case 0: 
-                return new VoisinCalculationScenario();
-            case 1: 
-                return new TierCalculationScenario();
-            case 2: 
-                return new ComingSoonScenario(3);
-            case 3: 
-                return new ComingSoonScenario(4);
+            // Только "играет по" сценарии
+            return this.stakeScenarios[Math.floor(Math.random() * this.stakeScenarios.length)];
+        } else if (mode === 'playsOn') {
+            // Только "играет на" сценарии
+            return this.calculationScenarios[Math.floor(Math.random() * this.calculationScenarios.length)];
+        } else {
+            // Вперемешку все сценарии
+            const allScenarios = [...this.stakeScenarios, ...this.calculationScenarios, ...this.comingSoonScenarios];
+            return allScenarios[Math.floor(Math.random() * allScenarios.length)];
         }
     }
 }
