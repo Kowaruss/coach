@@ -1,33 +1,27 @@
 class ScenarioManager {
     constructor() {
-        this.stakeScenarios = [
+        this.stakeScenarios = [ // "играет по" - 4 сценария
             new VoisinStakeScenario(),
             new TierStakeScenario(),
             new OrphalinsStakeScenario(),
             new SpielStakeScenario()
         ];
         
-        this.calculationScenarios = [
+        this.calculationScenarios = [ // "играет на" - 4 сценария
             new VoisinCalculationScenario(),
-            new TierCalculationScenario()
-        ];
-        
-        this.comingSoonScenarios = [
-            new ComingSoonScenario(3),
+            new TierCalculationScenario(),
+            new ComingSoonScenario(3), // Пока заглушки
             new ComingSoonScenario(4)
         ];
     }
     
     getRandomScenario(mode = 'mixed') {
         if (mode === 'playsBy') {
-            // Только "играет по" сценарии
             return this.stakeScenarios[Math.floor(Math.random() * this.stakeScenarios.length)];
         } else if (mode === 'playsOn') {
-            // Только "играет на" сценарии
             return this.calculationScenarios[Math.floor(Math.random() * this.calculationScenarios.length)];
         } else {
-            // Вперемешку все сценарии
-            const allScenarios = [...this.stakeScenarios, ...this.calculationScenarios, ...this.comingSoonScenarios];
+            const allScenarios = [...this.stakeScenarios, ...this.calculationScenarios];
             return allScenarios[Math.floor(Math.random() * allScenarios.length)];
         }
     }
