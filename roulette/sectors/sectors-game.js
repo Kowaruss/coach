@@ -1,20 +1,3 @@
-console.log('=== SECTORS DEBUG ===');
-console.log('sectors-game.js loaded');
-
-// Проверка загрузки зависимостей
-console.log('ScenarioManager:', typeof ScenarioManager);
-console.log('SectorToStakeScenario:', typeof SectorToStakeScenario);
-console.log('VoisinCalculationScenario:', typeof VoisinCalculationScenario);
-
-// Проверка DOM
-console.log('sectorsText:', document.getElementById('sectorsText'));
-console.log('actionBtn:', document.getElementById('actionBtn'));
-
-// УБРАТЬ ЭТУ ЧАСТЬ:
-// class SectorsGame {
-//     // остальной код...
-
-// ОСТАВИТЬ ТОЛЬКО ЭТО:
 class SectorsGame {
     constructor() {
         this.sectorsText = document.getElementById('sectorsText');
@@ -22,12 +5,15 @@ class SectorsGame {
         this.actionBtn = document.getElementById('actionBtn');
         
         this.scenarioManager = new ScenarioManager();
+        this.currentScenario = null;
+        
         this.actionButton = new ActionButton(
             this.actionBtn,
             () => this.showAnswer(),
             () => this.nextExample()
         );
         
+        this.setupModeControls();
         this.init();
     }
     
@@ -35,9 +21,25 @@ class SectorsGame {
         this.generateExample();
     }
     
+    setupModeControls() {
+        const modeInputs = document.querySelectorAll('input[name="mode"]');
+        modeInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                this.generateExample();
+            });
+        });
+    }
+    
+    getSelectedMode() {
+        const selectedInput = document.querySelector('input[name="mode"]:checked');
+        return selectedInput ? selectedInput.value : 'mixed';
+    }
+    
     generateExample() {
-        const scenario = this.scenarioManager.getRandomScenario();
-        const { question, answer } = scenario.generate();
+        const mode = this.getSelectedMode();
+        this.currentScenario = this.scenarioManager.getRandomScenario(mode);
+        
+        const { question, answer } = this.currentScenario.generate();
         
         this.sectorsText.innerHTML = question;
         this.answerElement.innerHTML = answer;
