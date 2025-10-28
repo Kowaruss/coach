@@ -26,7 +26,7 @@ class VoisinCalculationScenario {
         
         let answer = `<span class="label">Играет по:</span><br>${this.formatNumber(playAmount)}`;
         if (hasSpreading) answer += " с размазыванием";
-        answer += `<br><span class="label">Сдача:</span><br>${this.formatNumber(change)}`;
+        answer += `<br><br><span class="label">Сдача:</span><br>${this.formatNumber(change)}`;
         
         return {
             question: `${rouletteName}<br>Ставка на Вуазен ${this.formatNumber(bet)} у.е.<br>Почем играет и сколько сдача?`,
