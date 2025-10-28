@@ -25,7 +25,7 @@ class VoisinCalculationScenario {
         const { playAmount, change, hasSpreading } = this.calculateVoisin(bet, baseAmount, rouletteType);
         
         let answer = `<span class="label">Играет по:</span><br>${this.formatNumber(playAmount)}`;
-        if (hasSpreading) answer += " с размазыванием<br>";
+        if (hasSpreading) answer += " с размазыванием";
         answer += `<br><span class="label">Сдача:</span><br>${this.formatNumber(change)}`;
         
         return {
@@ -65,7 +65,7 @@ class VoisinCalculationScenario {
         }
     }
     
-    formatNumber(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    }
+  formatNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
 }
