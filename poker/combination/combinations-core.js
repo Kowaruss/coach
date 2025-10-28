@@ -44,22 +44,33 @@ class PokerCombinations {
     
     generateNewExample() {
         this.generateDeck();
-        this.shuffleDeck();
         
-        let selectedCards = this.deck.slice(0, 7);
-        
-        // Проверяем комбинацию первых 7 карт
-        const combination = this.detectCombination(selectedCards);
-        const combinationRank = this.getCombinationRankFromName(combination);
-        
-        // Если комбинация ниже Стрита (Стрит = 5), генерируем новые карты
-        if (combinationRank < 5) {
-            // Перемешиваем колоду заново и берем новые 7 карт
+        let selectedCards;
+        let attempts = 0;
+        const maxAttempts = 3;
+
+        do {
+            attempts++;
             this.shuffleDeck();
             selectedCards = this.deck.slice(0, 7);
-        }
-        
-        // Показываем финальные карты (либо исходные, либо новые)
+            
+            // Проверяем комбинацию
+            const combination = this.detectCombination(selectedCards);
+            const combinationRank = this.getCombinationRankFromName(combination);
+            
+            // Если комбинация Стрит или выше - используем этот набор
+            if (combinationRank >= 5) {
+                break;
+            }
+            
+            // Если это последняя (третья) попытка - используем набор в любом случае
+            if (attempts === maxAttempts) {
+                break;
+            }
+            
+        } while (attempts < maxAttempts);
+
+        // Показываем финальные карты
         this.displayCards(selectedCards);
         this.startTimer();
     }
