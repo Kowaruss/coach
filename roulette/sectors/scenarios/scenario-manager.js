@@ -10,8 +10,8 @@ class ScenarioManager {
         this.calculationScenarios = [
             new VoisinCalculationScenario(),
             new TierCalculationScenario(),
-            new OrphalinsCalculationScenario(), // Добавляем Орфалайнс
-            new ComingSoonScenario(4) // Остается Шпиль как заглушка
+            new OrphalinsCalculationScenario(),
+            new SpielCalculationScenario() // Заменяем заглушку на реальный сценарий
         ];
     }
     
