@@ -62,12 +62,12 @@ h1 {
 }
 
 .roulette-btn {
-    background: linear-gradient(to right, #363e51 0%, #fffeff 100%);
+    background:#363e51;
     color: white;
 }
 
 .cards-btn {
-    background: linear-gradient(to right, #363e51 0%, #fffeff 100%);
+    background:#363e51;
     color: white;
 }
 
