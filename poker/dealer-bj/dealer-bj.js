@@ -12,6 +12,7 @@ class DealerBJTrainer {
         this.isRunning = false;
         this.intervalId = null;
         this.currentInterval = 1000;
+        this.bustOccurred = false; // Флаг перебора
         
         this.setupEventListeners();
         this.resetGame();
@@ -94,8 +95,12 @@ class DealerBJTrainer {
         
         const totalScore = this.calculateScore();
         
-        // Автоматическая остановка при переборе
-        if (totalScore > 21) {
+        // Проверяем перебор
+        if (totalScore > 21 && !this.bustOccurred) {
+            this.bustOccurred = true; // Устанавливаем флаг перебора
+            // Следующая карта будет последней
+        } else if (this.bustOccurred) {
+            // Если уже был перебор и добавили еще одну карту - останавливаем игру
             setTimeout(() => {
                 this.stopGame();
             }, 100);
@@ -171,8 +176,8 @@ class DealerBJTrainer {
     showResult() {
         const totalScore = this.calculateScore();
         
-        if (totalScore > 21) {
-            this.result.textContent = 'Перебор!';
+        if (this.bustOccurred) {
+            this.result.textContent = 'Провал! Должен был остановиться до перебора';
             this.result.className = 'result fail';
         } else if (totalScore >= 17 && totalScore <= 21) {
             this.result.textContent = 'Успех!';
@@ -185,6 +190,7 @@ class DealerBJTrainer {
     
     resetGame() {
         this.dealerHand = [];
+        this.bustOccurred = false; // Сбрасываем флаг перебора
         this.generateDeck();
         this.displayDealerCards();
         this.result.textContent = '';
