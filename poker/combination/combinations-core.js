@@ -18,6 +18,7 @@ class PokerCombinations {
         this.ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         this.deck = [];
         this.cardSize = 100; // базовый размер в %
+        this.answerShown = false; // Добавляем флаг
         
         this.setupEventListeners();
         this.generateNewExample();
@@ -102,6 +103,7 @@ class PokerCombinations {
 
         // Показываем финальные карты
         this.displayCards(selectedCards);
+        this.answerShown = false; // Сбрасываем флаг при новой генерации
         this.startTimer();
     }
     
@@ -201,16 +203,20 @@ class PokerCombinations {
     startTimer() {
         const time = parseInt(this.timeSlider.value) * 1000;
         this.timer = setTimeout(() => {
-            this.flipCards();
+            if (!this.answerShown) { // Проверяем, не был ли показан ответ
+                this.flipCards();
+            }
         }, time);
     }
     
     flipCards() {
-        const allCards = document.querySelectorAll('.card');
-        allCards.forEach(card => {
-            card.classList.add('back');
-            card.classList.remove('inactive'); // Сбрасываем выделение при перевороте
-        });
+        if (!this.answerShown) { // Переворачиваем только если ответ не показан
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(card => {
+                card.classList.add('back');
+                card.classList.remove('inactive');
+            });
+        }
     }
     
     showCards() {
@@ -222,12 +228,15 @@ class PokerCombinations {
     
     handleActionButton() {
         if (this.actionBtn.textContent === 'Покажи ответ') {
+            this.answerShown = true; // Устанавливаем флаг, что ответ показан
+            clearTimeout(this.timer); // Отменяем таймер переворота
             this.showCardsWithHighlight();
             const combination = this.detectCombination(this.currentCards);
             this.answer.textContent = combination;
             this.answer.classList.add('show');
             this.actionBtn.textContent = 'Следующий пример';
         } else {
+            this.answerShown = false; // Сбрасываем флаг при новом примере
             clearTimeout(this.timer);
             this.generateNewExample();
         }
