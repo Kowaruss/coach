@@ -242,146 +242,83 @@ class PokerCombinations {
         }
     }
     
-  // Новая функция для показа карт с выделением комбинации и кикеров
-showCardsWithHighlight() {
-    const allCards = document.querySelectorAll('.card');
-    allCards.forEach(card => {
-        card.classList.remove('back');
-        card.classList.remove('inactive'); // Сбрасываем выделение
-    });
-    
-    // Находим карты, которые входят в лучшую комбинацию
-    const { combinationCards, kickerCards } = this.findBestCombinationWithKickers(this.currentCards);
-    
-    // Помечаем все карты как неактивные
-    allCards.forEach(card => {
-        card.classList.add('inactive');
-    });
-    
-    // Помечаем карты комбинации как активные
-    combinationCards.forEach(comboCard => {
-        allCards.forEach(displayCard => {
-            const displayRank = displayCard.querySelector('.card-rank').textContent;
-            const displaySuit = this.getSuitFromSymbol(displayCard.querySelector('.card-suit').textContent);
-            
-            if (displayRank === comboCard.rank && displaySuit === comboCard.suit) {
-                displayCard.classList.remove('inactive');
-            }
+    // Новая функция для показа карт с выделением комбинации и кикеров
+    showCardsWithHighlight() {
+        const allCards = document.querySelectorAll('.card');
+        allCards.forEach(card => {
+            card.classList.remove('back');
+            card.classList.remove('inactive'); // Сбрасываем выделение
         });
-    });
-    
-    // Помечаем кикеры как активные (если есть)
-    kickerCards.forEach(kickerCard => {
-        allCards.forEach(displayCard => {
-            const displayRank = displayCard.querySelector('.card-rank').textContent;
-            const displaySuit = this.getSuitFromSymbol(displayCard.querySelector('.card-suit').textContent);
-            
-            if (displayRank === kickerCard.rank && displaySuit === kickerCard.suit) {
-                displayCard.classList.remove('inactive');
-            }
-        });
-    });
-}
-
-// Новая функция для получения комбинации с кикерами
-findBestCombinationWithKickers(cards) {
-    const numericCards = cards.map(card => {
-        const rank = card.rank;
-        let value;
-        if (rank === 'A') value = 14;
-        else if (rank === 'K') value = 13;
-        else if (rank === 'Q') value = 12;
-        else if (rank === 'J') value = 11;
-        else value = parseInt(rank);
         
-        return { value, suit: card.suit, rank: card.rank, original: card };
-    });
+        // Находим все карты, которые используются в руке (комбинация + кикеры)
+        const usedCards = this.findUsedCardsInHand(this.currentCards);
+        
+        // Помечаем все карты как неактивные
+        allCards.forEach(card => {
+            card.classList.add('inactive');
+        });
+        
+        // Помечаем используемые карты как активные
+        usedCards.forEach(usedCard => {
+            allCards.forEach(displayCard => {
+                const displayRank = displayCard.querySelector('.card-rank').textContent;
+                const displaySuit = this.getSuitFromSymbol(displayCard.querySelector('.card-suit').textContent);
+                
+                if (displayRank === usedCard.rank && displaySuit === usedCard.suit) {
+                    displayCard.classList.remove('inactive');
+                }
+            });
+        });
+    }
     
-    const combinations = this.getAllCombinations(numericCards);
-    let bestCombination = [];
-    let bestKickers = [];
-    let bestRank = 0;
-
-    combinations.forEach(comb => {
-        const rank = this.getCombinationRank(comb);
-        if (rank > bestRank) {
-            bestRank = rank;
-            bestCombination = comb;
-            // Находим кикеры для этой комбинации
-            bestKickers = this.findKickers(numericCards, comb);
-        } else if (rank === bestRank) {
-            // Если ранг одинаковый, сравниваем кикеры
-            const currentKickers = this.findKickers(numericCards, comb);
-            if (this.compareKickers(currentKickers, bestKickers) > 0) {
-                bestCombination = comb;
-                bestKickers = currentKickers;
-            }
+    // Упрощенная функция для поиска используемых карт в руке
+    findUsedCardsInHand(cards) {
+        const numericCards = cards.map(card => {
+            const rank = card.rank;
+            let value;
+            if (rank === 'A') value = 14;
+            else if (rank === 'K') value = 13;
+            else if (rank === 'Q') value = 12;
+            else if (rank === 'J') value = 11;
+            else value = parseInt(rank);
+            
+            return { value, suit: card.suit, rank: card.rank, original: card };
+        });
+        
+        // Находим лучшую комбинацию из 5 карт
+        const bestCombination = this.findBestCombinationCards(numericCards);
+        
+        // Для комбинаций, где используются все 5 карт (Флеш, Стрит, Фулл-хаус и т.д.)
+        const combinationName = this.getCombinationName(bestCombination);
+        
+        if (["Флеш-рояль", "Стрит-флеш", "Флеш", "Стрит", "Фулл-хаус"].includes(combinationName)) {
+            return bestCombination; // Все 5 карт используются
         }
-    });
-
-    return {
-        combinationCards: bestCombination,
-        kickerCards: bestKickers
-    };
-}
-
-// Функция для поиска кикеров
-findKickers(allCards, combinationCards) {
-    // Карты, которые не входят в комбинацию
-    const remainingCards = allCards.filter(card => 
-        !combinationCards.some(comboCard => 
-            comboCard.rank === card.rank && comboCard.suit === card.suit
-        )
-    );
-    
-    // Сортируем оставшиеся карты по достоинству (от старших к младшим)
-    const sortedRemaining = remainingCards.sort((a, b) => b.value - a.value);
-    
-    // Берем нужное количество старших карт в зависимости от комбинации
-    const combinationName = this.getCombinationName(combinationCards);
-    
-    switch(combinationName) {
-        case "Каре": // Нужен 1 кикер
-            return sortedRemaining.slice(0, 1);
-        case "Фулл-хаус": // Кикеры не нужны
-            return [];
-        case "Флеш": // Кикеры не нужны (вся комбинация уже определена)
-            return [];
-        case "Стрит": // Кикеры не нужны
-            return [];
-        case "Сет": // Нужно 2 кикера
-            return sortedRemaining.slice(0, 2);
-        case "Две пары": // Нужен 1 кикер
-            return sortedRemaining.slice(0, 1);
-        case "Пара двоек":
-        case "Пара троек":
-        case "Пара четвёрок":
-        case "Пара пятёрок":
-        case "Пара шестёрок":
-        case "Пара семёрок":
-        case "Пара восьмёрок":
-        case "Пара девяток":
-        case "Пара десяток":
-        case "Пара валетов":
-        case "Пара дам":
-        case "Пара королей":
-        case "Пара тузов": // Нужно 3 кикера
-            return sortedRemaining.slice(0, 3);
-        case "Нет игры": // Нужно 5 старших карт
-            return sortedRemaining.slice(0, 5);
-        default:
-            return [];
+        
+        // Для комбинаций где используются не все 7 карт, находим старшие карты
+        if (bestCombination.length === 5) {
+            return bestCombination; // Уже есть 5 карт
+        }
+        
+        // Сортируем все карты по достоинству
+        const allCardsSorted = [...numericCards].sort((a, b) => b.value - a.value);
+        
+        // Берем карты комбинации и добавляем старшие карты до 5 штук
+        const usedCards = [...bestCombination];
+        const remainingCards = allCardsSorted.filter(card => 
+            !usedCards.some(usedCard => 
+                usedCard.rank === card.rank && usedCard.suit === card.suit
+            )
+        );
+        
+        // Добавляем старшие карты пока не наберем 5
+        let cardsNeeded = 5 - usedCards.length;
+        for (let i = 0; i < cardsNeeded && i < remainingCards.length; i++) {
+            usedCards.push(remainingCards[i]);
+        }
+        
+        return usedCards;
     }
-}
-
-// Функция для сравнения кикеров
-compareKickers(kickersA, kickersB) {
-    for (let i = 0; i < Math.min(kickersA.length, kickersB.length); i++) {
-        if (kickersA[i].value > kickersB[i].value) return 1;
-        if (kickersA[i].value < kickersB[i].value) return -1;
-    }
-    return 0;
-}
     
     // Вспомогательная функция для получения масти из символа
     getSuitFromSymbol(symbol) {
@@ -396,19 +333,7 @@ compareKickers(kickersA, kickersB) {
     
     // Новая функция для получения карт лучшей комбинации
     findBestCombinationCards(cards) {
-        const numericCards = cards.map(card => {
-            const rank = card.rank;
-            let value;
-            if (rank === 'A') value = 14;
-            else if (rank === 'K') value = 13;
-            else if (rank === 'Q') value = 12;
-            else if (rank === 'J') value = 11;
-            else value = parseInt(rank);
-            
-            return { value, suit: card.suit, rank: card.rank };
-        });
-        
-        const combinations = this.getAllCombinations(numericCards);
+        const combinations = this.getAllCombinations(cards);
         let bestCombination = [];
         let bestRank = 0;
 
