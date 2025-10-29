@@ -161,6 +161,12 @@ class PokerCombinations {
         this.answer.textContent = '';
         this.actionBtn.textContent = 'Покажи ответ';
         
+        // Сбрасываем выделение при новой генерации
+        const allCards = document.querySelectorAll('.card');
+        allCards.forEach(card => {
+            card.classList.remove('inactive');
+        });
+        
         // Применяем текущий размер карт
         this.applyCardSize();
     }
@@ -203,6 +209,7 @@ class PokerCombinations {
         const allCards = document.querySelectorAll('.card');
         allCards.forEach(card => {
             card.classList.add('back');
+            card.classList.remove('inactive'); // Сбрасываем выделение при перевороте
         });
     }
     
@@ -215,7 +222,7 @@ class PokerCombinations {
     
     handleActionButton() {
         if (this.actionBtn.textContent === 'Покажи ответ') {
-            this.showCards();
+            this.showCardsWithHighlight();
             const combination = this.detectCombination(this.currentCards);
             this.answer.textContent = combination;
             this.answer.classList.add('show');
@@ -224,6 +231,75 @@ class PokerCombinations {
             clearTimeout(this.timer);
             this.generateNewExample();
         }
+    }
+    
+    // Новая функция для показа карт с выделением комбинации
+    showCardsWithHighlight() {
+        const allCards = document.querySelectorAll('.card');
+        allCards.forEach(card => {
+            card.classList.remove('back');
+            card.classList.remove('inactive'); // Сбрасываем выделение
+        });
+        
+        // Находим карты, которые входят в лучшую комбинацию
+        const bestCombinationCards = this.findBestCombinationCards(this.currentCards);
+        
+        // Помечаем все карты как неактивные
+        allCards.forEach(card => {
+            card.classList.add('inactive');
+        });
+        
+        // Помечаем карты комбинации как активные
+        bestCombinationCards.forEach(comboCard => {
+            allCards.forEach(displayCard => {
+                const displayRank = displayCard.querySelector('.card-rank').textContent;
+                const displaySuit = this.getSuitFromSymbol(displayCard.querySelector('.card-suit').textContent);
+                
+                if (displayRank === comboCard.rank && displaySuit === comboCard.suit) {
+                    displayCard.classList.remove('inactive');
+                }
+            });
+        });
+    }
+    
+    // Вспомогательная функция для получения масти из символа
+    getSuitFromSymbol(symbol) {
+        const suitMap = {
+            '♥': 'hearts',
+            '♦': 'diamonds', 
+            '♣': 'clubs',
+            '♠': 'spades'
+        };
+        return suitMap[symbol] || '';
+    }
+    
+    // Новая функция для получения карт лучшей комбинации
+    findBestCombinationCards(cards) {
+        const numericCards = cards.map(card => {
+            const rank = card.rank;
+            let value;
+            if (rank === 'A') value = 14;
+            else if (rank === 'K') value = 13;
+            else if (rank === 'Q') value = 12;
+            else if (rank === 'J') value = 11;
+            else value = parseInt(rank);
+            
+            return { value, suit: card.suit, rank: card.rank };
+        });
+        
+        const combinations = this.getAllCombinations(numericCards);
+        let bestCombination = [];
+        let bestRank = 0;
+
+        combinations.forEach(comb => {
+            const rank = this.getCombinationRank(comb);
+            if (rank > bestRank) {
+                bestRank = rank;
+                bestCombination = comb;
+            }
+        });
+
+        return bestCombination;
     }
     
     changeCardSize(delta) {
