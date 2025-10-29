@@ -1,0 +1,315 @@
+.time-slider-container {
+    display: none;
+}
+
+.cards-container {
+    margin: 15px 0;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cards-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.top-cards {
+    margin-bottom: 20px;
+}
+
+.bottom-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.card-group {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.card {
+    width: 60px;
+    height: 90px;
+    background: white;
+    border-radius: 6px;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.card-rank {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.card-suit {
+    font-size: 1.4em;
+    margin-top: 5px;
+}
+
+.card.red .card-suit {
+    color: #dc3545;
+}
+
+.card.black .card-suit {
+    color: #2c3e50;
+}
+
+.card.back {
+    background: #363e51;
+}
+
+.card.back .card-content {
+    display: none;
+}
+
+.answer {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin: 15px 0;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.answer.show {
+    opacity: 1;
+}
+
+.action-btn {
+    margin-top: 15px;
+}
+
+/* Кнопка настроек */
+.settings-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.settings-btn:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* Модальное окно настроек */
+.settings-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-modal.show {
+    display: flex;
+}
+
+.settings-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    max-width: 350px;
+    width: 90%;
+}
+
+.settings-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.setting-group {
+    margin-bottom: 20px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+#timeSlider {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
+
+.size-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
+.size-btn {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #3498db;
+    background: white;
+    border-radius: 50%;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.size-btn:hover {
+    background: #3498db;
+    color: white;
+}
+
+#sizeValue {
+    font-weight: bold;
+    min-width: 50px;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.close-settings {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.close-settings:hover {
+    background: #2980b9;
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+    .card {
+        width: 45px;
+        height: 67px;
+        font-size: 0.8em;
+    }
+    
+    .cards-row {
+        gap: 6px;
+        margin: 10px 0;
+    }
+    
+    .bottom-cards {
+        gap: 15px;
+    }
+    
+    .card-group {
+        gap: 5px;
+    }
+    
+    .top-cards {
+        margin-bottom: 15px;
+    }
+    
+    .answer {
+        font-size: 1.1em;
+        min-height: 40px;
+    }
+    
+    .settings-btn {
+        top: 15px;
+        right: 15px;
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 40px;
+        height: 60px;
+        font-size: 0.7em;
+    }
+    
+    .bottom-cards {
+        gap: 10px;
+    }
+    
+    .card-group {
+        gap: 4px;
+    }
+    
+    .settings-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .card {
+        width: 35px;
+        height: 52px;
+        font-size: 0.6em;
+    }
+    
+    .bottom-cards {
+        gap: 8px;
+    }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+    .cards-container {
+        min-height: 200px;
+    }
+    
+    .card {
+        width: 40px;
+        height: 60px;
+        font-size: 0.8em;
+    }
+    
+    .cards-row {
+        margin: 8px 0;
+    }
+}
