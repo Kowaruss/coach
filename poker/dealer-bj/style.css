@@ -51,11 +51,6 @@
     color: #2c3e50;
 }
 
-.card.back {
-    background: linear-gradient(145deg, #1a5276, #2980b9);
-    color: white;
-}
-
 .card-content {
     display: flex;
     flex-direction: column;
@@ -72,14 +67,6 @@
 .card-suit {
     font-size: 1.8em;
     margin-top: 5px;
-}
-
-.score {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #2c3e50;
-    margin: 20px 0;
-    min-height: 30px;
 }
 
 .controls {
@@ -178,9 +165,5 @@
     
     .dealer-cards {
         min-height: 100px;
-    }
-    
-    .score {
-        font-size: 1.1em;
     }
 }
