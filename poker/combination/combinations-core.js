@@ -271,7 +271,7 @@ class PokerCombinations {
         });
     }
     
-    // Упрощенная функция для поиска используемых карт в руке
+    // Исправленная функция для поиска используемых карт в руке
     findUsedCardsInHand(cards) {
         const numericCards = cards.map(card => {
             const rank = card.rank;
@@ -287,37 +287,76 @@ class PokerCombinations {
         
         // Находим лучшую комбинацию из 5 карт
         const bestCombination = this.findBestCombinationCards(numericCards);
-        
-        // Для комбинаций, где используются все 5 карт (Флеш, Стрит, Фулл-хаус и т.д.)
         const combinationName = this.getCombinationName(bestCombination);
         
-        if (["Флеш-рояль", "Стрит-флеш", "Флеш", "Стрит", "Фулл-хаус"].includes(combinationName)) {
+        // Для комбинаций, где используются все 5 карт (Флеш, Стрит и т.д.)
+        if (["Флеш-рояль", "Стрит-флеш", "Флеш", "Стрит"].includes(combinationName)) {
             return bestCombination; // Все 5 карт используются
         }
         
-        // Для комбинаций где используются не все 7 карт, находим старшие карты
-        if (bestCombination.length === 5) {
-            return bestCombination; // Уже есть 5 карт
+        // Для Фулл-хауса - все 5 карт тоже используются
+        if (combinationName === "Фулл-хаус") {
+            return bestCombination;
         }
+        
+        // Для остальных комбинаций находим конкретные карты комбинации и кикеры
+        let combinationCards = [];
+        let kickerCards = [];
         
         // Сортируем все карты по достоинству
         const allCardsSorted = [...numericCards].sort((a, b) => b.value - a.value);
         
-        // Берем карты комбинации и добавляем старшие карты до 5 штук
-        const usedCards = [...bestCombination];
-        const remainingCards = allCardsSorted.filter(card => 
-            !usedCards.some(usedCard => 
-                usedCard.rank === card.rank && usedCard.suit === card.suit
-            )
-        );
-        
-        // Добавляем старшие карты пока не наберем 5
-        let cardsNeeded = 5 - usedCards.length;
-        for (let i = 0; i < cardsNeeded && i < remainingCards.length; i++) {
-            usedCards.push(remainingCards[i]);
+        if (combinationName === "Каре") {
+            // Находим 4 карты одного достоинства
+            const counts = {};
+            allCardsSorted.forEach(card => {
+                counts[card.value] = (counts[card.value] || 0) + 1;
+            });
+            const fourRank = Object.keys(counts).find(rank => counts[rank] === 4);
+            combinationCards = allCardsSorted.filter(card => card.value == fourRank);
+            // Кикер - старшая карта не входящая в каре
+            kickerCards = allCardsSorted.filter(card => card.value != fourRank).slice(0, 1);
+        }
+        else if (combinationName === "Сет") {
+            // Находим 3 карты одного достоинства
+            const counts = {};
+            allCardsSorted.forEach(card => {
+                counts[card.value] = (counts[card.value] || 0) + 1;
+            });
+            const threeRank = Object.keys(counts).find(rank => counts[rank] === 3);
+            combinationCards = allCardsSorted.filter(card => card.value == threeRank);
+            // Кикеры - 2 старшие карты не входящие в сет
+            kickerCards = allCardsSorted.filter(card => card.value != threeRank).slice(0, 2);
+        }
+        else if (combinationName === "Две пары") {
+            // Находим 2 пары
+            const counts = {};
+            allCardsSorted.forEach(card => {
+                counts[card.value] = (counts[card.value] || 0) + 1;
+            });
+            const pairs = Object.keys(counts).filter(rank => counts[rank] === 2).sort((a, b) => b - a);
+            // Берем две старшие пары
+            combinationCards = allCardsSorted.filter(card => card.value == pairs[0] || card.value == pairs[1]);
+            // Кикер - старшая карта не входящая в пары
+            kickerCards = allCardsSorted.filter(card => card.value != pairs[0] && card.value != pairs[1]).slice(0, 1);
+        }
+        else if (combinationName.includes("Пара")) {
+            // Находим пару
+            const counts = {};
+            allCardsSorted.forEach(card => {
+                counts[card.value] = (counts[card.value] || 0) + 1;
+            });
+            const pairRank = Object.keys(counts).find(rank => counts[rank] === 2);
+            combinationCards = allCardsSorted.filter(card => card.value == pairRank);
+            // Кикеры - 3 старшие карты не входящие в пару
+            kickerCards = allCardsSorted.filter(card => card.value != pairRank).slice(0, 3);
+        }
+        else { // "Нет игры"
+            // 5 старших карт
+            combinationCards = allCardsSorted.slice(0, 5);
         }
         
-        return usedCards;
+        return [...combinationCards, ...kickerCards];
     }
     
     // Вспомогательная функция для получения масти из символа
