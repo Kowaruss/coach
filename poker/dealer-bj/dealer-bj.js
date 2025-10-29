@@ -3,7 +3,6 @@ class DealerBJTrainer {
         this.timeSlider = document.getElementById('timeSlider');
         this.timeValue = document.getElementById('timeValue');
         this.dealerCards = document.getElementById('dealerCards');
-        this.score = document.getElementById('score');
         this.startBtn = document.getElementById('startBtn');
         this.stopBtn = document.getElementById('stopBtn');
         this.result = document.getElementById('result');
@@ -94,7 +93,6 @@ class DealerBJTrainer {
         this.displayDealerCards();
         
         const totalScore = this.calculateScore();
-        this.score.textContent = `Очки: ${totalScore}`;
         
         // Автоматическая остановка при переборе
         if (totalScore > 21) {
@@ -131,13 +129,13 @@ class DealerBJTrainer {
     displayDealerCards() {
         this.dealerCards.innerHTML = '';
         
-        this.dealerHand.forEach((card, index) => {
-            const cardElement = this.createCardElement(card, index === 0);
+        this.dealerHand.forEach((card) => {
+            const cardElement = this.createCardElement(card);
             this.dealerCards.appendChild(cardElement);
         });
     }
     
-    createCardElement(card, isFirstCard = false) {
+    createCardElement(card) {
         const cardElement = document.createElement('div');
         cardElement.className = 'card new-card';
         
@@ -148,23 +146,18 @@ class DealerBJTrainer {
             'spades': '♠'
         };
         
-        if (isFirstCard) {
-            // Первая карта всегда открыта
-            cardElement.innerHTML = `
-                <div class="card-content">
-                    <div class="card-rank">${card.rank}</div>
-                    <div class="card-suit">${suitSymbols[card.suit]}</div>
-                </div>
-            `;
-            
-            if (card.suit === 'hearts' || card.suit === 'diamonds') {
-                cardElement.classList.add('red');
-            } else {
-                cardElement.classList.add('black');
-            }
+        // ВСЕ карты открыты (рубашкой вниз)
+        cardElement.innerHTML = `
+            <div class="card-content">
+                <div class="card-rank">${card.rank}</div>
+                <div class="card-suit">${suitSymbols[card.suit]}</div>
+            </div>
+        `;
+        
+        if (card.suit === 'hearts' || card.suit === 'diamonds') {
+            cardElement.classList.add('red');
         } else {
-            // Остальные карты рубашкой вверх
-            cardElement.classList.add('back');
+            cardElement.classList.add('black');
         }
         
         // Убираем анимацию после завершения
@@ -194,7 +187,6 @@ class DealerBJTrainer {
         this.dealerHand = [];
         this.generateDeck();
         this.displayDealerCards();
-        this.score.textContent = 'Очки: 0';
         this.result.textContent = '';
         this.result.className = 'result';
     }
