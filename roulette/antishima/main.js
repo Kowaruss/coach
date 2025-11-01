@@ -50,20 +50,20 @@ class BetTrainer {
     }
     
     displayAnswer() {
-        const { roulette, playPrice, additionalBet, neighborCount, imageName } = this.currentResult;
-        
-        const excessChange = this.calculator.calculateExcessChange(
-            roulette, playPrice, neighborCount, imageName
-        );
-        
-        this.answer.innerHTML = `
-            <div class="answer-line answer-green">Играет по: ${playPrice}</div>
-            <div class="answer-line answer-green">Сдача со ставки: ${additionalBet}</div>
-            <div class="answer-line answer-green">Сдача с превышений: ${excessChange}</div>
-        `;
-        
-        this.answer.classList.add('show');
-    }
+    const { roulette, playPrice, additionalBet, neighborCount, imageName } = this.currentResult;
+    
+    const excessChange = this.calculator.calculateExcessChange(
+        roulette, playPrice, neighborCount, imageName
+    );
+    
+    this.answer.innerHTML = `
+        <div class="answer-line"><span class="answer-green">Играет по:</span> <span class="answer-black">${playPrice}</span></div>
+        <div class="answer-line"><span class="answer-green">Сдача со ставки:</span> <span class="answer-black">${additionalBet}</span></div>
+        <div class="answer-line"><span class="answer-green">Сдача с превышений:</span> <span class="answer-black">${excessChange}</span></div>
+    `;
+    
+    this.answer.classList.add('show');
+}
     
     hideAnswer() {
         this.answer.classList.remove('show');
