@@ -19,32 +19,39 @@ class BetCalculator {
         return this.neighborCounts[Math.floor(Math.random() * this.neighborCounts.length)];
     }
     
-    // Генерация "почём играет"
-    generatePlayPrice(roulette) {
-        const { playRange, step } = roulette;
-        const steps = Math.floor((playRange.max - playRange.min) / step) + 1;
-        const randomStep = Math.floor(Math.random() * steps);
-        return playRange.min + randomStep * step;
+    // Генерация "почём играет" с умножением
+generatePlayPrice(roulette) {
+    const { playRange, step } = roulette;
+    const steps = Math.floor((playRange.max - playRange.min) / step) + 1;
+    const randomStep = Math.floor(Math.random() * steps);
+    let basePrice = playRange.min + randomStep * step;
+    
+    // Умножаем в зависимости от рулетки
+    if (roulette.name === '25-500') {
+        return basePrice * 25;
+    } else {
+        return basePrice * 5;
+    }
+}
+
+// Генерация дополнительной ставки от 0
+generateAdditionalBet(roulette, neighborCount) {
+    let min, max, step;
+    
+    if (roulette.name === '25-500') {
+        step = 25;
+        min = 0;  // от 0
+        max = neighborCount * 125 - 25;
+    } else {
+        step = 5;
+        min = 0;  // от 0
+        max = neighborCount * 25 - 5;
     }
     
-    // Генерация дополнительной ставки
-    generateAdditionalBet(roulette, neighborCount) {
-        let min, max, step;
-        
-        if (roulette.name === '25-500') {
-            step = 25;
-            min = 25;
-            max = neighborCount * 125 - 25;
-        } else {
-            step = 5;
-            min = 5;
-            max = neighborCount * 25 - 5;
-        }
-        
-        const steps = Math.floor((max - min) / step) + 1;
-        const randomStep = Math.floor(Math.random() * steps);
-        return min + randomStep * step;
-    }
+    const steps = Math.floor((max - min) / step) + 1;
+    const randomStep = Math.floor(Math.random() * steps);
+    return min + randomStep * step;
+}
     
     // Расчет сдачи с превышений (только для 3 соседей и картинки 3_1.jpg)
     calculateExcessChange(roulette, playPrice, neighborCount, imageName) {
