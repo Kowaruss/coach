@@ -81,27 +81,22 @@ class BetCalculator {
     }
     
     // Основной расчет с новой формулой ставки
-    calculateBet() {
-        const roulette = this.getRandomRoulette();
-        const neighborCount = this.getRandomNeighborCount();
-        const playPrice = this.generatePlayPrice(roulette);
-        const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
-        
-        // Новая формула ставки
-        let multiplier;
-        if (roulette.name === '25-500') {
-            multiplier = 25;
-        } else {
-            multiplier = 5;
-        }
-        const totalBet = (playPrice * multiplier * neighborCount) + additionalBet;
-        
-        return {
-            roulette,
-            neighborCount,
-            playPrice,
-            additionalBet,
-            totalBet
-        };
-    }
+    // Основной расчет с новой формулой ставки
+calculateBet() {
+    const roulette = this.getRandomRoulette();
+    const neighborCount = this.getRandomNeighborCount();
+    const playPrice = this.generatePlayPrice(roulette);
+    const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
+    
+    // Новая формула ставки - ВСЕ рулетки умножаем на 5
+    const totalBet = (playPrice * 5 * neighborCount) + additionalBet;
+    
+    return {
+        roulette,
+        neighborCount,
+        playPrice,
+        additionalBet,
+        totalBet
+    };
+}
 }
