@@ -3,7 +3,7 @@ class BetCalculator {
         this.rouletteTypes = [
             { name: '1-100', min: 1, max: 100, step: 5, playRange: { min: 35, max: 95 } },
             { name: '5-200', min: 5, max: 200, step: 5, playRange: { min: 70, max: 195 } },
-            { name: '25-500', min: 25, max: 500, step: 25, playRange: { min: 175, max: 475 } }
+            { name: '25-500', min: 25, max: 500, step: 25, playRange: { min: 175, max: 495 } }
         ];
         
         this.neighborCounts = [3, 4, 5];
@@ -19,39 +19,32 @@ class BetCalculator {
         return this.neighborCounts[Math.floor(Math.random() * this.neighborCounts.length)];
     }
     
-    // Генерация "почём играет" с умножением
-generatePlayPrice(roulette) {
-    const { playRange, step } = roulette;
-    const steps = Math.floor((playRange.max - playRange.min) / step) + 1;
-    const randomStep = Math.floor(Math.random() * steps);
-    let basePrice = playRange.min + randomStep * step;
-    
-    // Умножаем в зависимости от рулетки
-    if (roulette.name === '25-500') {
-        return basePrice * 25;
-    } else {
-        return basePrice * 5;
-    }
-}
-
-// Генерация дополнительной ставки от 0
-generateAdditionalBet(roulette, neighborCount) {
-    let min, max, step;
-    
-    if (roulette.name === '25-500') {
-        step = 25;
-        min = 0;  // от 0
-        max = neighborCount * 125 - 25;
-    } else {
-        step = 5;
-        min = 0;  // от 0
-        max = neighborCount * 25 - 5;
+    // Генерация "почём играет" (старые диапазоны)
+    generatePlayPrice(roulette) {
+        const { playRange, step } = roulette;
+        const steps = Math.floor((playRange.max - playRange.min) / step) + 1;
+        const randomStep = Math.floor(Math.random() * steps);
+        return playRange.min + randomStep * step;
     }
     
-    const steps = Math.floor((max - min) / step) + 1;
-    const randomStep = Math.floor(Math.random() * steps);
-    return min + randomStep * step;
-}
+    // Генерация дополнительной ставки от 0
+    generateAdditionalBet(roulette, neighborCount) {
+        let min, max, step;
+        
+        if (roulette.name === '25-500') {
+            step = 25;
+            min = 0;  // от 0
+            max = neighborCount * 125 - 25;
+        } else {
+            step = 5;
+            min = 0;  // от 0
+            max = neighborCount * 25 - 5;
+        }
+        
+        const steps = Math.floor((max - min) / step) + 1;
+        const randomStep = Math.floor(Math.random() * steps);
+        return min + randomStep * step;
+    }
     
     // Расчет сдачи с превышений (только для 3 соседей и картинки 3_1.jpg)
     calculateExcessChange(roulette, playPrice, neighborCount, imageName) {
@@ -87,29 +80,28 @@ generateAdditionalBet(roulette, neighborCount) {
         }
     }
     
-    // Основной расчет
+    // Основной расчет с новой формулой ставки
     calculateBet() {
-    const roulette = this.getRandomRoulette();
-    const neighborCount = this.getRandomNeighborCount();
-    const playPrice = this.generatePlayPrice(roulette); // старый метод
-    const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
-    
-    // Новая формула ставки
-    let multiplier;
-    if (roulette.name === '25-500') {
-        multiplier = 25;
-    } else {
-        multiplier = 5;
-    }
-    const totalBet = (playPrice * multiplier * neighborCount) + additionalBet;
-    
-    return {
-        roulette,
-        neighborCount,
-        playPrice,
-        additionalBet,
-        totalBet
-    };
-}
+        const roulette = this.getRandomRoulette();
+        const neighborCount = this.getRandomNeighborCount();
+        const playPrice = this.generatePlayPrice(roulette);
+        const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
+        
+        // Новая формула ставки
+        let multiplier;
+        if (roulette.name === '25-500') {
+            multiplier = 25;
+        } else {
+            multiplier = 5;
+        }
+        const totalBet = (playPrice * multiplier * neighborCount) + additionalBet;
+        
+        return {
+            roulette,
+            neighborCount,
+            playPrice,
+            additionalBet,
+            totalBet
+        };
     }
 }
