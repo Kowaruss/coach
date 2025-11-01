@@ -29,6 +29,8 @@ class BetTrainer {
         
         this.displayQuestion();
         this.hideAnswer();
+        this.actionBtn.classList.remove('next-example');
+        this.actionBtn.classList.add('show-answer');
     }
     
     displayQuestion() {
@@ -75,6 +77,8 @@ class BetTrainer {
             this.displayAnswer();
             this.answerShown = true;
             this.actionBtn.textContent = 'Следующий пример';
+            this.actionBtn.classList.remove('show-answer');
+            this.actionBtn.classList.add('next-example');
         } else {
             this.generateNewExample();
         }
