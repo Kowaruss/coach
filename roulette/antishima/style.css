@@ -147,3 +147,13 @@
         height: 45px;
     }
 }
+.roulette-line {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.bet-line {
+    font-size: 1.2em;
+    font-weight: bold;
+}
