@@ -89,18 +89,27 @@ generateAdditionalBet(roulette, neighborCount) {
     
     // Основной расчет
     calculateBet() {
-        const roulette = this.getRandomRoulette();
-        const neighborCount = this.getRandomNeighborCount();
-        const playPrice = this.generatePlayPrice(roulette);
-        const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
-        const totalBet = neighborCount * playPrice + additionalBet;
-        
-        return {
-            roulette,
-            neighborCount,
-            playPrice,
-            additionalBet,
-            totalBet
-        };
+    const roulette = this.getRandomRoulette();
+    const neighborCount = this.getRandomNeighborCount();
+    const playPrice = this.generatePlayPrice(roulette); // старый метод
+    const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
+    
+    // Новая формула ставки
+    let multiplier;
+    if (roulette.name === '25-500') {
+        multiplier = 25;
+    } else {
+        multiplier = 5;
+    }
+    const totalBet = (playPrice * multiplier * neighborCount) + additionalBet;
+    
+    return {
+        roulette,
+        neighborCount,
+        playPrice,
+        additionalBet,
+        totalBet
+    };
+}
     }
 }
