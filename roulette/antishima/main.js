@@ -31,21 +31,21 @@ class BetTrainer {
         this.hideAnswer();
     }
     
-    displayQuestion() {
-        const { roulette, neighborCount, totalBet } = this.currentResult;
-        
-        this.rouletteInfo.innerHTML = `
-            Рулетка <span class="roulette-red">${roulette.name}</span><br>
-            Ставка ${totalBet} на ${neighborCount} соседей
+   displayQuestion() {
+    const { roulette, neighborCount, totalBet } = this.currentResult;
+    
+    this.rouletteInfo.innerHTML = `
+        <div class="roulette-line">Рулетка <span class="roulette-red">${roulette.name}</span></div>
+        <div class="bet-line">Ставка ${totalBet} на ${neighborCount} соседей</div>
+    `;
+    
+    if (this.currentResult.imageName) {
+        this.imageContainer.innerHTML = `
+            <img src="${this.imageSelector.getImagePath(this.currentResult.imageName)}" 
+                 alt="Схема ставок для ${neighborCount} соседей">
         `;
-        
-        if (this.currentResult.imageName) {
-            this.imageContainer.innerHTML = `
-                <img src="${this.imageSelector.getImagePath(this.currentResult.imageName)}" 
-                     alt="Схема ставок для ${neighborCount} соседей">
-            `;
-        }
     }
+}
     
     displayAnswer() {
         const { roulette, playPrice, additionalBet, neighborCount, imageName } = this.currentResult;
