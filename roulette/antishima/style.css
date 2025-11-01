@@ -132,3 +132,12 @@
     font-size: 1.2em;
     font-weight: bold;
 }
+.answer-green {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.answer-black {
+    color: #030303;
+    font-weight: bold;
+}
