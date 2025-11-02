@@ -12,6 +12,8 @@ class BetCalculator {
         this.excessCalculationMethods = {
             '3_1.jpg': this.calculateExcess3_1.bind(this),
             '3_2.jpg': this.calculateExcess3_2.bind(this),
+            '3_3.jpg': this.calculateExcess3_2.bind(this), // такая же логика как 3_2
+            '3_4.jpg': this.calculateExcess3_4.bind(this),
             // Добавьте другие картинки по мере необходимости
         };
     }
@@ -56,6 +58,26 @@ class BetCalculator {
         const diff2 = 3 * playPrice - limit;
         if (diff2 > 0) {
             total += diff2;  // добавляем без умножения
+        }
+        
+        return total;
+    }
+    
+    // Метод для картинки 3_4.jpg
+    calculateExcess3_4(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        // 2 × почём_играет - лимит
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) {
+            total += diff1 * 4;  // умножаем на 4
+        }
+        
+        // 3 × почём_играет - лимит
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) {
+            total += diff2 * 2;  // умножаем на 2
         }
         
         return total;
