@@ -46,11 +46,13 @@ class BetCalculator {
         return min + randomStep * step;
     }
     
-    // Расчет сдачи с превышений (только для 3 соседей и картинки 3_1.jpg)
+    // Расчет сдачи с превышений
     calculateExcessChange(roulette, playPrice, neighborCount, imageName) {
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        // Логика для картинки 3_1.jpg
         if (neighborCount === 3 && imageName === '3_1.jpg') {
             let total = 0;
-            const limit = this.getRouletteLimit(roulette.name);
             
             // 2 × почём_играет - лимит
             const diff1 = 2 * playPrice - limit;
@@ -65,10 +67,29 @@ class BetCalculator {
             }
             
             return total;
-        } else {
-            // Заглушка для остальных случаев
-            return 0; // Логика сдачи позже
         }
+        
+        // Логика для картинки 3_2.jpg
+        if (neighborCount === 3 && imageName === '3_2.jpg') {
+            let total = 0;
+            
+            // 2 × почём_играет - лимит
+            const diff1 = 2 * playPrice - limit;
+            if (diff1 > 0) {
+                total += diff1 * 4;  // умножаем на 4
+            }
+            
+            // 3 × почём_играет - лимит
+            const diff2 = 3 * playPrice - limit;
+            if (diff2 > 0) {
+                total += diff2;  // добавляем без умножения
+            }
+            
+            return total;
+        }
+        
+        // Для остальных случаев
+        return 0;
     }
     
     getRouletteLimit(rouletteName) {
@@ -81,22 +102,21 @@ class BetCalculator {
     }
     
     // Основной расчет с новой формулой ставки
-    // Основной расчет с новой формулой ставки
-calculateBet() {
-    const roulette = this.getRandomRoulette();
-    const neighborCount = this.getRandomNeighborCount();
-    const playPrice = this.generatePlayPrice(roulette);
-    const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
-    
-    // Новая формула ставки - ВСЕ рулетки умножаем на 5
-    const totalBet = (playPrice * 5 * neighborCount) + additionalBet;
-    
-    return {
-        roulette,
-        neighborCount,
-        playPrice,
-        additionalBet,
-        totalBet
-    };
-}
+    calculateBet() {
+        const roulette = this.getRandomRoulette();
+        const neighborCount = this.getRandomNeighborCount();
+        const playPrice = this.generatePlayPrice(roulette);
+        const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
+        
+        // Новая формула ставки - ВСЕ рулетки умножаем на 5
+        const totalBet = (playPrice * 5 * neighborCount) + additionalBet;
+        
+        return {
+            roulette,
+            neighborCount,
+            playPrice,
+            additionalBet,
+            totalBet
+        };
+    }
 }
