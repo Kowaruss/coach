@@ -7,19 +7,75 @@ class BetCalculator {
         ];
         
         this.neighborCounts = [3, 4, 5];
+        
+        // Методы расчета для каждой картинки
+        this.excessCalculationMethods = {
+            '3_1.jpg': this.calculateExcess3_1.bind(this),
+            '3_2.jpg': this.calculateExcess3_2.bind(this),
+            // Добавьте другие картинки по мере необходимости
+        };
     }
     
-    // Выбор случайной рулетки
+    // Базовый метод-заглушка (возвращает 0)
+    calculateExcessDefault(roulette, playPrice, neighborCount) {
+        return 0;
+    }
+    
+    // Метод для картинки 3_1.jpg
+    calculateExcess3_1(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        // 2 × почём_играет - лимит
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) {
+            total += diff1 * 2;
+        }
+        
+        // 3 × почём_играет - лимит
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) {
+            total += diff2 * 3;
+        }
+        
+        return total;
+    }
+    
+    // Метод для картинки 3_2.jpg
+    calculateExcess3_2(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        // 2 × почём_играет - лимит
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) {
+            total += diff1 * 4;  // умножаем на 4
+        }
+        
+        // 3 × почём_играет - лимит
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) {
+            total += diff2;  // добавляем без умножения
+        }
+        
+        return total;
+    }
+    
+    // Основной метод расчета сдачи с превышений
+    calculateExcessChange(roulette, playPrice, neighborCount, imageName) {
+        const calculationMethod = this.excessCalculationMethods[imageName] || this.calculateExcessDefault;
+        return calculationMethod(roulette, playPrice, neighborCount);
+    }
+    
+    // Остальные методы без изменений
     getRandomRoulette() {
         return this.rouletteTypes[Math.floor(Math.random() * this.rouletteTypes.length)];
     }
     
-    // Выбор случайного количества соседей
     getRandomNeighborCount() {
         return this.neighborCounts[Math.floor(Math.random() * this.neighborCounts.length)];
     }
     
-    // Генерация "почём играет" (старые диапазоны)
     generatePlayPrice(roulette) {
         const { playRange, step } = roulette;
         const steps = Math.floor((playRange.max - playRange.min) / step) + 1;
@@ -27,69 +83,22 @@ class BetCalculator {
         return playRange.min + randomStep * step;
     }
     
-    // Генерация дополнительной ставки от 0
     generateAdditionalBet(roulette, neighborCount) {
         let min, max, step;
         
         if (roulette.name === '25-500') {
             step = 25;
-            min = 0;  // от 0
+            min = 0;
             max = neighborCount * 125 - 25;
         } else {
             step = 5;
-            min = 0;  // от 0
+            min = 0;
             max = neighborCount * 25 - 5;
         }
         
         const steps = Math.floor((max - min) / step) + 1;
         const randomStep = Math.floor(Math.random() * steps);
         return min + randomStep * step;
-    }
-    
-    // Расчет сдачи с превышений
-    calculateExcessChange(roulette, playPrice, neighborCount, imageName) {
-        const limit = this.getRouletteLimit(roulette.name);
-        
-        // Логика для картинки 3_1.jpg
-        if (neighborCount === 3 && imageName === '3_1.jpg') {
-            let total = 0;
-            
-            // 2 × почём_играет - лимит
-            const diff1 = 2 * playPrice - limit;
-            if (diff1 > 0) {
-                total += diff1 * 2;
-            }
-            
-            // 3 × почём_играет - лимит
-            const diff2 = 3 * playPrice - limit;
-            if (diff2 > 0) {
-                total += diff2 * 3;
-            }
-            
-            return total;
-        }
-        
-        // Логика для картинки 3_2.jpg
-        if (neighborCount === 3 && imageName === '3_2.jpg') {
-            let total = 0;
-            
-            // 2 × почём_играет - лимит
-            const diff1 = 2 * playPrice - limit;
-            if (diff1 > 0) {
-                total += diff1 * 4;  // умножаем на 4
-            }
-            
-            // 3 × почём_играет - лимит
-            const diff2 = 3 * playPrice - limit;
-            if (diff2 > 0) {
-                total += diff2;  // добавляем без умножения
-            }
-            
-            return total;
-        }
-        
-        // Для остальных случаев
-        return 0;
     }
     
     getRouletteLimit(rouletteName) {
@@ -101,14 +110,11 @@ class BetCalculator {
         }
     }
     
-    // Основной расчет с новой формулой ставки
     calculateBet() {
         const roulette = this.getRandomRoulette();
         const neighborCount = this.getRandomNeighborCount();
         const playPrice = this.generatePlayPrice(roulette);
         const additionalBet = this.generateAdditionalBet(roulette, neighborCount);
-        
-        // Новая формула ставки - ВСЕ рулетки умножаем на 5
         const totalBet = (playPrice * 5 * neighborCount) + additionalBet;
         
         return {
