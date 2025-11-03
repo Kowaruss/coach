@@ -77,7 +77,7 @@ class BetCalculator {
         // 3 × почём_играет - лимит
         const diff2 = 3 * playPrice - limit;
         if (diff2 > 0) {
-            total += diff2 * 2;  // умножаем на 2
+            total += diff2;
         }
         
         return total;
