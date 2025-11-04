@@ -10,7 +10,7 @@ const betInfoElement = document.getElementById('betInfo');
 const answerElement = document.getElementById('answer');
 const showAnswerBtn = document.getElementById('showAnswerBtn');
 const settingsModal = document.getElementById('settingsModal');
-const settingsButton = document.querySelector('.settings-button');
+const settingsButton = document.getElementById('settingsBtn');
 const cancelSettingsBtn = document.getElementById('cancelSettings');
 const saveSettingsBtn = document.getElementById('saveSettings');
 const minBetInput = document.getElementById('minBet');
@@ -24,6 +24,12 @@ let currentBet = 0;
 function generateRandomBet() {
     const min = Math.ceil(settings.minBet / settings.multiple) * settings.multiple;
     const max = Math.floor(settings.maxBet / settings.multiple) * settings.multiple;
+    
+    // Проверка на корректность диапазона
+    if (min > max) {
+        betInfoElement.textContent = 'Ошибка: неверный диапазон ставок';
+        return;
+    }
     
     const steps = Math.floor((max - min) / settings.multiple) + 1;
     const randomStep = Math.floor(Math.random() * steps);
