@@ -6,8 +6,16 @@ class ImagesGame {
         
         // Реальный список картинок из папки
         this.images = [
-            '102.jpg', '103.jpg', '25.jpg', '33.jpg', '43.jpg',
-            '51.jpg', '51_2.jpg', '52.jpg', '69.jpg', '86.jpg', '77.jpg'
+            'img/10.jpg', 'img/100.jpg', 'img/102.jpg', 'img/103.jpg', 'img/105.jpg', 'img/106.jpg', 'img/108.jpg', 
+            'img/116.jpg', 'img/121.jpg', 'img/123.jpg', 'img/129.jpg', 'img/13.jpg', 'img/130.jpg', 'img/135.jpg', 
+            'img/13_2.jpg', 'img/141.jpg', 'img/156.jpg', 'img/16.jpg', 'img/165.jpg', 'img/19.jpg', 'img/19_2.jpg', 
+            'img/21.jpg', 'img/24.jpg', 'img/25.jpg', 'img/30.jpg', 'img/33.jpg', 'img/36.jpg', 'img/36_2.jpg', 
+            'img/40.jpg', 'img/43.jpg', 'img/43_2.jpg', 'img/43_3.jpg', 'img/45.jpg', 'img/46.jpg', 'img/46_2.jpg', 
+            'img/48.jpg', 'img/48_2.jpg', 'img/49.jpg', 'img/51.jpg', 'img/52.jpg', 'img/52_2.jpg', 'img/54.jpg', 
+            'img/57.jpg', 'img/58.jpg', 'img/60.jpg', 'img/61.jpg', 'img/61_2.jpg', 'img/65.jpg', 'img/67.jpg', 
+            'img/67_2.jpg', 'img/68.jpg', 'img/68_2.jpg', 'img/69.jpg', 'img/71.jpg', 'img/73.jpg', 'img/73_2.jpg', 
+            'img/77.jpg', 'img/80.jpg', 'img/80_2.jpg', 'img/81.jpg', 'img/86.jpg', 'img/86_2.jpg', 'img/88.jpg', 
+            'img/88_2.jpg', 'img/90.jpg', 'img/93.jpg', 'img/93_2.jpg', 'img/94.jpg', 'img/97.jpg', 'img/99.jpg'
         ];
         this.currentImage = null;
         
