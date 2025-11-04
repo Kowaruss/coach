@@ -48,22 +48,29 @@
     background: rgba(40, 167, 69, 0.1);
     border-radius: 12px;
     border: 2px solid #28a745;
-    display: none;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    min-height: 80px; /* Фиксированная высота чтобы не двигать контент */
+    min-height: 80px; /* Фиксированная высота */
     display: flex;
     align-items: center;
     justify-content: center;
     visibility: hidden; /* Скрываем но сохраняем место */
+    opacity: 0; /* Для плавного появления */
+    transition: opacity 0.3s ease;
 }
 
-.answer:not(:empty) {
-    visibility: visible; /* Показываем когда есть контент */
+.answer.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.answer-placeholder {
+    min-height: 80px; /* Такая же высота как у ответа */
+    margin: 20px 0;
+    visibility: hidden; /* Невидимый но занимает место */
 }
 
 .button-container {
-    margin-top: auto; /* Прижимаем кнопку к низу */
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
 /* Модальное окно */
@@ -155,6 +162,10 @@
     .answer {
         font-size: 1.2em;
         padding: 15px;
+        min-height: 70px;
+    }
+    
+    .answer-placeholder {
         min-height: 70px;
     }
     
