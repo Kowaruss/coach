@@ -145,7 +145,7 @@
     /* === ОТВЕЧАЕТ ЗА ПОЛОЖЕНИЕ КНОПКИ НА МОБИЛЬНЫХ === */
     .action-btn {
         position: fixed;
-        bottom: 10px; /* Поднял выше */
+        bottom: 120px; /* Поднял выше */
         left: 10px;
         right: 10px;
         width: calc(100% - 20px);
