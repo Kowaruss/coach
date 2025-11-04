@@ -8,6 +8,7 @@ let settings = {
 // Элементы DOM
 const betInfoElement = document.getElementById('betInfo');
 const answerElement = document.getElementById('answer');
+const answerPlaceholder = document.getElementById('answerPlaceholder');
 const actionBtn = document.getElementById('actionBtn');
 const settingsModal = document.getElementById('settingsModal');
 const settingsButton = document.getElementById('settingsBtn');
@@ -38,9 +39,8 @@ function generateRandomBet() {
     
     betInfoElement.textContent = `Ставка: ${currentBet} (случайная цифра от ${settings.minBet} до ${settings.maxBet} кратно ${settings.multiple})`;
     
-    // Скрываем ответ (оставляем место)
-    answerElement.textContent = '';
-    answerElement.style.visibility = 'hidden';
+    // Скрываем ответ
+    hideAnswer();
 }
 
 // Функция для расчета выплаты
@@ -54,7 +54,13 @@ function calculatePayout(bet) {
 function showAnswer() {
     const payout = calculatePayout(currentBet);
     answerElement.textContent = `Выплата: ${payout} (${currentBet} - 5% комиссия)`;
-    answerElement.style.visibility = 'visible';
+    answerElement.classList.add('visible');
+}
+
+// Функция скрытия ответа
+function hideAnswer() {
+    answerElement.textContent = '';
+    answerElement.classList.remove('visible');
 }
 
 // Функция следующего примера
