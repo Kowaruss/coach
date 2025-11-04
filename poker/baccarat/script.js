@@ -38,8 +38,9 @@ function generateRandomBet() {
     
     betInfoElement.textContent = `Ставка: ${currentBet} (случайная цифра от ${settings.minBet} до ${settings.maxBet} кратно ${settings.multiple})`;
     
-    // Скрываем ответ
-    answerElement.style.display = 'none';
+    // Скрываем ответ (оставляем место)
+    answerElement.textContent = '';
+    answerElement.style.visibility = 'hidden';
 }
 
 // Функция для расчета выплаты
@@ -53,7 +54,7 @@ function calculatePayout(bet) {
 function showAnswer() {
     const payout = calculatePayout(currentBet);
     answerElement.textContent = `Выплата: ${payout} (${currentBet} - 5% комиссия)`;
-    answerElement.style.display = 'block';
+    answerElement.style.visibility = 'visible';
 }
 
 // Функция следующего примера
