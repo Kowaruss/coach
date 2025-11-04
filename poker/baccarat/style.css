@@ -1,79 +1,39 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f5f5f5;
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.back-button, .action-button {
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.back-button:hover, .action-button:hover {
-    background: #0056b3;
-}
-
-.settings-button {
-    padding: 10px;
-    background: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.settings-button:hover {
-    background: #545b62;
-}
-
-.content {
-    text-align: center;
-    padding: 20px 0;
-}
+/* Минимальные дополнительные стили для страницы Баккара */
 
 .bet-info {
-    font-size: 18px;
+    font-size: 1.2em;
     margin: 20px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 5px;
+    padding: 20px;
+    background: rgba(248, 249, 250, 0.8);
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    color: #2c3e50;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .answer {
-    font-size: 18px;
+    font-size: 1.3em;
     font-weight: bold;
     color: #28a745;
     margin: 20px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 5px;
+    padding: 20px;
+    background: rgba(40, 167, 69, 0.1);
+    border-radius: 12px;
+    border: 2px solid #28a745;
     display: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+.settings-button {
+    margin-top: 20px;
+    background: linear-gradient(145deg, #6c757d, #545b62);
+}
+
+.settings-button:hover {
+    background: linear-gradient(145deg, #7a8288, #6c757d);
+}
+
+/* Модальное окно */
 .modal {
     display: none;
     position: fixed;
@@ -84,61 +44,59 @@ body {
     background: rgba(0,0,0,0.5);
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .modal-content {
     background: white;
     padding: 30px;
-    border-radius: 10px;
-    width: 300px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
 }
 
 .form-group input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
     box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4a5568;
 }
 
 .modal-buttons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.modal-buttons .button {
+    flex: 1;
+    padding: 12px 20px;
 }
 
 .save-button {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    background: linear-gradient(145deg, #28a745, #218838);
 }
 
 .cancel-button {
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.save-button:hover {
-    background: #218838;
-}
-
-.cancel-button:hover {
-    background: #545b62;
+    background: linear-gradient(145deg, #6c757d, #545b62);
 }
