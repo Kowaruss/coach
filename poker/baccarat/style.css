@@ -27,6 +27,7 @@
 .settings-button {
     margin-top: 20px;
     background: linear-gradient(145deg, #6c757d, #545b62);
+    width: 100%;
 }
 
 .settings-button:hover {
