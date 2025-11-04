@@ -10,15 +10,27 @@ class BetCalculator {
         
         // Методы расчета для каждой картинки
         this.excessCalculationMethods = {
+            // 3 соседа
             '3_1.jpg': this.calculateExcess3_1.bind(this),
             '3_2.jpg': this.calculateExcess3_2.bind(this),
             '3_3.jpg': this.calculateExcess3_2.bind(this),
             '3_4.jpg': this.calculateExcess3_4.bind(this),
+            
+            // 4 соседа
             '4_1.jpg': this.calculateExcess4_1.bind(this),
             '4_2.jpg': this.calculateExcess4_2.bind(this),
             '4_3.jpg': this.calculateExcess4_3.bind(this),
             '4_4.jpg': this.calculateExcess4_4.bind(this),
-            '4_5.jpg': this.calculateExcess4_5.bind(this)
+            '4_5.jpg': this.calculateExcess4_5.bind(this),
+            
+            // 5 соседей
+            '5_1.jpg': this.calculateExcess5_1.bind(this),
+            '5_2.jpg': this.calculateExcess5_2.bind(this),
+            '5_3.jpg': this.calculateExcess5_3.bind(this),
+            '5_4.jpg': this.calculateExcess5_4.bind(this),
+            '5_5.jpg': this.calculateExcess5_5.bind(this),
+            '5_6.jpg': this.calculateExcess5_6.bind(this),
+            '5_7.jpg': this.calculateExcess5_7.bind(this)
         };
     }
     
@@ -138,6 +150,113 @@ class BetCalculator {
         
         const diff2 = 3 * playPrice - limit;
         if (diff2 > 0) total += diff2 * 4;
+        
+        return total;
+    }
+    
+    // Методы для 5 соседей
+    calculateExcess5_1(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 2;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 2;
+        
+        const diff3 = 4 * playPrice - limit;
+        if (diff3 > 0) total += diff3 * 2;
+        
+        const diff4 = 5 * playPrice - limit;
+        if (diff4 > 0) total += diff4 * 1;
+        
+        return total;
+    }
+    
+    calculateExcess5_2(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 6;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 3;
+        
+        return total;
+    }
+    
+    calculateExcess5_3(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 3;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 3;
+        
+        const diff3 = 4 * playPrice - limit;
+        if (diff3 > 0) total += diff3 * 2;
+        
+        return total;
+    }
+    
+    calculateExcess5_4(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 4;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 5;
+        
+        return total;
+    }
+    
+    calculateExcess5_5(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 2;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 3;
+        
+        const diff3 = 4 * playPrice - limit;
+        if (diff3 > 0) total += diff3 * 2;
+        
+        return total;
+    }
+    
+    calculateExcess5_6(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 3;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 2;
+        
+        const diff3 = 4 * playPrice - limit;
+        if (diff3 > 0) total += diff3 * 2;
+        
+        return total;
+    }
+    
+    calculateExcess5_7(roulette, playPrice, neighborCount) {
+        let total = 0;
+        const limit = this.getRouletteLimit(roulette.name);
+        
+        const diff1 = 2 * playPrice - limit;
+        if (diff1 > 0) total += diff1 * 6;
+        
+        const diff2 = 3 * playPrice - limit;
+        if (diff2 > 0) total += diff2 * 3;
         
         return total;
     }
