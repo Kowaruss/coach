@@ -8,7 +8,7 @@ let settings = {
 // Элементы DOM
 const betInfoElement = document.getElementById('betInfo');
 const answerElement = document.getElementById('answer');
-const showAnswerBtn = document.getElementById('showAnswerBtn');
+const actionBtn = document.getElementById('actionBtn');
 const settingsModal = document.getElementById('settingsModal');
 const settingsButton = document.getElementById('settingsBtn');
 const cancelSettingsBtn = document.getElementById('cancelSettings');
@@ -49,12 +49,20 @@ function calculatePayout(bet) {
     return Math.round(payout * 100) / 100; // Округление до сотых
 }
 
-// Показать ответ
-showAnswerBtn.addEventListener('click', function() {
+// Функция показа ответа
+function showAnswer() {
     const payout = calculatePayout(currentBet);
     answerElement.textContent = `Выплата: ${payout} (${currentBet} - 5% комиссия)`;
     answerElement.style.display = 'block';
-});
+}
+
+// Функция следующего примера
+function nextExample() {
+    generateRandomBet();
+}
+
+// Инициализация ActionButton
+let actionButton;
 
 // Открыть модальное окно настроек
 settingsButton.addEventListener('click', function() {
@@ -82,6 +90,7 @@ saveSettingsBtn.addEventListener('click', function() {
         
         settingsModal.style.display = 'none';
         generateRandomBet(); // Обновляем ставку с новыми настройками
+        actionButton.reset(); // Сбрасываем кнопку
     } else {
         alert('Пожалуйста, введите корректные значения:\n- Минимальная ставка должна быть больше 0\n- Максимальная ставка должна быть больше минимальной\n- Кратность должна быть больше 0');
     }
@@ -96,5 +105,13 @@ window.addEventListener('click', function(event) {
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
+    // Создаем экземпляр ActionButton
+    actionButton = new ActionButton(
+        actionBtn,
+        showAnswer,     // callback для показа ответа
+        nextExample     // callback для следующего примера
+    );
+    
+    // Генерируем первую ставку
     generateRandomBet();
 });
