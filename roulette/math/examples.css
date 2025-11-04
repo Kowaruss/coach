@@ -14,7 +14,7 @@
 .example-formula {
     font-size: 1.4em;
     font-weight: bold;
-    margin: 60px 0 40px 0;
+    margin: 40px 0 30px 0; /* Уменьшил отступы */
     min-height: 60px;
     display: flex;
     align-items: center;
@@ -36,10 +36,10 @@
 }
 
 .answer {
-    font-size: 2.5em;
+    font-size: 2em; /* Уменьшил размер */
     color: #28a745;
-    margin: 20px 0;
-    min-height: 70px;
+    margin: 20px 0 30px 0; /* Уменьшил отступы */
+    min-height: 50px; /* Уменьшил высоту */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,21 +85,22 @@
     cursor: pointer;
 }
 
-/* Контейнер для контента (формула + ответ) */
-.content-wrapper {
+/* Контейнер для основного контента */
+.content-area {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
     width: 100%;
-    max-width: 600px; /* Ограничиваем максимальную ширину на компьютерах */
+    max-width: 600px;
     margin: 0 auto;
+    padding-bottom: 20px; /* Отступ снизу */
 }
 
-/* Стили для кнопки действия */
+/* Кнопка действия */
 .action-btn {
-    position: fixed;
+    position: sticky;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -107,24 +108,33 @@
     width: auto;
     min-width: 200px;
     max-width: 90%;
-    margin: 0;
+    margin: 20px auto 0 auto;
+    align-self: center;
 }
 
-/* Адаптивность */
+/* Адаптивность для мобильных */
 @media (max-width: 480px) {
+    .container {
+        padding: 15px 10px 20px 10px;
+        min-height: calc(100vh - 60px); /* Уменьшаем высоту контейнера */
+    }
+    
     .example-formula {
         font-size: 1.2em;
-        margin: 50px 0 30px 0;
-        padding: 12px 5px;
+        margin: 30px 0 20px 0; /* Еще уменьшил отступы */
+        padding: 10px 5px;
+        min-height: 50px;
     }
     
     .answer {
-        font-size: 2em;
+        font-size: 1.8em; /* Еще уменьшил */
+        margin: 15px 0 25px 0;
+        min-height: 40px;
     }
     
     .font-size-controls {
-        top: 15px;
-        right: 15px;
+        top: 10px;
+        right: 10px;
     }
     
     .font-btn {
@@ -133,20 +143,30 @@
         font-size: 1em;
     }
     
-    .container {
-        padding: 15px 10px 25px 10px;
+    .action-btn {
+        position: fixed;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 180px;
+        margin: 0;
     }
     
-    .action-btn {
-        bottom: 15px;
-        min-width: 180px;
+    .content-area {
+        padding-bottom: 70px; /* Больше места для кнопки */
     }
 }
 
 @media (max-width: 360px) {
     .example-formula {
         font-size: 1.1em;
-        padding: 10px 3px;
+        padding: 8px 3px;
+        margin: 25px 0 15px 0;
+    }
+    
+    .answer {
+        font-size: 1.6em;
+        margin: 10px 0 20px 0;
     }
     
     .font-label {
@@ -154,8 +174,32 @@
     }
     
     .action-btn {
-        min-width: 160px;
         bottom: 10px;
+        min-width: 160px;
+        font-size: 0.9em;
+        padding: 12px 20px;
+    }
+    
+    .content-area {
+        padding-bottom: 60px;
+    }
+}
+
+/* Для очень маленьких высот экрана */
+@media (max-height: 600px) {
+    .example-formula {
+        margin: 20px 0 15px 0;
+        min-height: 40px;
+    }
+    
+    .answer {
+        margin: 10px 0 15px 0;
+        min-height: 30px;
+        font-size: 1.5em;
+    }
+    
+    .content-area {
+        padding-bottom: 50px;
     }
 }
 
@@ -167,16 +211,8 @@
         margin: 0 auto;
     }
     
-    .content-wrapper {
-        max-width: 700px;
-    }
-    
     .action-btn {
+        position: sticky;
         bottom: 30px;
-        min-width: 220px;
-    }
-    
-    .example-formula {
-        margin: 80px 0 50px 0;
     }
 }
