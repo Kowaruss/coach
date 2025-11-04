@@ -33,8 +33,9 @@ class ImagesGame {
     }
     
     getImageNumber(filename) {
-        // Из "25.jpg" получаем 25, из "51_2.jpg" получаем 51
-        return filename.split('_')[0].split('.')[0];
+        // Из "img/25.jpg" получаем "25", из "img/51_2.jpg" получаем "51"
+        const nameWithExtension = filename.split('/')[1]; // "25.jpg" или "51_2.jpg"
+        return nameWithExtension.split('_')[0].split('.')[0]; // Убираем "_2" и ".jpg"
     }
     
     nextImage() {
@@ -44,7 +45,7 @@ class ImagesGame {
         this.currentImage = imageFile;
         
         // Показываем картинку
-        this.imageContent.innerHTML = `<img src="${imageFile}" alt="Картинка ${imageFile}">`;
+        this.imageContent.innerHTML = `<img src="${imageFile}" alt="Картинка ${this.getImageNumber(imageFile)}">`;
         
         // Скрываем ответ
         this.answerElement.innerHTML = this.getImageNumber(imageFile);
