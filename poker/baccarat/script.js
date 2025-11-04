@@ -8,6 +8,8 @@ let settings = {
 // Элементы DOM
 const betInfoElement = document.getElementById('betInfo');
 const answerElement = document.getElementById('answer');
+const commissionValueElement = document.getElementById('commissionValue');
+const payoutValueElement = document.getElementById('payoutValue');
 const answerPlaceholder = document.getElementById('answerPlaceholder');
 const actionBtn = document.getElementById('actionBtn');
 const settingsModal = document.getElementById('settingsModal');
@@ -37,29 +39,44 @@ function generateRandomBet() {
     
     currentBet = min + (randomStep * settings.multiple);
     
-    betInfoElement.textContent = `Ставка: ${currentBet} (случайная цифра от ${settings.minBet} до ${settings.maxBet} кратно ${settings.multiple})`;
+    // В вопросе только цифра ставки
+    betInfoElement.textContent = `Ставка: ${currentBet}`;
     
     // Скрываем ответ
     hideAnswer();
 }
 
-// Функция для расчета выплаты
-function calculatePayout(bet) {
-    const commission = 0.05; // 5% комиссия
-    const payout = bet * (1 - commission);
-    return Math.round(payout * 100) / 100; // Округление до сотых
+// Функция для расчета выплаты и комиссии
+function calculatePayoutAndCommission(bet) {
+    const commissionRate = 0.05; // 5% комиссия
+    const commission = bet * commissionRate;
+    const payout = bet - commission;
+    
+    return {
+        commission: Math.round(commission * 100) / 100,
+        payout: Math.round(payout * 100) / 100
+    };
 }
 
 // Функция показа ответа
 function showAnswer() {
-    const payout = calculatePayout(currentBet);
-    answerElement.textContent = `Выплата: ${payout} (${currentBet} - 5% комиссия)`;
+    const result = calculatePayoutAndCommission(currentBet);
+    
+    // Заполняем значения
+    commissionValueElement.textContent = result.commission;
+    payoutValueElement.textContent = result.payout;
+    
+    // Показываем ответ
     answerElement.classList.add('visible');
 }
 
 // Функция скрытия ответа
 function hideAnswer() {
-    answerElement.textContent = '';
+    // Очищаем значения
+    commissionValueElement.textContent = '';
+    payoutValueElement.textContent = '';
+    
+    // Скрываем ответ
     answerElement.classList.remove('visible');
 }
 
