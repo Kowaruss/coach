@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Баккара</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <a href="#" class="back-button">← Назад</a>
-            <button class="settings-button">⚙️</button>
+        <a href="../index.html" class="back-button">
+            <span class="back-arrow">←</span>
+        </a>
+        
+        <h1>Баккара</h1>
+        <p>Посчитай выплату с учетом комиссии</p>
+        
+        <div class="bet-info" id="betInfo">
+            <!-- Случайная ставка будет отображаться здесь -->
         </div>
         
-        <div class="content">
-            <h1>Баккара</h1>
-            <p>Посчитай выплату с учетом комиссии</p>
-            
-            <div class="bet-info" id="betInfo">
-                <!-- Случайная ставка будет отображаться здесь -->
-            </div>
-            
-            <button class="action-button" id="showAnswerBtn">Показать ответ</button>
-            
-            <div class="answer" id="answer">
-                <!-- Правильный ответ будет отображаться здесь -->
-            </div>
+        <div class="button-container">
+            <button class="button action-button" id="showAnswerBtn">
+                Показать ответ
+            </button>
         </div>
+        
+        <div class="answer" id="answer">
+            <!-- Правильный ответ будет отображаться здесь -->
+        </div>
+
+        <button class="settings-button" id="settingsBtn">⚙️ Настройки</button>
     </div>
 
     <!-- Модальное окно настроек -->
@@ -46,8 +49,8 @@
                 <input type="number" id="multiple" min="1" value="5">
             </div>
             <div class="modal-buttons">
-                <button class="cancel-button" id="cancelSettings">Отмена</button>
-                <button class="save-button" id="saveSettings">Сохранить</button>
+                <button class="button cancel-button" id="cancelSettings">Отмена</button>
+                <button class="button save-button" id="saveSettings">Сохранить</button>
             </div>
         </div>
     </div>
