@@ -50,6 +50,20 @@
     border: 2px solid #28a745;
     display: none;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    min-height: 80px; /* Фиксированная высота чтобы не двигать контент */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden; /* Скрываем но сохраняем место */
+}
+
+.answer:not(:empty) {
+    visibility: visible; /* Показываем когда есть контент */
+}
+
+.button-container {
+    margin-top: auto; /* Прижимаем кнопку к низу */
+    padding-top: 20px;
 }
 
 /* Модальное окно */
@@ -141,6 +155,7 @@
     .answer {
         font-size: 1.2em;
         padding: 15px;
+        min-height: 70px;
     }
     
     .modal-content {
