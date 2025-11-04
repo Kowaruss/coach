@@ -1,5 +1,33 @@
 /* Минимальные дополнительные стили для страницы Баккара */
 
+.header-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.settings-button {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 2px solid #2c3e50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.settings-button:hover {
+    background: #f8f9fa;
+    transform: scale(1.05);
+}
+
 .bet-info {
     font-size: 1.2em;
     margin: 20px 0;
@@ -22,16 +50,6 @@
     border: 2px solid #28a745;
     display: none;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.settings-button {
-    margin-top: 20px;
-    background: linear-gradient(145deg, #6c757d, #545b62);
-    width: 100%;
-}
-
-.settings-button:hover {
-    background: linear-gradient(145deg, #7a8288, #6c757d);
 }
 
 /* Модальное окно */
@@ -100,4 +118,33 @@
 
 .cancel-button {
     background: linear-gradient(145deg, #6c757d, #545b62);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+    .header-buttons {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .settings-button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1em;
+    }
+    
+    .bet-info {
+        font-size: 1.1em;
+        padding: 15px;
+    }
+    
+    .answer {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+    
+    .modal-content {
+        padding: 25px 20px;
+        margin: 20px;
+    }
 }
