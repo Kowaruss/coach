@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажер ставок - Антишима</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../action-button.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <span class="back-arrow">&lt;</span>
+        </a>
+        
+        <!-- Кнопка настроек -->
+        <button class="settings-button" id="settingsBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2"/>
+                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </button>
+        
+        <div class="content">
+            <div class="roulette-info" id="rouletteInfo">
+                <!-- Рулетка 1-100 / 5-200 / 25-500 -->
+            </div>
+            
+            <div class="image-container" id="imageContainer">
+                <!-- Картинка появится здесь -->
+            </div>
+        </div>
+
+        <div class="answer" id="answer">
+            <!-- Ответ из 3 строк -->
+        </div>
+        
+        <button class="action-btn show-answer" id="actionBtn">
+            Покажи ответ
+        </button>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <h3>Настройки генерации</h3>
+            
+            <div class="settings-group">
+                <h4>Рулетка:</h4>
+                <label class="radio-label">
+                    <input type="radio" name="roulette" value="all" checked>
+                    <span class="radio-custom"></span>
+                    Вперемешку
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="roulette" value="1-100">
+                    <span class="radio-custom"></span>
+                    Рулетка 1-100
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="roulette" value="5-200">
+                    <span class="radio-custom"></span>
+                    Рулетка 5-200
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="roulette" value="25-500">
+                    <span class="radio-custom"></span>
+                    Рулетка 25-500
+                </label>
+            </div>
+            
+            <div class="settings-group">
+                <h4>Соседи:</h4>
+                <label class="radio-label">
+                    <input type="radio" name="neighbors" value="all" checked>
+                    <span class="radio-custom"></span>
+                    Вперемешку
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="neighbors" value="3">
+                    <span class="radio-custom"></span>
+                    3 соседа
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="neighbors" value="4">
+                    <span class="radio-custom"></span>
+                    4 соседа
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="neighbors" value="5">
+                    <span class="radio-custom"></span>
+                    5 соседей
+                </label>
+            </div>
+            
+            <button class="modal-close-btn" id="modalCloseBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="calculator.js"></script>
+    <script src="image-selector.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
