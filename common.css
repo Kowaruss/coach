@@ -67,7 +67,7 @@ body {
 .menu-buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     align-items: center;
 }
 
