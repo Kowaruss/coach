@@ -87,12 +87,28 @@ body {
     text-decoration: none;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     z-index: 100;
+    transition: all 0.3s ease;
 }
 
-.back-arrow {
-    font-size: 1.5em;
-    color: #2c3e50;
-    font-weight: bold;
+/* Стрелка через псевдоэлемент */
+.back-button::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232c3e50'%3E%3Cpath d='M15 19l-7-7 7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #2c3e50;
+    border-color: #2c3e50;
+}
+
+.back-button:hover::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M15 19l-7-7 7-7'/%3E%3C/svg%3E");
 }
 
 /* Отступ только для страниц с кнопкой назад */
@@ -120,7 +136,8 @@ body {
         height: 45px;
     }
     
-    .back-arrow {
-        font-size: 1.3em;
+    .back-button::after {
+        width: 18px;
+        height: 18px;
     }
 }
