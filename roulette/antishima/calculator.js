@@ -270,21 +270,21 @@ class BetCalculator {
         return total;
     }
     
-    calculateExcess5_6(roulette, playPrice, neighborCount) {
-        let total = 0;
-        const limit = this.getRouletteLimit(roulette.name);
-        
-        const diff1 = 2 * playPrice - limit;
-        if (diff1 > 0) total += diff1 * 3;
-        
-        const diff2 = 3 * playPrice - limit;
-        if (diff2 > 0) total += diff2 * 2;
-        
-        const diff3 = 4 * playPrice - limit;
-        if (diff3 > 0) total += diff3 * 2;
-        
-        return total;
-    }
+   calculateExcess5_6(roulette, playPrice, neighborCount) {
+    let total = 0;
+    const limit = this.getRouletteLimit(roulette.name);
+    
+    const diff1 = 2 * playPrice - limit;
+    if (diff1 > 0) total += diff1 * 2;  // было ×3, стало ×2
+    
+    const diff2 = 3 * playPrice - limit;
+    if (diff2 > 0) total += diff2 * 3;  // было ×2, стало ×3
+    
+    const diff3 = 4 * playPrice - limit;
+    if (diff3 > 0) total += diff3 * 2;  // осталось ×2
+    
+    return total;
+}
     
     calculateExcess5_7(roulette, playPrice, neighborCount) {
         let total = 0;
