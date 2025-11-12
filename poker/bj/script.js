@@ -130,12 +130,17 @@ function createCardElement(card, index, isBack = false) {
     const cardElement = document.createElement('div');
     cardElement.className = `card ${isBack ? 'card-back' : 'card-front'}`;
     
-    // Позиционирование ёлочкой с наездом 70%
+    // Позиционирование ёлочкой с наездом 70% влево и 70% вниз
     const cardWidth = 80; // ширина карты
-    const overlap = cardWidth * 0.7; // 70% наезд
-    const offsetX = index * -overlap; // Смещение влево
+    const cardHeight = 120; // высота карты
+    const overlapX = cardWidth * 0.7; // 70% наезд по горизонтали
+    const overlapY = cardHeight * 0.7; // 70% наезд по вертикали
+    
+    const offsetX = index * -overlapX; // Смещение влево
+    const offsetY = index * overlapY; // Смещение вниз
     
     cardElement.style.left = `calc(50% + ${offsetX}px)`;
+    cardElement.style.top = `${offsetY}px`;
     cardElement.style.zIndex = index;
     
     if (!isBack) {
@@ -187,12 +192,17 @@ function updateCardSize() {
     const cardElements = cardsContainer.querySelectorAll('.card');
     const scale = settings.cardSize / 100;
     const cardWidth = 80 * scale; // новая ширина с учетом масштаба
-    const overlap = cardWidth * 0.7; // 70% наезд от новой ширины
+    const cardHeight = 120 * scale; // новая высота с учетом масштаба
+    const overlapX = cardWidth * 0.7; // 70% наезд по горизонтали
+    const overlapY = cardHeight * 0.7; // 70% наезд по вертикали
     
     cardElements.forEach((cardElement, index) => {
-        const offsetX = index * -overlap;
+        const offsetX = index * -overlapX;
+        const offsetY = index * overlapY;
+        
         cardElement.style.transform = `scale(${scale})`;
         cardElement.style.left = `calc(50% + ${offsetX}px)`;
+        cardElement.style.top = `${offsetY}px`;
     });
 }
 
