@@ -38,7 +38,7 @@
 .cards-container {
     position: relative;
     margin: 30px 0;
-    min-height: 400px; /* Увеличил для ёлочки с наездом */
+    min-height: 200px; /* Вернул нормальную высоту */
     width: 100%;
 }
 
@@ -250,10 +250,6 @@ input[type="range"] {
     .card {
         width: 70px;
         height: 105px;
-    }
-    
-    .cards-container {
-        min-height: 350px;
     }
     
     .answer {
