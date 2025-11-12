@@ -130,16 +130,22 @@ function createCardElement(card, index, isBack = false) {
     const cardElement = document.createElement('div');
     cardElement.className = `card ${isBack ? 'card-back' : 'card-front'}`;
     
-    // Позиционирование ёлочкой с наездом 70% влево и 70% вниз
-    const cardWidth = 80; // ширина карты
-    const cardHeight = 120; // высота карты
-    const overlapX = cardWidth * 0.7; // 70% наезд по горизонтали
-    const overlapY = cardHeight * 0.7; // 70% наезд по вертикали
+    // Базовые размеры карты при 100%
+    const baseWidth = 80;
+    const baseHeight = 120;
     
-    const offsetX = index * -overlapX; // Смещение влево
-    const offsetY = index * overlapY; // Смещение вниз
+    // Наезд 70% - видимая часть 30%
+    const visibleWidth = baseWidth * 0.3; // 24px видимой ширины
+    const visibleHeight = baseHeight * 0.3; // 36px видимой высоты
     
-    cardElement.style.left = `calc(50% + ${offsetX}px)`;
+    // Смещение для каждой следующей карты
+    const offsetX = index * -visibleWidth; // Смещение влево на видимую ширину
+    const offsetY = index * visibleHeight; // Смещение вниз на видимую высоту
+    
+    // Первая карта смещена на 150% вправо от центра
+    const firstCardOffset = baseWidth * 1.5; // 120px вправо от центра
+    
+    cardElement.style.left = `calc(50% + ${firstCardOffset + offsetX}px)`;
     cardElement.style.top = `${offsetY}px`;
     cardElement.style.zIndex = index;
     
@@ -191,17 +197,24 @@ function flipCards() {
 function updateCardSize() {
     const cardElements = cardsContainer.querySelectorAll('.card');
     const scale = settings.cardSize / 100;
-    const cardWidth = 80 * scale; // новая ширина с учетом масштаба
-    const cardHeight = 120 * scale; // новая высота с учетом масштаба
-    const overlapX = cardWidth * 0.7; // 70% наезд по горизонтали
-    const overlapY = cardHeight * 0.7; // 70% наезд по вертикали
+    
+    // Базовые размеры с учетом масштаба
+    const scaledWidth = 80 * scale;
+    const scaledHeight = 120 * scale;
+    
+    // Видимая часть 30% от масштабированных размеров
+    const visibleWidth = scaledWidth * 0.3;
+    const visibleHeight = scaledHeight * 0.3;
+    
+    // Смещение первой карты (150% от базовой ширины)
+    const firstCardOffset = 80 * 1.5 * scale;
     
     cardElements.forEach((cardElement, index) => {
-        const offsetX = index * -overlapX;
-        const offsetY = index * overlapY;
+        const offsetX = index * -visibleWidth;
+        const offsetY = index * visibleHeight;
         
         cardElement.style.transform = `scale(${scale})`;
-        cardElement.style.left = `calc(50% + ${offsetX}px)`;
+        cardElement.style.left = `calc(50% + ${firstCardOffset + offsetX}px)`;
         cardElement.style.top = `${offsetY}px`;
     });
 }
