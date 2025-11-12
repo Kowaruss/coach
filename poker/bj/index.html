@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Набор BJ</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../action-button.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Кнопка Назад добавится автоматически через back-button.js -->
+        
+        <div class="header-buttons">
+            <button class="settings-button" id="settingsBtn">⚙️</button>
+        </div>
+        
+        <h1>Набор BJ</h1>
+        <p class="instruction">Посчитай количество очков на боксе пока карты не перевернулись</p>
+        
+        <div class="target-score" id="targetScore">
+            <!-- Целевое число будет отображаться здесь -->
+        </div>
+        
+        <div class="cards-container" id="cardsContainer">
+            <!-- Карты будут отображаться здесь -->
+        </div>
+        
+        <div class="answer-placeholder" id="answerPlaceholder"></div>
+        
+        <div class="answer" id="answer">
+            <span class="answer-label">Очков на боксе:</span>
+            <span class="answer-value" id="scoreValue"></span>
+        </div>
+        
+        <div class="button-container">
+            <button class="action-btn show-answer" id="actionBtn">
+                Покажи ответ
+            </button>
+        </div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <h3>Настройки</h3>
+            
+            <div class="form-group">
+                <label for="cardSize">Размер карт:</label>
+                <div class="size-controls">
+                    <button class="size-btn" id="decreaseSize">-</button>
+                    <span class="size-value" id="sizeValue">100%</span>
+                    <button class="size-btn" id="increaseSize">+</button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="showTime">Время показа карт: <span id="timeValue">3</span> сек</label>
+                <input type="range" id="showTime" min="1" max="5" value="3" step="0.5">
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="button cancel-button" id="cancelSettings">Отмена</button>
+                <button class="button save-button" id="saveSettings">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../back-button.js"></script>
+    <script src="../../action-button.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
