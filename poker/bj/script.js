@@ -1,11 +1,10 @@
 // Настройки по умолчанию
 let settings = {
-    cardSize: 100, // в процентах
+    cardSize: 100, // в процентах (100-140 с шагом 10)
     showTime: 3 // в секундах
 };
 
 // Элементы DOM
-const targetScoreElement = document.getElementById('targetScore');
 const cardsContainer = document.getElementById('cardsContainer');
 const answerElement = document.getElementById('answer');
 const scoreValueElement = document.getElementById('scoreValue');
@@ -28,7 +27,7 @@ let deck = [];
 let currentCards = [];
 let targetScore = 0;
 
-// Значения карт для BJ
+// Значения карт для BJ (стандартные правила)
 const cardValues = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
     'J': 10, 'Q': 10, 'K': 10, 'A': 1 // A считается как 1, но может стать 11
@@ -55,36 +54,33 @@ function shuffleDeck(deck) {
     }
 }
 
-// Функция генерации целевого числа (17-21, но не BJ)
+// Функция генерации целевого числа (14-21)
 function generateTargetScore() {
-    const scores = [17, 18, 19, 20, 21];
+    const scores = [14, 15, 16, 17, 18, 19, 20, 21];
     // Исключаем BJ (комбинация из двух карт дающая 21)
     const validScores = scores.filter(score => score !== 21 || Math.random() > 0.3);
     targetScore = validScores[Math.floor(Math.random() * validScores.length)];
-    targetScoreElement.textContent = `Цель: ${targetScore} очков`;
 }
 
-// Функция подсчета очков
+// Функция подсчета очков (стандартные правила блекджека)
 function calculateScore(cards) {
     let score = 0;
-    let aceCount = 0;
+    let aces = 0;
     
-    // Сначала считаем все карты кроме тузов
+    // Сначала считаем все карты, тузы как 1
     for (let card of cards) {
         if (card.value === 'A') {
-            aceCount++;
+            aces++;
+            score += 1;
         } else {
             score += cardValues[card.value];
         }
     }
     
-    // Обрабатываем тузы
-    for (let i = 0; i < aceCount; i++) {
-        // Туз становится 11 только если это не дает перебор
-        if (score + 11 <= 21) {
-            score += 11;
-        } else {
-            score += 1;
+    // Превращаем тузы в 11 если это улучшает руку
+    for (let i = 0; i < aces; i++) {
+        if (score + 10 <= 21) {
+            score += 10; // Туз становится 11 (1 + 10)
         }
     }
     
@@ -134,11 +130,12 @@ function createCardElement(card, index, isBack = false) {
     const cardElement = document.createElement('div');
     cardElement.className = `card ${isBack ? 'card-back' : 'card-front'}`;
     
-    // Позиционирование ёлочкой
-    const offsetX = index * -16; // Смещение влево
-    const offsetY = index * 20;  // Смещение вниз
+    // Позиционирование ёлочкой с наездом 70%
+    const cardWidth = 80; // ширина карты
+    const overlap = cardWidth * 0.7; // 70% наезд
+    const offsetX = index * -overlap; // Смещение влево
     
-    cardElement.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    cardElement.style.left = `calc(50% + ${offsetX}px)`;
     cardElement.style.zIndex = index;
     
     if (!isBack) {
@@ -173,27 +170,29 @@ function showCards() {
     }, settings.showTime * 1000);
 }
 
-// Функция переворота карт
+// Функция переворота карт (одновременно)
 function flipCards() {
     const cardElements = cardsContainer.querySelectorAll('.card');
-    cardElements.forEach((cardElement, index) => {
-        setTimeout(() => {
-            cardElement.classList.remove('card-front');
-            cardElement.classList.add('card-back');
-            cardElement.innerHTML = '';
-        }, index * 200); // Задержка между переворотами
+    
+    // Все карты переворачиваются одновременно
+    cardElements.forEach((cardElement) => {
+        cardElement.classList.remove('card-front');
+        cardElement.classList.add('card-back');
+        cardElement.innerHTML = '';
     });
 }
 
-// Функция обновления размера карт
+// Функция обновления размера карт (100-140% с шагом 10)
 function updateCardSize() {
     const cardElements = cardsContainer.querySelectorAll('.card');
     const scale = settings.cardSize / 100;
+    const cardWidth = 80 * scale; // новая ширина с учетом масштаба
+    const overlap = cardWidth * 0.7; // 70% наезд от новой ширины
     
-    cardElements.forEach(card => {
-        const currentTransform = card.style.transform;
-        const baseTransform = currentTransform.replace(/scale\([^)]*\)/, '').trim();
-        card.style.transform = `${baseTransform} scale(${scale})`;
+    cardElements.forEach((cardElement, index) => {
+        const offsetX = index * -overlap;
+        cardElement.style.transform = `scale(${scale})`;
+        cardElement.style.left = `calc(50% + ${offsetX}px)`;
     });
 }
 
@@ -239,16 +238,16 @@ saveSettingsBtn.addEventListener('click', function() {
     updateCardSize();
 });
 
-// Управление размером карт
+// Управление размером карт (100-140% с шагом 10)
 decreaseSizeBtn.addEventListener('click', function() {
-    if (settings.cardSize > 60) {
+    if (settings.cardSize > 100) {
         settings.cardSize -= 10;
         sizeValueElement.textContent = `${settings.cardSize}%`;
     }
 });
 
 increaseSizeBtn.addEventListener('click', function() {
-    if (settings.cardSize < 150) {
+    if (settings.cardSize < 140) {
         settings.cardSize += 10;
         sizeValueElement.textContent = `${settings.cardSize}%`;
     }
