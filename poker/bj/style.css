@@ -1,5 +1,23 @@
 /* Стили для страницы Набор BJ */
 
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    min-height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 .header-buttons {
     position: absolute;
     top: 20px;
@@ -31,15 +49,17 @@
 .instruction {
     font-size: 1.1em;
     color: #2c3e50;
-    margin-bottom: 30px;
+    margin: 40px 0 30px 0; /* Добавил отступ сверху 40px (~1см) */
     text-align: center;
+    flex-shrink: 0;
 }
 
 .cards-container {
     position: relative;
     margin: 30px 0;
-    min-height: 200px; /* Вернул нормальную высоту */
+    min-height: 150px;
     width: 100%;
+    flex-shrink: 0;
 }
 
 .card {
@@ -108,6 +128,7 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     gap: 10px;
+    flex-shrink: 0;
 }
 
 .answer.visible {
@@ -129,10 +150,13 @@
     min-height: 80px;
     margin: 20px 0;
     visibility: hidden;
+    flex-shrink: 0;
 }
 
 .button-container {
-    margin-top: 20px;
+    margin-top: auto;
+    padding-top: 20px;
+    flex-shrink: 0;
 }
 
 /* Настройки размера карт */
@@ -245,6 +269,10 @@ input[type="range"] {
     .settings-button {
         width: 45px;
         height: 45px;
+    }
+    
+    .instruction {
+        margin: 30px 0 20px 0; /* Уменьшил отступы для мобильных */
     }
     
     .card {
