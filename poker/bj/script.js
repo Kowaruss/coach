@@ -25,7 +25,6 @@ const suits = ['♥', '♦', '♣', '♠'];
 const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let deck = [];
 let currentCards = [];
-let targetScore = 0;
 
 // Значения карт для BJ (стандартные правила)
 const cardValues = {
@@ -54,15 +53,42 @@ function shuffleDeck(deck) {
     }
 }
 
-// Функция генерации целевого числа (14-21)
-function generateTargetScore() {
-    const scores = [14, 15, 16, 17, 18, 19, 20, 21];
-    // Исключаем BJ (комбинация из двух карт дающая 21)
-    const validScores = scores.filter(score => score !== 21 || Math.random() > 0.3);
-    targetScore = validScores[Math.floor(Math.random() * validScores.length)];
+// Функция проверки запрещённых комбинаций
+function isForbiddenCombination(combination) {
+    // Проверяем только для комбинаций из 2 карт
+    if (combination.length !== 2) return false;
+    
+    const hasTen = combination.some(card => 
+        card.value === '10' || card.value === 'J' || card.value === 'Q' || card.value === 'K');
+    const hasAce = combination.some(card => card.value === 'A');
+    
+    // Запрещаем комбинации 10/J/Q/K + A (в любом порядке)
+    return hasTen && hasAce;
 }
 
-// Функция подсчета очков (стандартные правила блекджека)
+// Функция поиска случайной комбинации из 3-4 карт
+function findRandomCombination() {
+    const numCards = Math.random() < 0.5 ? 3 : 4; // 3 или 4 карты
+    
+    // Берём случайные карты из колоды
+    const combination = [];
+    const tempDeck = [...deck];
+    
+    for (let i = 0; i < numCards; i++) {
+        if (tempDeck.length === 0) break;
+        const randomIndex = Math.floor(Math.random() * tempDeck.length);
+        combination.push(tempDeck.splice(randomIndex, 1)[0]);
+    }
+    
+    // Проверяем что это не запрещённая комбинация
+    if (isForbiddenCombination(combination)) {
+        return findRandomCombination(); // Пробуем снова
+    }
+    
+    return combination;
+}
+
+// Функция подсчёта очков (с учётом тузов)
 function calculateScore(cards) {
     let score = 0;
     let aces = 0;
@@ -77,7 +103,7 @@ function calculateScore(cards) {
         }
     }
     
-    // Превращаем тузы в 11 если это улучшает руку
+    // Превращаем тузы в 11 если это улучшает руку (не даёт перебор)
     for (let i = 0; i < aces; i++) {
         if (score + 10 <= 21) {
             score += 10; // Туз становится 11 (1 + 10)
@@ -85,39 +111,6 @@ function calculateScore(cards) {
     }
     
     return score;
-}
-
-// Функция поиска комбинации из 3-4 карт для целевого числа
-function findCardCombination() {
-    let attempts = 0;
-    const maxAttempts = 1000;
-    const numCards = Math.random() < 0.5 ? 3 : 4; // Только 3 или 4 карты
-    
-    while (attempts < maxAttempts) {
-        // Берем случайные карты из колоды
-        const combination = [];
-        const tempDeck = [...deck];
-        
-        for (let i = 0; i < numCards; i++) {
-            if (tempDeck.length === 0) break;
-            const randomIndex = Math.floor(Math.random() * tempDeck.length);
-            combination.push(tempDeck.splice(randomIndex, 1)[0]);
-        }
-        
-        // Проверяем что комбинация дает нужное число
-        const score = calculateScore(combination);
-        if (score === targetScore && 
-            combination.length === numCards &&
-            !(combination.length === 2 && score === 21)) {
-            return combination;
-        }
-        
-        attempts++;
-    }
-    
-    // Если не нашли, пробуем с другим количеством карт
-    console.log('Не удалось найти комбинацию, пробуем снова');
-    return findCardCombination();
 }
 
 // Функция определения цвета масти
@@ -167,11 +160,9 @@ function createCardElement(card, index, isBack = false) {
 
 // Функция отображения карт
 function showCards() {
-    console.log('showCards called, cards count:', currentCards.length);
     cardsContainer.innerHTML = '';
     
     currentCards.forEach((card, index) => {
-        console.log(`Card ${index}:`, card);
         const cardElement = createCardElement(card, index, false);
         cardsContainer.appendChild(cardElement);
     });
@@ -200,8 +191,6 @@ function flipCards() {
 // Функция обновления размера карт (100-140% с шагом 10)
 function updateCardSize() {
     const cardElements = cardsContainer.querySelectorAll('.card');
-    console.log('updateCardSize, cards found:', cardElements.length);
-    
     const scale = settings.cardSize / 100;
     
     // Базовые размеры с учетом масштаба
@@ -218,8 +207,6 @@ function updateCardSize() {
         const offsetX = positionIndex * -visibleWidth;
         const offsetY = index * visibleHeight;
         
-        console.log(`Card ${index}: offsetX=${offsetX}, offsetY=${offsetY}`);
-        
         cardElement.style.transform = `translate(-50%, 0) scale(${scale})`;
         cardElement.style.left = `calc(50% + ${offsetX}px)`;
         cardElement.style.top = `${offsetY}px`;
@@ -229,8 +216,7 @@ function updateCardSize() {
 // Функция генерации нового примера
 function generateNewExample() {
     createDeck();
-    generateTargetScore();
-    currentCards = findCardCombination();
+    currentCards = findRandomCombination();
     showCards();
     hideAnswer();
 }
@@ -238,7 +224,13 @@ function generateNewExample() {
 // Функция показа ответа
 function showAnswer() {
     const score = calculateScore(currentCards);
-    scoreValueElement.textContent = score;
+    
+    if (score > 21) {
+        scoreValueElement.textContent = 'много';
+    } else {
+        scoreValueElement.textContent = score;
+    }
+    
     answerElement.classList.add('visible');
 }
 
