@@ -26,6 +26,9 @@ const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'
 let deck = [];
 let currentCards = [];
 
+// Переменная для управления таймером переворота
+let flipTimer = null;
+
 // Значения карт для BJ (стандартные правила)
 const cardValues = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
@@ -170,8 +173,14 @@ function showCards() {
     // Применяем размер карт
     updateCardSize();
     
-    // Через заданное время переворачиваем карты
-    setTimeout(() => {
+    // Останавливаем предыдущий таймер если он есть
+    if (flipTimer) {
+        clearTimeout(flipTimer);
+        flipTimer = null;
+    }
+    
+    // Запускаем новый таймер для переворота карт
+    flipTimer = setTimeout(() => {
         flipCards();
     }, settings.showTime * 1000);
 }
@@ -186,6 +195,9 @@ function flipCards() {
         cardElement.classList.add('card-back');
         cardElement.innerHTML = '';
     });
+    
+    // Очищаем таймер после переворота
+    flipTimer = null;
 }
 
 // Функция обновления размера карт (100-140% с шагом 10)
@@ -232,6 +244,12 @@ function showAnswer() {
     }
     
     answerElement.classList.add('visible');
+    
+    // Останавливаем таймер переворота при показе ответа
+    if (flipTimer) {
+        clearTimeout(flipTimer);
+        flipTimer = null;
+    }
 }
 
 // Функция скрытия ответа
