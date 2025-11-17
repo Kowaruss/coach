@@ -1,6 +1,6 @@
 // Настройки по умолчанию
 let settings = {
-    cardSize: 100, // в процентах (100-140 с шагом 10)
+    cardSize: 100, // в процентах (100-140 с шаг 10)
     showTime: 3 // в секундах
 };
 
@@ -56,6 +56,19 @@ function shuffleDeck(deck) {
     }
 }
 
+// Функция проверки запрещённых комбинаций
+function isForbiddenCombination(combination) {
+    // Проверяем только для комбинаций из 2 карт
+    if (combination.length !== 2) return false;
+    
+    const hasTen = combination.some(card => 
+        card.value === '10' || card.value === 'J' || card.value === 'Q' || card.value === 'K');
+    const hasAce = combination.some(card => card.value === 'A');
+    
+    // Запрещаем комбинации 10/J/Q/K + A (в любом порядке)
+    return hasTen && hasAce;
+}
+
 // Функция подсчёта очков (с учётом тузов)
 function calculateScore(cards) {
     let score = 0;
@@ -81,60 +94,58 @@ function calculateScore(cards) {
     return score;
 }
 
-// Функция проверки запрещённых комбинаций
-function isForbiddenCombination(cards) {
-    // Проверяем только первые две карты
-    if (cards.length < 2) return false;
+// Функция поиска комбинации по новой логике
+function findCombination() {
+    const numCards = Math.random() < 0.5 ? 3 : 4; // 3 или 4 карты
+    const initialCardsCount = numCards - 1; // На одну карту меньше
     
-    const firstCard = cards[0];
-    const secondCard = cards[1];
-    
-    // Если первая карта туз - нельзя чтобы вторая была 10/J/Q/K
-    if (firstCard.value === 'A') {
-        const isTen = ['10', 'J', 'Q', 'K'].includes(secondCard.value);
-        if (isTen) return true;
-    }
-    
-    // Если первая карта 10/J/Q/K - нельзя чтобы вторая была туз
-    if (['10', 'J', 'Q', 'K'].includes(firstCard.value)) {
-        if (secondCard.value === 'A') return true;
-    }
-    
-    return false;
-}
-
-// Функция поиска комбинации для целевого числа
-function findCombinationForTarget(targetScore, numCards) {
     let attempts = 0;
-    const maxAttempts = 1000;
+    const maxAttempts = 100;
     
     while (attempts < maxAttempts) {
-        // Берём случайные карты из колоды
-        const combination = [];
+        // Берём начальные карты (на одну меньше)
+        const initialCards = [];
         const tempDeck = [...deck];
         
-        for (let i = 0; i < numCards; i++) {
+        for (let i = 0; i < initialCardsCount; i++) {
             if (tempDeck.length === 0) break;
             const randomIndex = Math.floor(Math.random() * tempDeck.length);
-            combination.push(tempDeck.splice(randomIndex, 1)[0]);
+            initialCards.push(tempDeck.splice(randomIndex, 1)[0]);
         }
         
-        // Проверяем запрещённые комбинации
-        if (isForbiddenCombination(combination)) {
+        // Проверяем что нет запрещённых комбинаций
+        if (isForbiddenCombination(initialCards)) {
             attempts++;
             continue;
         }
         
-        // Проверяем что сумма даёт целевое число
-        const score = calculateScore(combination);
-        if (score === targetScore) {
-            return combination;
+        // Считаем сумму начальных карт
+        const initialScore = calculateScore(initialCards);
+        
+        // Если сумма > 16 - перезапускаем генерацию
+        if (initialScore > 16) {
+            attempts++;
+            continue;
+        }
+        
+        // Если сумма ≤ 16 - добавляем последнюю карту
+        if (tempDeck.length > 0) {
+            const randomIndex = Math.floor(Math.random() * tempDeck.length);
+            const finalCard = tempDeck[randomIndex];
+            const combination = [...initialCards, finalCard];
+            
+            // Проверяем финальную комбинацию на запреты
+            if (!isForbiddenCombination(combination)) {
+                return combination;
+            }
         }
         
         attempts++;
     }
     
-    return null; // Не нашли подходящую комбинацию
+    // Если не нашли за maxAttempts, пробуем снова
+    console.log('Не удалось найти комбинацию, пробуем снова');
+    return findCombination();
 }
 
 // Функция определения цвета масти
@@ -249,28 +260,7 @@ function updateCardSize() {
 // Функция генерации нового примера
 function generateNewExample() {
     createDeck();
-    
-    // Случайное число от 13 до 26
-    const targetScore = Math.floor(Math.random() * 14) + 13; // 13-26
-    
-    // Случайно выбираем 3 или 4 карты
-    const numCards = Math.random() < 0.5 ? 3 : 4;
-    
-    // Ищем комбинацию для целевого числа
-    currentCards = findCombinationForTarget(targetScore, numCards);
-    
-    // Если не нашли, пробуем с другим количеством карт
-    if (!currentCards) {
-        const alternativeNumCards = numCards === 3 ? 4 : 3;
-        currentCards = findCombinationForTarget(targetScore, alternativeNumCards);
-    }
-    
-    // Если всё равно не нашли, генерируем новое число
-    if (!currentCards) {
-        generateNewExample();
-        return;
-    }
-    
+    currentCards = findCombination();
     showCards();
     hideAnswer();
 }
