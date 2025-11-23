@@ -297,3 +297,16 @@ input[type="range"] {
         padding-top: 5px;
     }
 }
+.container {
+    position: relative;
+    padding-bottom: 70px; /* Место для кнопки */
+}
+
+.button-container {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: calc(100% - 60px); /* Учитываем боковые отступы контейнера */
+}
