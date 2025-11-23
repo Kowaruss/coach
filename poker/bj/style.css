@@ -299,14 +299,15 @@ input[type="range"] {
 }
 .container {
     position: relative;
+    min-height: 500px;
     padding-bottom: 70px; /* Место для кнопки */
 }
 
 .button-container {
     position: absolute;
     bottom: 10px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: calc(100% - 60px); /* Учитываем боковые отступы контейнера */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 60px);
+    margin: 0;
 }
