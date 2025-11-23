@@ -208,7 +208,7 @@ input[type="range"] {
     100% { background-position: 0% 50%; }
 }
 
-/* Модальное окно */
+/* Модальное окно - ИСПРАВЛЕНИЕ: добавлен display: none */
 .modal {
     display: none;
     position: fixed;
