@@ -7,16 +7,16 @@ class CashPaymentsGame {
         // Группы номиналов с весами
         this.valueGroups = [
             {
-                weight: 10, // 10 из 17
-                values: [2, 5] // случайный из этих двух
+                weight: 10,
+                values: [2, 5]
             },
             {
-                weight: 4,  // 4 из 17  
-                values: [25] // всегда 25
+                weight: 4,
+                values: [25]
             },
             {
-                weight: 3,  // 3 из 17
-                values: [50, 125] // случайный из этих двух
+                weight: 3,
+                values: [50, 125]
             }
         ];
         
@@ -33,43 +33,50 @@ class CashPaymentsGame {
         this.generateExample();
     }
     
-    // Взвешенный выбор группы и номинала
+    // Взвешенный выбор номинала
     getWeightedX() {
-        // Создаем взвешенный массив групп
         let weightedGroups = [];
+        
         this.valueGroups.forEach(group => {
             for (let i = 0; i < group.weight; i++) {
                 weightedGroups.push(group);
             }
         });
         
-        // Выбираем случайную группу
         const selectedGroup = weightedGroups[Math.floor(Math.random() * weightedGroups.length)];
         
-        // Выбираем случайный номинал из группы
         return selectedGroup.values[Math.floor(Math.random() * selectedGroup.values.length)];
     }
     
     generateExample() {
-        // Z - случайное число от 170 до 350
-        const z = Math.floor(Math.random() * 181) + 170; // 170-350
-        
-        // X - взвешенный выбор номинала
-        const x = this.getWeightedX();
-        
-        // Y - случайное число от 199 до Z-50, умноженное на X и округленное
-        const yRaw = Math.floor(Math.random() * (z - 50 - 199 + 1)) + 199; // 199 до Z-50
-        const y = this.roundY(yRaw * x, x);
-        
-        // Формируем текст
+        let z, x, yRaw, y, answerValue;
+
+        // Генерируем пока ответ не станет >= 0
+        do {
+            // Z - случайное число от 170 до 350
+            z = Math.floor(Math.random() * 181) + 170;
+
+            // X - взвешенный выбор
+            x = this.getWeightedX();
+
+            // YRaw
+            yRaw = Math.floor(Math.random() * (z - 50 - 199 + 1)) + 199;
+
+            // Y
+            y = this.roundY(yRaw * x, x);
+
+            // Ответ
+            answerValue = z - (y / x);
+
+        } while (answerValue < 0);
+
+        // Текст примера
         this.cashPaymentsText.innerHTML = `Выплата ${z} цвет по ${x}<br>через ${y}`;
-        
-        // Рассчитываем ответ
-        const answerValue = z - (y / x);
-        
-        // Формируем ответ (целое число)
-        this.answerElement.innerHTML = `<span class="label">Ответ:</span><br>${Math.round(answerValue)}`;
-        
+
+        // Ответ
+        this.answerElement.innerHTML =
+            `<span class="label">Ответ:</span><br>${Math.round(answerValue)}`;
+
         this.answerElement.classList.remove('show');
         this.actionButton.reset();
     }
@@ -77,11 +84,14 @@ class CashPaymentsGame {
     roundY(y, x) {
         if (x === 2 || x === 5) {
             return Math.floor(y / 50) * 50;
-        } else if (x === 25 || x === 50) {
+        } 
+        else if (x === 25 || x === 50) {
             return Math.floor(y / 100) * 100;
-        } else if (x === 125) {
+        } 
+        else if (x === 125) {
             return Math.floor(y / 500) * 500;
         }
+        
         return y;
     }
     
