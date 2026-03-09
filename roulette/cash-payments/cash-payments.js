@@ -4,7 +4,6 @@ class CashPaymentsGame {
         this.answerElement = document.getElementById('answer');
         this.actionBtn = document.getElementById('actionBtn');
         
-        // Группы номиналов с весами
         this.valueGroups = [
             {
                 weight: 10,
@@ -33,47 +32,49 @@ class CashPaymentsGame {
         this.generateExample();
     }
     
-    // Взвешенный выбор номинала
     getWeightedX() {
         let weightedGroups = [];
-        
+
         this.valueGroups.forEach(group => {
             for (let i = 0; i < group.weight; i++) {
                 weightedGroups.push(group);
             }
         });
-        
+
         const selectedGroup = weightedGroups[Math.floor(Math.random() * weightedGroups.length)];
-        
+
         return selectedGroup.values[Math.floor(Math.random() * selectedGroup.values.length)];
     }
     
     generateExample() {
         let z, x, yRaw, y, answerValue;
 
-        // Генерируем пока ответ не станет >= 0
         do {
-            // Z - случайное число от 170 до 350
+
+            // Z
             z = Math.floor(Math.random() * 181) + 170;
 
-            // X - взвешенный выбор
+            // X
             x = this.getWeightedX();
 
-            // YRaw
-            yRaw = Math.floor(Math.random() * (z - 50 - 199 + 1)) + 199;
+            // yRaw всегда меньше z
+            yRaw = Math.floor(Math.random() * (z - 1)) + 1;
 
             // Y
             y = this.roundY(yRaw * x, x);
 
-            // Ответ
+            // если округление увеличило значение — пересчитать
+            if ((y / x) > z) {
+                continue;
+            }
+
             answerValue = z - (y / x);
 
         } while (answerValue < 0);
 
-        // Текст примера
-        this.cashPaymentsText.innerHTML = `Выплата ${z} цвет по ${x}<br>через ${y}`;
+        this.cashPaymentsText.innerHTML =
+            `Выплата ${z} цвет по ${x}<br>через ${y}`;
 
-        // Ответ
         this.answerElement.innerHTML =
             `<span class="label">Ответ:</span><br>${Math.round(answerValue)}`;
 
@@ -91,7 +92,7 @@ class CashPaymentsGame {
         else if (x === 125) {
             return Math.floor(y / 500) * 500;
         }
-        
+
         return y;
     }
     
