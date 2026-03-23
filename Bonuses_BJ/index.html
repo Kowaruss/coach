@@ -5,48 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bonuses BJ</title>
 
-    <!-- Общие стили проекта -->
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-    <!-- КНОПКА НАЗАД (как в poker) -->
-    <div class="back-btn" onclick="history.back()">
+    <!-- КНОПКА НАЗАД (как в roulette/index5.html) -->
+    <a href="../index.html" class="back">
         ← Назад
-    </div>
+    </a>
 
     <div class="container">
 
-        <!-- Заголовок -->
         <h1>Bonuses BJ</h1>
 
-        <!-- Контент -->
-        <div class="task">
-            <p>
-                Здесь будет задание по бонусам Blackjack
-            </p>
-        </div>
+        <p>
+            Здесь будет задание по бонусам Blackjack
+        </p>
 
-        <!-- Кнопка показать ответ -->
-        <button class="button show-answer-btn" onclick="toggleAnswer()">
+        <!-- КНОПКА ДЕЙСТВИЯ (как в roulette) -->
+        <button class="action-btn" onclick="toggleAnswer()">
             Показать ответ
         </button>
 
-        <!-- Ответ -->
-        <div id="answer" class="answer hidden">
+        <div id="answer" class="hidden">
             Здесь будет правильный ответ
         </div>
 
     </div>
 
-    <!-- Общий JS -->
     <script src="../script.js"></script>
 
-    <!-- Если в корневом script.js нет toggleAnswer -->
     <script>
         function toggleAnswer() {
-            const answer = document.getElementById("answer");
-            answer.classList.toggle("hidden");
+            const el = document.getElementById("answer");
+            el.classList.toggle("hidden");
         }
     </script>
 
