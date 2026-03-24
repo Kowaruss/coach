@@ -1,0 +1,51 @@
+.zones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.zone {
+    width: 100px;
+    min-height: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
+.card {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid #000;
+    margin: 4px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle.active {
+    background: red;
+    color: white;
+}
+
+.settings-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
