@@ -3,16 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Покер игры</title>
-    <link rel="stylesheet" href="../common.css">
-    <!--<link rel="stylesheet" href="poker.css">-->
+    <title>Bonuses BJ</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <a href="../../index5.html" class="back-button"></a>
-        
-        <!--тут будет контент -->
-    
+
+<div class="back-button" onclick="history.back()">←</div>
+<div class="settings-button">⚙️</div>
+
+<div class="container">
+
+    <h1>Бонус</h1>
+
+    <div class="zones">
+        <div class="zone hidden" id="zone1"></div>
+
+        <div class="zone" id="zone2">
+            <div id="playerCards"></div>
+        </div>
+
+        <div class="zone hidden" id="zone3"></div>
     </div>
+
+    <div class="indicators">
+        <div class="circle" id="c1">F</div>
+        <div class="circle" id="c2">F</div>
+        <div class="circle" id="c3">F</div>
+    </div>
+
+    <div id="dealerCards"></div>
+
+    <div id="answer" class="hidden"></div>
+
+    <button id="btn" class="action-button">Показать ответ</button>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
